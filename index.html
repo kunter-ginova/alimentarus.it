@@ -1,387 +1,395 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="color-scheme" content="light" />
-  <title>Alimentarus Systems — Coming Soon</title>
-  <meta name="description" content="Alimentarus Systems — a modern, pastel-forward corporate placeholder." />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALIMENTARUS SYSTEMS | INITIALIZING</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;800&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg: #050505;
+            --white: #e0e0e0;
+            --accent: #ff3c00; /* Industrial Orange */
+            --glass: rgba(255, 255, 255, 0.05);
+            --grid: rgba(255, 255, 255, 0.03);
+        }
 
-  <!-- Modern, clean typography -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300..800&family=Fraunces:opsz,wght@9..144,300..900&display=swap" rel="stylesheet">
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            cursor: none; /* Custom cursor used */
+        }
 
-  <style>
-    :root{
-      --ink:#0c1020;
-      --muted:rgba(12,16,32,.64);
-      --line:rgba(12,16,32,.10);
-      --glass:rgba(255,255,255,.62);
-      --glass2:rgba(255,255,255,.42);
-      --shadow: 0 18px 55px rgba(12,16,32,.18);
-      --shadow2: 0 10px 30px rgba(12,16,32,.12);
-      --radius: 22px;
-      --radius2: 30px;
-      --max: 1120px;
-      --sans: Manrope, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      --serif: Fraunces, ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+        body {
+            background-color: var(--bg);
+            color: var(--white);
+            font-family: 'Syne', sans-serif;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+            perspective: 1000px;
+        }
 
-      /* Pastel palette */
-      --p1:#c7f0ff;  /* sky */
-      --p2:#e7d7ff;  /* lilac */
-      --p3:#d7ffe3;  /* mint */
-      --p4:#fff0c7;  /* butter */
-      --p5:#ffd7ea;  /* blush */
-    }
+        /* --- BACKGROUND MESH --- */
+        #canvas-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.4;
+        }
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family:var(--sans);
-      color:var(--ink);
-      overflow-x:hidden;
-      background:
-        radial-gradient(900px 520px at 12% 18%, rgba(199,240,255,.85), transparent 62%),
-        radial-gradient(900px 560px at 82% 14%, rgba(231,215,255,.82), transparent 62%),
-        radial-gradient(860px 540px at 78% 86%, rgba(215,255,227,.82), transparent 62%),
-        radial-gradient(760px 520px at 18% 84%, rgba(255,215,234,.68), transparent 60%),
-        linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(252,252,255,1) 35%, rgba(250,252,255,1) 100%);
-    }
+        /* --- GRAIN OVERLAY --- */
+        .grain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E");
+            opacity: 0.05;
+            pointer-events: none;
+            z-index: 2;
+        }
 
-    /* soft grain */
-    body::before{
-      content:"";
-      position:fixed; inset:0;
-      pointer-events:none;
-      opacity:.12;
-      mix-blend-mode:multiply;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
-      background-size:240px 240px;
-    }
+        /* --- CUSTOM CURSOR --- */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 1px solid var(--white);
+            border-radius: 50%;
+            position: absolute;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, background-color 0.3s;
+            mix-blend-mode: difference;
+        }
+        
+        .cursor.hovered {
+            width: 50px;
+            height: 50px;
+            background-color: var(--white);
+            border-color: transparent;
+        }
 
-    a{color:inherit; text-decoration:none}
-    .wrap{max-width:var(--max); margin:0 auto; padding:0 22px}
-    .top{
-      padding: 18px 0;
-    }
-    .nav{
-      display:flex; align-items:center; justify-content:space-between; gap:14px;
-    }
-    .brand{
-      display:flex; align-items:center; gap:12px;
-    }
-    .logo{
-      width:44px; height:44px; border-radius: 16px;
-      background:
-        radial-gradient(18px 18px at 30% 30%, rgba(255,255,255,.95), rgba(255,255,255,.1) 70%),
-        conic-gradient(from 200deg, rgba(199,240,255,.95), rgba(231,215,255,.92), rgba(215,255,227,.92), rgba(255,240,199,.92), rgba(255,215,234,.92), rgba(199,240,255,.95));
-      box-shadow: var(--shadow2);
-      border:1px solid rgba(255,255,255,.75);
-      position:relative;
-      overflow:hidden;
-    }
-    .logo::after{
-      content:"";
-      position:absolute; inset:-40%;
-      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.65), transparent 60%);
-      transform: rotate(18deg);
-    }
-    .brand b{
-      font-family:var(--serif);
-      font-variation-settings:"opsz" 90;
-      letter-spacing:-.02em;
-      font-size:15px;
-      line-height:1.05;
-    }
-    .brand span{
-      display:block;
-      font-size:12px;
-      color:var(--muted);
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      margin-top:2px;
-    }
+        /* --- UI LAYOUT --- */
+        .ui-layer {
+            position: relative;
+            z-index: 10;
+            height: 100%;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: 1fr auto 1fr;
+            padding: 4vw;
+            pointer-events: none; /* Let clicks pass through unless on button */
+        }
 
-    .pill{
-      display:inline-flex; align-items:center; gap:8px;
-      padding: 10px 12px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.58);
-      border:1px solid rgba(255,255,255,.75);
-      box-shadow: 0 10px 26px rgba(12,16,32,.10);
-      color: rgba(12,16,32,.76);
-      font-size: 12px;
-      letter-spacing:.06em;
-      text-transform: uppercase;
-      user-select:none;
-    }
-    .dot{
-      width:9px; height:9px; border-radius:99px;
-      background: linear-gradient(135deg, rgba(120,255,220,.95), rgba(165,170,255,.95));
-      box-shadow: 0 0 0 6px rgba(165,170,255,.14);
-    }
+        /* --- HEADER & META --- */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            font-family: 'Manrope', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            opacity: 0.7;
+            text-transform: uppercase;
+        }
 
-    .hero{
-      padding: 60px 0 66px;
-      position:relative;
-    }
-    .grid{
-      display:grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap: 18px;
-      align-items: stretch;
-    }
+        .status-dot {
+            height: 8px;
+            width: 8px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+            animation: pulse 2s infinite;
+        }
 
-    .card{
-      border-radius: var(--radius2);
-      background: linear-gradient(180deg, rgba(255,255,255,.70), rgba(255,255,255,.44));
-      border: 1px solid rgba(255,255,255,.80);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(14px);
-      position:relative;
-      overflow:hidden;
-    }
-    .card::before{
-      content:"";
-      position:absolute; inset:-1px;
-      background:
-        radial-gradient(520px 260px at 15% 15%, rgba(199,240,255,.55), transparent 60%),
-        radial-gradient(520px 260px at 85% 10%, rgba(231,215,255,.55), transparent 60%),
-        radial-gradient(520px 260px at 75% 90%, rgba(215,255,227,.55), transparent 60%),
-        radial-gradient(520px 260px at 20% 85%, rgba(255,215,234,.46), transparent 60%);
-      pointer-events:none;
-      opacity:.95;
-    }
+        /* --- HERO TYPOGRAPHY --- */
+        .hero-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            transform-style: preserve-3d;
+        }
 
-    .left{
-      padding: 34px 30px 28px;
-    }
+        h1 {
+            font-size: clamp(3rem, 12vw, 15rem);
+            line-height: 0.8;
+            font-weight: 800;
+            text-align: center;
+            color: transparent;
+            -webkit-text-stroke: 1px var(--white);
+            position: relative;
+            transition: transform 0.1s ease-out;
+            pointer-events: auto;
+        }
 
-    h1{
-      margin: 0 0 12px;
-      font-family: var(--serif);
-      font-variation-settings:"opsz" 110;
-      font-size: clamp(44px, 5.2vw, 76px);
-      line-height: .95;
-      letter-spacing: -0.05em;
-    }
-    .sub{
-      margin: 0 0 20px;
-      color: rgba(12,16,32,.72);
-      font-size: 16px;
-      line-height: 1.55;
-      max-width: 54ch;
-    }
+        h1 span {
+            display: block;
+        }
 
-    .actions{
-      display:flex; gap:10px; flex-wrap:wrap;
-      margin-top: 18px;
-    }
-    .btn{
-      height: 46px;
-      padding: 0 16px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.85);
-      background: rgba(255,255,255,.64);
-      box-shadow: 0 10px 24px rgba(12,16,32,.10);
-      display:inline-flex; align-items:center; gap:10px;
-      font-weight: 750;
-      letter-spacing: -.01em;
-      transition: transform .18s ease, filter .18s ease;
-      cursor:pointer;
-    }
-    .btn:hover{ transform: translateY(-1px); filter:saturate(1.08); }
-    .btn.primary{
-      background: linear-gradient(135deg, rgba(199,240,255,.92), rgba(231,215,255,.82), rgba(215,255,227,.82));
-    }
-    .btn small{
-      font-weight: 650;
-      color: rgba(12,16,32,.65);
-      letter-spacing: .02em;
-    }
+        .filled-text {
+            color: var(--white);
+            -webkit-text-stroke: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            clip-path: polygon(0 0, 100% 0, 100% 0, 0 0); /* Hidden initially */
+            animation: textReveal 1.5s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+            animation-delay: 0.5s;
+        }
 
-    .right{
-      padding: 18px;
-      display:flex;
-      flex-direction:column;
-      gap: 12px;
-      justify-content: space-between;
-    }
+        .sub-hero {
+            font-family: 'Manrope', sans-serif;
+            font-size: clamp(0.8rem, 1.5vw, 2rem);
+            letter-spacing: 0.5em;
+            margin-top: 2rem;
+            text-transform: uppercase;
+            opacity: 0;
+            animation: fadeUp 1s ease-out forwards;
+            animation-delay: 1.2s;
+            mix-blend-mode: exclusion;
+        }
 
-    .mini{
-      border-radius: var(--radius);
-      border:1px solid rgba(255,255,255,.78);
-      background: rgba(255,255,255,.58);
-      padding: 14px 14px 12px;
-      box-shadow: 0 12px 26px rgba(12,16,32,.08);
-    }
-    .mini b{
-      display:block;
-      font-size: 12px;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      color: rgba(12,16,32,.70);
-      margin-bottom: 10px;
-    }
-    .row{
-      display:flex; align-items:center; justify-content:space-between;
-      padding: 10px 10px;
-      border-radius: 14px;
-      background: rgba(255,255,255,.55);
-      border:1px solid rgba(12,16,32,.07);
-      margin-top: 8px;
-      font-size: 13px;
-      color: rgba(12,16,32,.78);
-    }
-    .badge{
-      font-size:12px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      border:1px solid rgba(12,16,32,.10);
-      background: rgba(255,255,255,.65);
-      color: rgba(12,16,32,.70);
-    }
+        /* --- FOOTER & CTA --- */
+        .bottom-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            font-family: 'Manrope', sans-serif;
+        }
 
-    .nl{
-      display:flex; gap:10px; align-items:center;
-      margin-top: 10px;
-    }
-    input{
-      flex:1;
-      height: 46px;
-      padding: 0 14px;
-      border-radius: 999px;
-      border:1px solid rgba(12,16,32,.10);
-      background: rgba(255,255,255,.74);
-      outline:none;
-      font-size: 14px;
-      color: rgba(12,16,32,.85);
-    }
-    input:focus{
-      box-shadow: 0 0 0 7px rgba(165,170,255,.18);
-      border-color: rgba(165,170,255,.28);
-    }
+        .cta-btn {
+            pointer-events: auto;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.2);
+            color: var(--white);
+            padding: 1rem 3rem;
+            font-family: 'Manrope', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-size: 0.8rem;
+            transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+            position: relative;
+            overflow: hidden;
+        }
 
-    .tiny{
-      color: rgba(12,16,32,.62);
-      font-size: 12px;
-      line-height: 1.45;
-      margin: 10px 0 0;
-    }
+        .cta-btn:hover {
+            border-color: var(--accent);
+            color: var(--bg);
+        }
 
-    footer{
-      padding: 18px 0 34px;
-      color: rgba(12,16,32,.62);
-      font-size: 12px;
-    }
-    .foot{
-      display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;
-      border-top: 1px solid rgba(12,16,32,.10);
-      padding-top: 16px;
-    }
-    .links{
-      display:flex; gap:10px; flex-wrap:wrap;
-    }
-    .link{
-      padding: 8px 10px;
-      border-radius: 999px;
-      border:1px solid rgba(12,16,32,.10);
-      background: rgba(255,255,255,.55);
-    }
+        .cta-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background: var(--accent);
+            z-index: -1;
+            transition: width 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+        }
 
-    @media (max-width: 940px){
-      .grid{ grid-template-columns: 1fr; }
-      .left{ padding: 28px 22px 22px; }
-    }
-    @media (prefers-reduced-motion: reduce){
-      .btn:hover{ transform:none; }
-    }
-  </style>
+        .cta-btn:hover::before {
+            width: 100%;
+        }
+
+        .coordinates {
+            text-align: right;
+            font-family: 'Manrope', sans-serif;
+            font-size: 0.7rem;
+            opacity: 0.5;
+            line-height: 1.5;
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 60, 0, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 60, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 60, 0, 0); }
+        }
+
+        @keyframes textReveal {
+            0% { clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%); transform: translateY(50px); }
+            100% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); transform: translateY(0); }
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .ui-layer { padding: 8vw; }
+            h1 { font-size: 15vw; }
+            .bottom-bar { flex-direction: column-reverse; align-items: center; gap: 2rem; }
+            .cta-btn { width: 100%; text-align: center; }
+        }
+    </style>
 </head>
-
 <body>
-  <div class="top">
-    <div class="wrap">
-      <div class="nav">
-        <a class="brand" href="#" aria-label="Alimentarus Systems">
-          <div class="logo" aria-hidden="true"></div>
-          <div>
-            <b>Alimentarus Systems</b>
-            <span>coming soon</span>
-          </div>
-        </a>
-        <div class="pill"><span class="dot"></span> public preview</div>
-      </div>
+
+    <div class="grain"></div>
+
+    <div class="cursor" id="cursor"></div>
+
+    <div id="canvas-wrapper">
+        <canvas id="neuralCanvas"></canvas>
     </div>
-  </div>
 
-  <main class="hero">
-    <div class="wrap">
-      <div class="grid">
-        <section class="card left">
-          <div style="position:relative">
-            <h1>Alimentarus.</h1>
-            <p class="sub">A fresh, modern platform for food systems.</p>
-
-            <div class="actions">
-              <button class="btn primary" type="button" onclick="document.getElementById('email').focus()">
-                Get updates <small>• 30s</small>
-              </button>
-              <a class="btn" href="#" onclick="return false;">Contact <small>• soon</small></a>
-              <span class="btn" style="cursor:default">SRL <small>• planned</small></span>
+    <main class="ui-layer">
+        
+        <div class="top-bar">
+            <div>
+                <span class="status-dot"></span>
+                SYSTEM INITIALIZATION
             </div>
-
-            <p class="tiny">Minimal now. Built to scale.</p>
-          </div>
-        </section>
-
-        <aside class="card right" aria-label="Status">
-          <div class="mini">
-            <b>Now</b>
-            <div class="row"><span>Site</span><span class="badge">Placeholder</span></div>
-            <div class="row"><span>Design</span><span class="badge">Pastel glass</span></div>
-            <div class="row"><span>Speed</span><span class="badge">Instant</span></div>
-          </div>
-
-          <div class="mini">
-            <b>Drop your email</b>
-            <div class="nl">
-              <input id="email" type="email" placeholder="name@domain.com" autocomplete="email" />
-              <button class="btn" type="button" onclick="alert('Placeholder. Wire this to Formspree/Netlify later.')">
-                Join
-              </button>
-            </div>
-            <p class="tiny">No spam. Just launch notes.</p>
-          </div>
-
-          <div class="mini">
-            <b>Links</b>
-            <div class="row"><span>Company</span><span class="badge">Soon</span></div>
-            <div class="row"><span>Research</span><span class="badge">Soon</span></div>
-            <div class="row"><span>Press</span><span class="badge">Soon</span></div>
-          </div>
-        </aside>
-      </div>
-
-      <footer>
-        <div class="wrap">
-          <div class="foot">
-            <div>© <span id="y"></span> Alimentarus Systems</div>
-            <div class="links">
-              <span class="link">EN</span>
-              <span class="link">IT</span>
-              <span class="link">TR</span>
-            </div>
-          </div>
+            <div>EST. 2026</div>
         </div>
-      </footer>
-    </div>
-  </main>
 
-  <script>
-    document.getElementById("y").textContent = new Date().getFullYear();
-  </script>
+        <div class="hero-container" id="hero">
+            <h1>
+                <span>ALIMENTARUS</span>
+                <span>SYSTEMS</span>
+                
+                <div class="filled-text">
+                    <span>ALIMENTARUS</span>
+                    <span>SYSTEMS</span>
+                </div>
+            </h1>
+            <div class="sub-hero">Global Infrastructure Protocol</div>
+        </div>
+
+        <div class="bottom-bar">
+            <button class="cta-btn" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">Request Access</button>
+            <div class="coordinates">
+                LAT: 40.7128° N<br>
+                LNG: 74.0060° W<br>
+                SECURE SERVER: ACTIVE
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        // --- CUSTOM CURSOR LOGIC ---
+        const cursor = document.getElementById('cursor');
+        
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        function hoverCursor() {
+            cursor.classList.add('hovered');
+        }
+
+        function unhoverCursor() {
+            cursor.classList.remove('hovered');
+        }
+
+        // --- 3D TILT EFFECT ON TYPOGRAPHY ---
+        const hero = document.getElementById('hero');
+        const sensitivity = 20; // Lower is more extreme
+
+        document.addEventListener('mousemove', (e) => {
+            const x = (window.innerWidth / 2 - e.clientX) / sensitivity;
+            const y = (window.innerHeight / 2 - e.clientY) / sensitivity;
+            
+            // Apply rotation based on mouse position
+            hero.style.transform = `rotateX(${y}deg) rotateY(${(-x)}deg)`;
+        });
+
+        // --- CANVAS PARTICLE NETWORK ---
+        const canvas = document.getElementById('neuralCanvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let particles = [];
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+
+        window.addEventListener('resize', resize);
+        resize();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.size = Math.random() * 2;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0 || this.x > width) this.vx *= -1;
+                if (this.y < 0 || this.y > height) this.vy *= -1;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            const particleCount = Math.min(window.innerWidth / 10, 100); 
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+
+                // Draw connections
+                for (let j = i; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 150) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${0.1 - distance/1500})`;
+                        ctx.lineWidth = 1;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+
+        initParticles();
+        animate();
+    </script>
 </body>
 </html>
