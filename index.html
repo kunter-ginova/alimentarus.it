@@ -1,539 +1,609 @@
-<!DOCTYPE html>
-<html lang="it">
+<!doctype html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alimentarus Systems | Ordinem Cibi</title>
-    <meta name="description" content="Alimentarus Systems: Ordinem Cibi. Architecture, standards, and control for food systems.">
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,ITAL@9..144,300,0;9..144,400,0;9..144,300,1&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Alimentarus Systems — nutrition-grade systems, governance, and signal-based food engineering." />
+  <title>Alimentarus Systems</title>
 
-    <style>
-        /* --- INSTITUTIONAL DESIGN SYSTEM --- */
-        :root {
-            /* Palette: Archive Paper, Ink, Gilt */
-            --paper-bg: #F5F4F0;
-            --paper-noise: #EAE8E0;
-            
-            --ink-primary: #111111;
-            --ink-secondary: #4A4A4A;
-            --ink-tertiary: #888888;
-            
-            --gilt: #9C8C74; /* Muted Bronze/Gold */
-            --gilt-faint: rgba(156, 140, 116, 0.15);
-            
-            --line-color: rgba(0, 0, 0, 0.08);
+  <!-- Single-file styling (no external dependencies) -->
+  <style>
+    :root{
+      --bg: #fbfbfb;
+      --panel: #ffffff;
+      --ink: #101114;
+      --muted: #5a606b;
+      --line: rgba(16,17,20,.10);
+      --shadow: 0 10px 30px rgba(16,17,20,.08);
+      --radius: 18px;
+      --max: 1120px;
+      --pad: clamp(16px, 2vw, 22px);
+    }
 
-            /* Typography */
-            --font-serif: 'Fraunces', serif;
-            --font-sans: 'Manrope', sans-serif;
+    *{ box-sizing: border-box; }
+    html{ scroll-behavior: smooth; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color: var(--ink);
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(16,17,20,.05), transparent 60%),
+                  radial-gradient(900px 500px at 90% 20%, rgba(16,17,20,.04), transparent 55%),
+                  linear-gradient(180deg, #ffffff, var(--bg));
+    }
 
-            /* Spacing Metrics */
-            --unit: 8px;
-            --space-sm: 16px;
-            --space-md: 32px;
-            --space-lg: 64px;
-            --space-xl: 120px;
-        }
+    a{ color: inherit; text-decoration: none; }
+    a:hover{ text-decoration: underline; text-underline-offset: 3px; }
 
-        /* --- BASE RESET --- */
-        *, *::before, *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+    .wrap{ max-width: var(--max); margin: 0 auto; padding: 0 var(--pad); }
 
-        html, body {
-            height: 100%;
-            width: 100%;
-        }
+    /* Top bar */
+    header{
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(10px);
+      background: rgba(251,251,251,.75);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      padding: 14px 0;
+      gap: 14px;
+    }
+    .brand{
+      display:flex; align-items:center; gap: 10px;
+      letter-spacing: .2px;
+      font-weight: 650;
+    }
+    .mark{
+      width: 34px; height: 34px; border-radius: 12px;
+      border: 1px solid var(--line);
+      background: linear-gradient(135deg, rgba(16,17,20,.10), rgba(16,17,20,.03));
+      display:grid; place-items:center;
+      box-shadow: 0 6px 16px rgba(16,17,20,.08);
+      font-size: 14px;
+    }
+    .brand small{ display:block; font-weight: 550; color: var(--muted); letter-spacing:.3px; }
 
-        body {
-            background-color: var(--paper-bg);
-            color: var(--ink-primary);
-            font-family: var(--font-sans);
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            overflow-x: hidden;
-            line-height: 1.4;
-            /* Texture Layer */
-            background-image: 
-                linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0)),
-                url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
-        }
+    .links{ display:flex; align-items:center; gap: 18px; }
+    .links a{ font-size: 14px; color: rgba(16,17,20,.85); }
+    .cta{
+      display:inline-flex; align-items:center; justify-content:center;
+      height: 40px; padding: 0 14px; border-radius: 999px;
+      border: 1px solid var(--line);
+      background: #fff;
+      box-shadow: 0 6px 18px rgba(16,17,20,.06);
+      font-size: 14px;
+      white-space: nowrap;
+    }
+    .cta:hover{ text-decoration:none; transform: translateY(-1px); }
 
-        /* --- LAYOUT GRID --- */
-        .grid-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            background-size: 40px 40px;
-            background-image: 
-                linear-gradient(to right, rgba(0,0,0,0.02) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(0,0,0,0.02) 1px, transparent 1px);
-        }
+    .burger{
+      display:none;
+      height: 40px; width: 40px; border-radius: 12px;
+      border: 1px solid var(--line); background: #fff;
+      box-shadow: 0 6px 18px rgba(16,17,20,.06);
+      cursor:pointer;
+    }
+    .burger span{ display:block; height:2px; width:18px; background: rgba(16,17,20,.80); margin: 0 auto; }
+    .burger span + span{ margin-top: 5px; }
 
-        .container {
-            position: relative;
-            z-index: 1;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 var(--space-md);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
+    .mobile{
+      display:none;
+      padding-bottom: 14px;
+    }
+    .mobile a{
+      display:block;
+      padding: 10px 0;
+      border-top: 1px solid var(--line);
+      color: rgba(16,17,20,.86);
+    }
 
-        /* --- NAVIGATION / TOP BAR --- */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            padding-top: var(--space-md);
-            border-bottom: 1px solid transparent;
-        }
+    /* Hero */
+    .hero{ padding: 52px 0 22px; }
+    .heroGrid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+    .card{
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .heroMain{
+      padding: clamp(22px, 3vw, 34px);
+      position: relative;
+      overflow: hidden;
+    }
+    .kicker{
+      display:inline-flex; align-items:center; gap: 10px;
+      font-size: 13px; color: rgba(16,17,20,.72);
+      border: 1px solid var(--line);
+      padding: 8px 12px; border-radius: 999px;
+      background: rgba(255,255,255,.75);
+    }
+    .dot{
+      width: 8px; height: 8px; border-radius: 999px;
+      background: rgba(16,17,20,.50);
+    }
+    h1{
+      margin: 16px 0 10px;
+      font-size: clamp(32px, 4vw, 48px);
+      line-height: 1.04;
+      letter-spacing: -0.8px;
+    }
+    .lead{
+      margin: 0;
+      color: rgba(16,17,20,.75);
+      font-size: 16px;
+      line-height: 1.55;
+      max-width: 62ch;
+    }
+    .heroActions{
+      margin-top: 18px;
+      display:flex; gap: 10px; flex-wrap: wrap;
+      align-items:center;
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      height: 44px; padding: 0 16px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: #fff;
+      box-shadow: 0 10px 22px rgba(16,17,20,.08);
+      font-size: 14px;
+      cursor:pointer;
+      transition: transform .12s ease, box-shadow .12s ease;
+    }
+    .btn:hover{ text-decoration:none; transform: translateY(-1px); }
+    .btn.primary{
+      background: rgba(16,17,20,.93);
+      color: #fff;
+      border-color: rgba(16,17,20,.25);
+    }
+    .btn.primary:hover{ box-shadow: 0 14px 30px rgba(16,17,20,.18); }
 
-        .brand-micro {
-            font-family: var(--font-sans);
-            font-size: 0.75rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
+    .heroSide{
+      padding: 18px;
+      display:flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .mini{
+      padding: 16px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(16,17,20,.04), transparent);
+    }
+    .mini h3{
+      margin:0 0 6px; font-size: 14px; letter-spacing:.2px;
+    }
+    .mini p{
+      margin:0; color: rgba(16,17,20,.72);
+      font-size: 13px; line-height: 1.5;
+    }
 
-        /* Abstract Seal Mark */
-        .seal-mark {
-            width: 16px;
-            height: 16px;
-            border: 1.5px solid var(--ink-primary);
-            border-radius: 50%;
-            position: relative;
-        }
-        .seal-mark::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 6px;
-            height: 6px;
-            background-color: var(--gilt);
-            border-radius: 50%;
-        }
+    /* Sections */
+    section{ padding: 26px 0; }
+    .sectionHead{
+      display:flex; align-items:flex-end; justify-content:space-between;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+    h2{
+      margin:0;
+      font-size: 18px;
+      letter-spacing: .2px;
+    }
+    .sub{
+      margin:0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+      max-width: 70ch;
+    }
 
-        .nav-controls {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 8px;
-        }
+    .grid3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .tile{
+      padding: 18px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: #fff;
+      box-shadow: 0 10px 26px rgba(16,17,20,.06);
+      transition: transform .12s ease, box-shadow .12s ease;
+    }
+    .tile:hover{ transform: translateY(-2px); box-shadow: 0 16px 36px rgba(16,17,20,.10); text-decoration:none; }
+    .tile b{ display:block; font-size: 14px; margin-bottom: 8px; }
+    .tile span{ display:block; color: rgba(16,17,20,.72); font-size: 13px; line-height: 1.55; }
 
-        .status-badge {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--gilt);
-            border: 1px solid var(--gilt-faint);
-            padding: 4px 8px;
-            background: rgba(255,255,255,0.3);
-        }
+    /* Quote */
+    blockquote{
+      margin: 0;
+      padding: 18px 18px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.7);
+      box-shadow: 0 10px 26px rgba(16,17,20,.06);
+      color: rgba(16,17,20,.86);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    blockquote footer{
+      margin-top: 10px;
+      color: rgba(16,17,20,.58);
+      font-size: 12px;
+    }
 
-        .lang-switch {
-            font-family: var(--font-sans);
-            font-size: 0.75rem;
-            letter-spacing: 0.05em;
-            cursor: pointer;
-            user-select: none;
-            display: flex;
-            gap: 8px;
-        }
-        
-        .lang-opt {
-            color: var(--ink-tertiary);
-            transition: color 0.2s ease;
-        }
-        
-        .lang-opt.active {
-            color: var(--ink-primary);
-            font-weight: 600;
-            border-bottom: 1px solid var(--ink-primary);
-        }
+    /* Contact */
+    .contact{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      align-items: stretch;
+    }
+    form{
+      padding: 18px;
+    }
+    label{
+      display:block;
+      font-size: 12px;
+      color: rgba(16,17,20,.72);
+      margin: 10px 0 6px;
+    }
+    input, textarea{
+      width: 100%;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      padding: 12px 12px;
+      font: inherit;
+      background: #fff;
+      outline: none;
+    }
+    textarea{ min-height: 120px; resize: vertical; }
+    .hint{
+      font-size: 12px;
+      color: rgba(16,17,20,.58);
+      margin-top: 10px;
+      line-height: 1.5;
+    }
+    .ok, .err{
+      display:none;
+      margin-top: 12px;
+      padding: 12px 12px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: #fff;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+    .ok{ border-color: rgba(46, 160, 67, .25); }
+    .err{ border-color: rgba(220, 38, 38, .25); }
 
-        /* --- HERO TYPOGRAPHY --- */
-        .hero {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: var(--space-xl) 0;
-        }
+    /* Footer */
+    footer{
+      padding: 30px 0 46px;
+      border-top: 1px solid var(--line);
+      margin-top: 18px;
+      color: rgba(16,17,20,.62);
+      font-size: 13px;
+    }
+    .foot{
+      display:flex; justify-content:space-between; gap: 16px; flex-wrap:wrap;
+      align-items:center;
+    }
+    .foot a{ color: rgba(16,17,20,.68); margin-right: 12px; }
+    .mono{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
 
-        .hero-group {
-            margin-bottom: var(--space-lg);
-            position: relative;
-        }
-
-        /* The Typography Masterpiece */
-        h1 {
-            font-family: var(--font-serif);
-            font-weight: 300; /* Light/Editorial weight */
-            color: var(--ink-primary);
-            line-height: 0.85;
-            letter-spacing: -0.04em;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
-
-        .h1-main {
-            font-size: clamp(3.5rem, 11vw, 9rem);
-            display: block;
-            margin-bottom: 0.1em;
-        }
-
-        .h1-sub {
-            font-size: clamp(1.5rem, 4vw, 3rem);
-            font-weight: 300; /* Even lighter */
-            letter-spacing: 0.15em; /* Tracked out */
-            text-transform: uppercase;
-            color: var(--ink-secondary);
-            margin-left: 6px; /* Optical alignment */
-            font-family: var(--font-sans);
-        }
-
-        .latin-seal {
-            font-family: var(--font-serif);
-            font-style: italic;
-            font-size: clamp(1rem, 1.5vw, 1.5rem);
-            color: var(--gilt);
-            margin-top: var(--space-md);
-            display: block;
-            border-top: 1px solid var(--gilt);
-            padding-top: var(--space-sm);
-            width: fit-content;
-            padding-right: var(--space-lg);
-        }
-
-        .hero-desc {
-            margin-top: var(--space-md);
-            font-size: 1.1rem;
-            color: var(--ink-secondary);
-            max-width: 480px;
-            font-weight: 400;
-        }
-
-        /* --- DEFINITIONS (The Axioms) --- */
-        .definitions-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--space-lg);
-            margin-top: var(--space-lg);
-            border-top: 1px solid var(--line-color);
-            padding-top: var(--space-lg);
-        }
-
-        .def-card {
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-sm);
-        }
-
-        .def-title {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            color: var(--ink-tertiary);
-            font-weight: 500;
-        }
-
-        .def-text {
-            font-family: var(--font-serif);
-            font-size: clamp(1.25rem, 2vw, 1.75rem);
-            line-height: 1.3;
-            color: var(--ink-primary);
-            max-width: 30ch;
-        }
-
-        /* --- CTA SECTION --- */
-        .cta-container {
-            margin-top: var(--space-xl);
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-sm);
-            align-items: flex-start;
-        }
-
-        .contact-btn {
-            background: none;
-            border: none;
-            font-family: var(--font-sans);
-            font-size: 1rem;
-            color: var(--ink-primary);
-            cursor: pointer;
-            text-decoration: none;
-            border-bottom: 1px solid var(--ink-secondary);
-            padding-bottom: 2px;
-            transition: border-color 0.3s, color 0.3s;
-        }
-
-        .contact-btn:hover {
-            color: var(--gilt);
-            border-color: var(--gilt);
-        }
-
-        /* Institutional Input - Subtle */
-        .hidden-form {
-            display: flex;
-            gap: 12px;
-            margin-top: 12px;
-            opacity: 0.6;
-            transition: opacity 0.3s;
-        }
-        .hidden-form:hover, .hidden-form:focus-within {
-            opacity: 1;
-        }
-
-        .input-inst {
-            background: transparent;
-            border: none;
-            border-bottom: 1px solid var(--ink-tertiary);
-            font-family: var(--font-sans);
-            color: var(--ink-primary);
-            width: 200px;
-            font-size: 0.85rem;
-            padding: 4px 0;
-            outline: none;
-        }
-        .input-inst::placeholder {
-            color: var(--ink-tertiary);
-            font-style: italic;
-        }
-        .submit-arrow {
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: var(--ink-primary);
-            font-size: 1rem;
-        }
-
-        /* --- FOOTER --- */
-        footer {
-            padding: var(--space-md) 0;
-            border-top: 1px solid var(--line-color);
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            font-size: 0.75rem;
-            color: var(--ink-tertiary);
-            margin-top: var(--space-lg);
-        }
-
-        .footer-seal {
-            font-family: var(--font-serif);
-            font-style: italic;
-            margin-bottom: 4px;
-            color: var(--gilt);
-            display: block;
-        }
-
-        /* --- UTILITIES --- */
-        .sr-only {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            border: 0;
-        }
-
-        /* Mobile Response */
-        @media (max-width: 768px) {
-            :root {
-                --space-lg: 40px;
-                --space-xl: 60px;
-            }
-
-            .h1-sub {
-                margin-left: 2px;
-                font-size: 1.2rem;
-            }
-
-            .definitions-grid {
-                grid-template-columns: 1fr;
-                gap: var(--space-md);
-            }
-
-            header {
-                flex-direction: column; /* Keep strict hierarchy even on mobile */
-                gap: var(--space-sm);
-                align-items: flex-start;
-            }
-            
-            .nav-controls {
-                width: 100%;
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: center;
-            }
-            
-            .latin-seal {
-                width: 100%;
-                border-top: 1px solid var(--gilt);
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                transition: none !important;
-            }
-        }
-    </style>
+    /* Responsive */
+    @media (max-width: 920px){
+      .heroGrid{ grid-template-columns: 1fr; }
+      .grid3{ grid-template-columns: 1fr; }
+      .contact{ grid-template-columns: 1fr; }
+      .links{ display:none; }
+      .burger{ display:inline-grid; place-items:center; }
+      .mobile{ display:block; }
+      .mobile[hidden]{ display:none; }
+    }
+  </style>
 </head>
+
 <body>
-    <div class="grid-bg"></div>
+  <header>
+    <div class="wrap">
+      <nav class="nav" aria-label="Primary">
+        <a class="brand" href="#top" aria-label="Alimentarus Systems Home">
+          <span class="mark">AS</span>
+          <span>
+            Alimentarus Systems
+            <small>Nutrition-grade systems & governance</small>
+          </span>
+        </a>
 
-    <div class="container">
-        
-        <header>
-            <div class="brand-micro">
-                <div class="seal-mark"></div>
-                <span>Alimentarus Systems</span>
-            </div>
-            
-            <div class="nav-controls">
-                <span class="status-badge" data-i18n="status">Pre-lancio · Anteprima privata</span>
-                <div class="lang-switch">
-                    <span class="lang-opt" id="lang-it" onclick="setLanguage('it')">IT</span>
-                    <span class="lang-opt" style="opacity:0.3">|</span>
-                    <span class="lang-opt" id="lang-en" onclick="setLanguage('en')">EN</span>
-                </div>
-            </div>
-        </header>
+        <div class="links" role="navigation" aria-label="Site">
+          <a href="#platforms">Platforms</a>
+          <a href="#scope">Scope</a>
+          <a href="#principle">Principle</a>
+          <a href="#contact">Contact</a>
+        </div>
 
-        <main class="hero">
-            <div class="hero-group">
-                <h1>
-                    <span class="h1-main">ALIMENTARUS</span>
-                    <span class="h1-sub">SYSTEMS</span>
-                </h1>
-                <span class="latin-seal">Ordinem Cibi: Mensura, Structura, Regimen</span>
-                <p class="hero-desc" data-i18n="hero_desc">Architetture, standard e controllo per i sistemi alimentari.</p>
-            </div>
+        <div style="display:flex; gap:10px; align-items:center;">
+          <a class="cta" href="#contact">Request a conversation</a>
+          <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </nav>
 
-            <div class="definitions-grid">
-                <article class="def-card">
-                    <span class="def-title" data-i18n="def_food_title">CIBO</span>
-                    <p class="def-text" data-i18n="def_food_text">Materia con conseguenze di stato.</p>
-                </article>
-
-                <article class="def-card">
-                    <span class="def-title" data-i18n="def_nut_title">NUTRIZIONE</span>
-                    <p class="def-text" data-i18n="def_nut_text">Logica di controllo degli stati ammissibili.</p>
-                </article>
-            </div>
-
-            <div class="cta-container">
-                <a href="mailto:office@alimentarus.systems" class="contact-btn" data-i18n="cta_main">Richiedi contatto istituzionale</a>
-                
-                <form class="hidden-form" onsubmit="event.preventDefault();">
-                    <label for="email" class="sr-only" data-i18n="email_label">Email</label>
-                    <input type="email" id="email" class="input-inst" placeholder="Ricevi note di lancio" data-i18n-placeholder="email_ph">
-                    <button type="submit" class="submit-arrow" aria-label="Submit">
-                        &rarr;
-                    </button>
-                </form>
-            </div>
-        </main>
-
-        <footer>
-            <div>
-                <span class="footer-seal">Ordinem Cibi</span>
-                <span>&copy; <span id="year">2026</span> Alimentarus Systems</span>
-            </div>
-            <div data-i18n="footer_loc">Europa · Mediterraneo</div>
-        </footer>
-
+      <div class="mobile" id="mobileMenu" hidden>
+        <a href="#platforms">Platforms</a>
+        <a href="#scope">Scope</a>
+        <a href="#principle">Principle</a>
+        <a href="#contact">Contact</a>
+      </div>
     </div>
+  </header>
 
-    <script>
-        // --- CONTENT DICTIONARY ---
-        const i18n = {
-            it: {
-                status: "Pre-lancio · Anteprima privata",
-                hero_desc: "Architetture, standard e controllo per i sistemi alimentari.",
-                def_food_title: "CIBO",
-                def_food_text: "Materia con conseguenze di stato.",
-                def_nut_title: "NUTRIZIONE",
-                def_nut_text: "Logica di controllo degli stati ammissibili.",
-                cta_main: "Richiedi contatto istituzionale",
-                email_ph: "Ricevi note di lancio",
-                footer_loc: "Europa · Mediterraneo"
-            },
-            en: {
-                status: "Pre-launch · Private preview",
-                hero_desc: "Architecture, standards, and control for food systems.",
-                def_food_title: "FOOD",
-                def_food_text: "Material with state consequences.",
-                def_nut_title: "NUTRITION",
-                def_nut_text: "Control logic for permissible states.",
-                cta_main: "Request an institutional contact",
-                email_ph: "Receive launch notes",
-                footer_loc: "Europe · Mediterranean"
-            }
-        };
+  <main id="top">
+    <div class="wrap">
+      <section class="hero">
+        <div class="heroGrid">
+          <div class="card heroMain">
+            <div class="kicker"><span class="dot"></span><span>Signal-based food engineering • policy-grade clarity • execution discipline</span></div>
+            <h1>Alimentarus Systems builds the operating logic of nutrition, from label to state.</h1>
+            <p class="lead">
+              This is a plain-HTML counterpart to your Wix page: fast, portable, and deployable anywhere (GitHub Pages, Netlify, S3).
+              Replace the copy blocks below with your exact Wix text and you’ll have a clean, institutional presence without platform lock-in.
+            </p>
 
-        // --- LANGUAGE LOGIC ---
-        function setLanguage(lang) {
-            // Update HTML lang attribute
-            document.documentElement.lang = lang;
-            
-            // Save preference
-            localStorage.setItem('lang', lang);
+            <div class="heroActions">
+              <a class="btn primary" href="#platforms">Explore the platforms</a>
+              <a class="btn" href="#contact">Contact</a>
+              <a class="btn" href="#" id="downloadBtn">Download this page (HTML)</a>
+            </div>
+          </div>
 
-            // Update DOM content
-            const elements = document.querySelectorAll('[data-i18n]');
-            elements.forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                if (i18n[lang][key]) {
-                    el.textContent = i18n[lang][key];
-                }
-            });
+          <aside class="card heroSide" aria-label="Highlights">
+            <div class="mini">
+              <h3>What we ship</h3>
+              <p>Platforms, product grammars, label logic, and institutional narratives that survive scrutiny.</p>
+            </div>
+            <div class="mini">
+              <h3>What we avoid</h3>
+              <p>Well-designed fluff that collapses under policy optics, audit pressure, or scientific review.</p>
+            </div>
+            <div class="mini">
+              <h3>Deployment</h3>
+              <p>Single-file HTML • no build step • easily extended into multi-page structure.</p>
+            </div>
+          </aside>
+        </div>
+      </section>
 
-            // Update placeholders
-            const inputs = document.querySelectorAll('[data-i18n-placeholder]');
-            inputs.forEach(el => {
-                const key = el.getAttribute('data-i18n-placeholder');
-                if (i18n[lang][key]) {
-                    el.placeholder = i18n[lang][key];
-                }
-            });
+      <section id="platforms">
+        <div class="sectionHead">
+          <div>
+            <h2>Platforms</h2>
+            <p class="sub">Replace these tiles with the exact platform set you already defined (CIVITAS, LEXALIS, AEVUM, SIGNUM, etc.).</p>
+          </div>
+        </div>
 
-            // Toggle Visual State
-            document.getElementById('lang-it').classList.toggle('active', lang === 'it');
-            document.getElementById('lang-en').classList.toggle('active', lang === 'en');
-        }
+        <div class="grid3">
+          <a class="tile" href="#contact">
+            <b>CIVITAS</b>
+            <span>Public-facing legitimacy layer: trust, institutional optics, and the policy-admissible narrative.</span>
+          </a>
+          <a class="tile" href="#contact">
+            <b>LEXALIS</b>
+            <span>Grammar and constraints: how claims, labels, and product language remain audit-safe.</span>
+          </a>
+          <a class="tile" href="#contact">
+            <b>AEVUM</b>
+            <span>Long-horizon continuity: portfolio coherence across years, regulation, and consumer drift.</span>
+          </a>
+          <a class="tile" href="#contact">
+            <b>SIGNUM</b>
+            <span>Signal architecture: what the product “permits” physiologically, and what it must never imply.</span>
+          </a>
+          <a class="tile" href="#contact">
+            <b>REGIMEN</b>
+            <span>Regimen logic: sequencing, timing, and user-state fit—without collapsing into wellness clichés.</span>
+          </a>
+          <a class="tile" href="#contact">
+            <b>BiOMIKS</b>
+            <span>Product execution: formulation families engineered to express the architecture in real goods.</span>
+          </a>
+        </div>
+      </section>
 
-        // --- INITIALIZATION ---
-        document.addEventListener('DOMContentLoaded', () => {
-            // Set Year
-            document.getElementById('year').textContent = new Date().getFullYear();
+      <section id="scope">
+        <div class="sectionHead">
+          <div>
+            <h2>Scope</h2>
+            <p class="sub">These bullets are placeholders—swap with your actual activity map from the Wix page.</p>
+          </div>
+        </div>
 
-            // Check Storage or Default to IT
-            const savedLang = localStorage.getItem('lang') || 'it';
-            setLanguage(savedLang);
-        });
-    </script>
+        <div class="card" style="padding:18px;">
+          <ul style="margin:0; padding-left: 18px; color: rgba(16,17,20,.78); line-height:1.7; font-size:14px;">
+            <li>Institutional web presence, research portal structure, and compliance-first copy.</li>
+            <li>Product family naming system (identity grammar) and portfolio-wide semantic constraints.</li>
+            <li>Label architecture: claims discipline, timing logic, and risk-aware consumer interpretation.</li>
+            <li>Evidence packs: citations, rationale, and boundary statements engineered for audit survivability.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="principle">
+        <div class="sectionHead">
+          <div>
+            <h2>Principle</h2>
+            <p class="sub">A single “north star” statement that can sit on your homepage without embarrassing you in five years.</p>
+          </div>
+        </div>
+
+        <blockquote>
+          We treat nutrition as a governance problem: signals constrain states, language constrains interpretation, and products must remain valid under scrutiny.
+          <footer>— Alimentarus Systems</footer>
+        </blockquote>
+      </section>
+
+      <section id="contact">
+        <div class="sectionHead">
+          <div>
+            <h2>Contact</h2>
+            <p class="sub">This form is functional without a backend: it opens an email draft via <span class="mono">mailto:</span>. If you want serverless submission, plug in a Formspree/Netlify endpoint later.</p>
+          </div>
+        </div>
+
+        <div class="contact">
+          <div class="card">
+            <form id="contactForm" autocomplete="on">
+              <label for="name">Name</label>
+              <input id="name" name="name" type="text" placeholder="Your name" required />
+
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" placeholder="name@domain.com" required />
+
+              <label for="topic">Topic</label>
+              <input id="topic" name="topic" type="text" placeholder="What do you want to build?" required />
+
+              <label for="message">Message</label>
+              <textarea id="message" name="message" placeholder="Give me the context in 5–10 lines." required></textarea>
+
+              <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+                <button class="btn primary" type="submit">Send</button>
+                <button class="btn" type="button" id="clearBtn">Clear</button>
+              </div>
+
+              <p class="hint" id="hint">
+                Default recipient is a placeholder. Change <span class="mono">CONTACT_EMAIL</span> in the script below.
+              </p>
+
+              <div class="ok" id="okBox">Your email client should open now. If it doesn’t, copy the message and send it manually.</div>
+              <div class="err" id="errBox">Something is missing or invalid. Check the fields and try again.</div>
+            </form>
+          </div>
+
+          <div class="card" style="padding:18px;">
+            <div class="mini" style="height:100%;">
+              <h3>Operational note</h3>
+              <p>
+                If your goal is a faithful clone of the Wix Vibe page, you must provide the content (copy + images).
+                Once you paste the Wix text here (or upload screenshots), I’ll reconstruct the exact sections and typography in this same single-file format.
+              </p>
+              <div style="height:12px;"></div>
+              <h3>Deployment</h3>
+              <p>
+                Save this file as <span class="mono">index.html</span> and push to your GitHub Pages repository root.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <div class="wrap">
+          <div class="foot">
+            <div>
+              <div style="font-weight:650; color: rgba(16,17,20,.78);">Alimentarus Systems</div>
+              <div style="margin-top:4px;">© <span id="year"></span> • Plain HTML5 build</div>
+            </div>
+            <div>
+              <a href="#platforms">Platforms</a>
+              <a href="#scope">Scope</a>
+              <a href="#contact">Contact</a>
+              <a href="#top">Top</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </main>
+
+  <script>
+    // === CONFIG ===
+    const CONTACT_EMAIL = "kunter@ginova.org"; // <-- change if needed
+
+    // Mobile menu
+    const burger = document.getElementById("burger");
+    const mobileMenu = document.getElementById("mobileMenu");
+    function setMenu(open){
+      burger.setAttribute("aria-expanded", String(open));
+      mobileMenu.hidden = !open;
+    }
+    burger.addEventListener("click", () => {
+      const open = burger.getAttribute("aria-expanded") !== "true";
+      setMenu(open);
+    });
+    mobileMenu.addEventListener("click", (e) => {
+      if (e.target.tagName === "A") setMenu(false);
+    });
+
+    // Footer year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Contact form -> mailto (functional without backend)
+    const form = document.getElementById("contactForm");
+    const okBox = document.getElementById("okBox");
+    const errBox = document.getElementById("errBox");
+    const clearBtn = document.getElementById("clearBtn");
+
+    function show(el){ el.style.display = "block"; }
+    function hide(el){ el.style.display = "none"; }
+
+    clearBtn.addEventListener("click", () => {
+      form.reset();
+      hide(okBox); hide(errBox);
+    });
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      hide(okBox); hide(errBox);
+
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const topic = document.getElementById("topic").value.trim();
+      const message = document.getElementById("message").value.trim();
+
+      if (!name || !email || !topic || !message || !email.includes("@")) {
+        show(errBox);
+        return;
+      }
+
+      const subject = encodeURIComponent(`[Alimentarus Systems] ${topic}`);
+      const body = encodeURIComponent(
+`Name: ${name}
+Email: ${email}
+
+Message:
+${message}
+
+---`
+      );
+
+      const mailto = `mailto:${encodeURIComponent(CONTACT_EMAIL)}?subject=${subject}&body=${body}`;
+      window.location.href = mailto;
+      show(okBox);
+    });
+
+    // Download button: saves this HTML as a file from the browser
+    document.getElementById("downloadBtn").addEventListener("click", (e) => {
+      e.preventDefault();
+      const blob = new Blob([document.documentElement.outerHTML], { type: "text/html;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "alimentarus-systems.html";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    });
+  </script>
 </body>
 </html>
