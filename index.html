@@ -3,393 +3,521 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ALIMENTARUS SYSTEMS | INITIALIZING</title>
+    <title>Alimentarus Systems | Pre-Launch</title>
+    <meta name="description" content="A systems view of food and nutrition. Pre-launch private preview.">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;800&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+
     <style>
+        /* --- DESIGN SYSTEM & VARIABLES --- */
         :root {
-            --bg: #050505;
-            --white: #e0e0e0;
-            --accent: #ff3c00; /* Industrial Orange */
-            --glass: rgba(255, 255, 255, 0.05);
-            --grid: rgba(255, 255, 255, 0.03);
+            /* Palette: Sophisticated Pastels */
+            --bg-base: #FDFCF8; /* Warm off-white, paper-like */
+            --text-primary: #1A1A1A;
+            --text-secondary: #585858;
+            --text-muted: #949494;
+            
+            --accent-peach: #FFD6C9;
+            --accent-lavender: #E6E1FF;
+            --accent-sage: #D8E5D8;
+            --accent-mist: #F0F4F8;
+
+            --glass-surface: rgba(255, 255, 255, 0.45);
+            --glass-border: rgba(255, 255, 255, 0.6);
+            --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.04);
+
+            /* Typography */
+            --font-display: 'Fraunces', serif;
+            --font-body: 'Manrope', sans-serif;
+
+            /* Spacing */
+            --space-xs: 0.5rem;
+            --space-sm: 1rem;
+            --space-md: 2rem;
+            --space-lg: 4rem;
+            --space-xl: 8rem;
+
+            /* Transitions */
+            --ease-out: cubic-bezier(0.215, 0.61, 0.355, 1);
         }
 
-        * {
+        /* --- RESET & BASE --- */
+        *, *::before, *::after {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            cursor: none; /* Custom cursor used */
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
         }
 
         body {
-            background-color: var(--bg);
-            color: var(--white);
-            font-family: 'Syne', sans-serif;
-            overflow: hidden;
-            height: 100vh;
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
             width: 100vw;
-            perspective: 1000px;
+            min-height: 100vh;
+            position: relative;
         }
 
-        /* --- BACKGROUND MESH --- */
-        #canvas-wrapper {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            opacity: 0.4;
-        }
-
-        /* --- GRAIN OVERLAY --- */
-        .grain {
+        /* --- BACKGROUND LAYERS --- */
+        
+        /* 1. Grain Texture */
+        .grain-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E");
-            opacity: 0.05;
             pointer-events: none;
             z-index: 2;
+            opacity: 0.06;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E");
         }
 
-        /* --- CUSTOM CURSOR --- */
-        .cursor {
-            width: 20px;
-            height: 20px;
-            border: 1px solid var(--white);
-            border-radius: 50%;
-            position: absolute;
-            pointer-events: none;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
-            transition: width 0.3s, height 0.3s, background-color 0.3s;
-            mix-blend-mode: difference;
-        }
-        
-        .cursor.hovered {
-            width: 50px;
-            height: 50px;
-            background-color: var(--white);
-            border-color: transparent;
-        }
-
-        /* --- UI LAYOUT --- */
-        .ui-layer {
-            position: relative;
-            z-index: 10;
-            height: 100%;
+        /* 2. Micro Grid */
+        .grid-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            display: grid;
-            grid-template-columns: 1fr;
-            grid-template-rows: 1fr auto 1fr;
-            padding: 4vw;
-            pointer-events: none; /* Let clicks pass through unless on button */
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(to right, rgba(0,0,0,0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0,0,0,0.03) 1px, transparent 1px);
         }
 
-        /* --- HEADER & META --- */
-        .top-bar {
+        /* 3. Pastel Blobs */
+        .blob-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+            filter: blur(80px); /* Heavy blur for soft gradients */
+        }
+
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            animation: drift 25s infinite alternate ease-in-out;
+            opacity: 0.7;
+        }
+
+        .blob-1 {
+            top: -10%;
+            right: -5%;
+            width: 50vw;
+            height: 50vw;
+            background: var(--accent-peach);
+            animation-duration: 35s;
+        }
+
+        .blob-2 {
+            bottom: -10%;
+            left: -10%;
+            width: 40vw;
+            height: 40vw;
+            background: var(--accent-lavender);
+            animation-duration: 40s;
+            animation-direction: reverse;
+        }
+
+        .blob-3 {
+            top: 40%;
+            left: 40%;
+            width: 30vw;
+            height: 30vw;
+            background: var(--accent-sage);
+            opacity: 0.5;
+            animation-duration: 30s;
+        }
+
+        @keyframes drift {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(30px, -20px) scale(1.1); }
+            100% { transform: translate(-20px, 40px) scale(0.95); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .blob { animation: none; }
+        }
+
+        /* --- LAYOUT CONTAINER --- */
+        .wrapper {
+            position: relative;
+            z-index: 3; /* Above grain */
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: var(--space-md) var(--space-md);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* --- HEADER --- */
+        header {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
-            font-family: 'Manrope', sans-serif;
-            font-size: 0.8rem;
-            letter-spacing: 0.1em;
-            opacity: 0.7;
-            text-transform: uppercase;
+            align-items: center;
+            padding-bottom: var(--space-lg);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: -0.01em;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .logo-mark {
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            background: conic-gradient(from 180deg at 50% 50%, #FFD6C9 0deg, #E6E1FF 180deg, #D8E5D8 360deg);
+            box-shadow: inset 1px 1px 2px rgba(255,255,255,0.8);
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 12px;
+            border-radius: 100px;
+            background: rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            backdrop-filter: blur(4px);
         }
 
         .status-dot {
-            height: 8px;
-            width: 8px;
-            background-color: var(--accent);
+            width: 6px;
+            height: 6px;
+            background-color: #2DCA73;
             border-radius: 50%;
-            display: inline-block;
             margin-right: 8px;
-            animation: pulse 2s infinite;
+            box-shadow: 0 0 8px rgba(45, 202, 115, 0.4);
         }
 
-        /* --- HERO TYPOGRAPHY --- */
-        .hero-container {
+        /* --- HERO SECTION --- */
+        .hero {
+            flex-grow: 1;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: center;
-            position: relative;
-            transform-style: preserve-3d;
+            gap: var(--space-lg);
+            padding: var(--space-lg) 0;
         }
 
         h1 {
-            font-size: clamp(3rem, 12vw, 15rem);
-            line-height: 0.8;
-            font-weight: 800;
-            text-align: center;
-            color: transparent;
-            -webkit-text-stroke: 1px var(--white);
-            position: relative;
-            transition: transform 0.1s ease-out;
-            pointer-events: auto;
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 8vw, 6.5rem);
+            font-weight: 300;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            color: var(--text-primary);
+            max-width: 14ch;
+            /* Optical alignment */
+            margin-left: -0.05em; 
         }
 
         h1 span {
             display: block;
+            font-variation-settings: "wght" 300, "OPSZ" 72;
+        }
+        
+        .subline {
+            font-family: var(--font-body);
+            font-size: clamp(1.1rem, 2vw, 1.5rem);
+            color: var(--text-secondary);
+            font-weight: 300;
+            margin-top: calc(var(--space-sm) * -1);
+            max-width: 600px;
         }
 
-        .filled-text {
-            color: var(--white);
-            -webkit-text-stroke: 0;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            clip-path: polygon(0 0, 100% 0, 100% 0, 0 0); /* Hidden initially */
-            animation: textReveal 1.5s cubic-bezier(0.19, 1, 0.22, 1) forwards;
-            animation-delay: 0.5s;
+        /* --- DEFINITION CARDS --- */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-md);
+            margin-top: var(--space-lg);
         }
 
-        .sub-hero {
-            font-family: 'Manrope', sans-serif;
-            font-size: clamp(0.8rem, 1.5vw, 2rem);
-            letter-spacing: 0.5em;
-            margin-top: 2rem;
-            text-transform: uppercase;
-            opacity: 0;
-            animation: fadeUp 1s ease-out forwards;
-            animation-delay: 1.2s;
-            mix-blend-mode: exclusion;
-        }
-
-        /* --- FOOTER & CTA --- */
-        .bottom-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            font-family: 'Manrope', sans-serif;
-        }
-
-        .cta-btn {
-            pointer-events: auto;
-            background: transparent;
-            border: 1px solid rgba(255,255,255,0.2);
-            color: var(--white);
-            padding: 1rem 3rem;
-            font-family: 'Manrope', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            font-size: 0.8rem;
-            transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+        .glass-card {
+            background: var(--glass-surface);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            padding: var(--space-md) var(--space-md) var(--space-lg);
+            border-radius: 16px;
+            box-shadow: var(--glass-shadow);
+            transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
             position: relative;
             overflow: hidden;
         }
 
-        .cta-btn:hover {
-            border-color: var(--accent);
-            color: var(--bg);
+        .glass-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.08);
         }
 
-        .cta-btn::before {
+        .glass-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
-            width: 0%;
-            height: 100%;
-            background: var(--accent);
-            z-index: -1;
-            transition: width 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-        }
-
-        .cta-btn:hover::before {
             width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-peach), var(--accent-lavender));
+            opacity: 0.6;
         }
 
-        .coordinates {
-            text-align: right;
-            font-family: 'Manrope', sans-serif;
-            font-size: 0.7rem;
-            opacity: 0.5;
-            line-height: 1.5;
+        .card-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: var(--space-md);
+            display: block;
+            font-weight: 600;
         }
 
-        /* --- ANIMATIONS --- */
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(255, 60, 0, 0.4); }
-            70% { box-shadow: 0 0 0 10px rgba(255, 60, 0, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(255, 60, 0, 0); }
+        .card-text {
+            font-family: var(--font-display);
+            font-size: clamp(1.5rem, 2.5vw, 2rem);
+            line-height: 1.25;
+            color: var(--text-primary);
+            font-weight: 400;
+            letter-spacing: -0.01em;
         }
 
-        @keyframes textReveal {
-            0% { clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%); transform: translateY(50px); }
-            100% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); transform: translateY(0); }
+        /* --- EMAIL CAPTURE --- */
+        .capture-area {
+            margin-top: var(--space-lg);
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            flex-wrap: wrap;
         }
 
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        form {
+            position: relative;
+            display: flex;
+            gap: var(--space-xs);
+            background: rgba(255,255,255,0.6);
+            padding: 6px;
+            border-radius: 100px;
+            border: 1px solid rgba(0,0,0,0.08);
+            width: 100%;
+            max-width: 400px;
+            transition: border-color 0.2s;
         }
 
-        /* Mobile Adjustments */
+        form:focus-within {
+            border-color: var(--text-primary);
+            background: #fff;
+        }
+
+        input[type="email"] {
+            border: none;
+            background: transparent;
+            padding: 0 16px;
+            flex-grow: 1;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            color: var(--text-primary);
+            outline: none;
+        }
+
+        input[type="email"]::placeholder {
+            color: var(--text-muted);
+            opacity: 1;
+        }
+
+        button[type="submit"] {
+            background: var(--text-primary);
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 100px;
+            font-family: var(--font-body);
+            font-weight: 500;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        button[type="submit"]:hover {
+            transform: scale(1.02);
+        }
+
+        button[type="submit"]:active {
+            transform: scale(0.98);
+        }
+
+        .capture-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding-top: var(--space-lg);
+            border-top: 1px solid rgba(0,0,0,0.04);
+            margin-top: var(--space-xl);
+        }
+
+        .copyright {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .lang-toggle {
+            display: flex;
+            background: rgba(255,255,255,0.5);
+            border-radius: 100px;
+            padding: 4px;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .lang-opt {
+            padding: 4px 10px;
+            font-size: 0.75rem;
+            border-radius: 100px;
+            cursor: pointer;
+            color: var(--text-muted);
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .lang-opt.active {
+            background: #fff;
+            color: var(--text-primary);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        /* --- MOBILE ADJUSTMENTS --- */
         @media (max-width: 768px) {
-            .ui-layer { padding: 8vw; }
-            h1 { font-size: 15vw; }
-            .bottom-bar { flex-direction: column-reverse; align-items: center; gap: 2rem; }
-            .cta-btn { width: 100%; text-align: center; }
+            :root {
+                --space-lg: 2.5rem;
+                --space-xl: 4rem;
+            }
+            
+            .hero { padding: var(--space-md) 0; }
+            
+            .capture-area {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--space-sm);
+            }
+            
+            form { max-width: 100%; }
+
+            footer {
+                flex-direction: column-reverse;
+                align-items: flex-start;
+                gap: var(--space-md);
+            }
         }
     </style>
 </head>
 <body>
 
-    <div class="grain"></div>
-
-    <div class="cursor" id="cursor"></div>
-
-    <div id="canvas-wrapper">
-        <canvas id="neuralCanvas"></canvas>
+    <div class="blob-container">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
     </div>
+    <div class="grid-overlay"></div>
+    <div class="grain-overlay"></div>
 
-    <main class="ui-layer">
+    <div class="wrapper">
         
-        <div class="top-bar">
-            <div>
+        <header>
+            <a href="#" class="brand">
+                <div class="logo-mark"></div>
+                ALIMENTARUS SYSTEMS
+            </a>
+            <div class="status-badge">
                 <span class="status-dot"></span>
-                SYSTEM INITIALIZATION
+                Pre-launch • Private preview
             </div>
-            <div>EST. 2026</div>
-        </div>
+        </header>
 
-        <div class="hero-container" id="hero">
-            <h1>
-                <span>ALIMENTARUS</span>
-                <span>SYSTEMS</span>
-                
-                <div class="filled-text">
+        <main class="hero">
+            <div>
+                <h1>
                     <span>ALIMENTARUS</span>
                     <span>SYSTEMS</span>
-                </div>
-            </h1>
-            <div class="sub-hero">Global Infrastructure Protocol</div>
-        </div>
-
-        <div class="bottom-bar">
-            <button class="cta-btn" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">Request Access</button>
-            <div class="coordinates">
-                LAT: 40.7128° N<br>
-                LNG: 74.0060° W<br>
-                SECURE SERVER: ACTIVE
+                </h1>
+                <p class="subline">A systems view of food and nutrition.</p>
             </div>
-        </div>
 
-    </main>
+            <section class="cards-grid">
+                <article class="glass-card">
+                    <span class="card-label">01 — Definition</span>
+                    <p class="card-text">Food is chemistry that shapes state.</p>
+                </article>
+
+                <article class="glass-card">
+                    <span class="card-label">02 — Logic</span>
+                    <p class="card-text">Nutrition is the control architecture of permissible states.</p>
+                </article>
+            </section>
+
+            <div class="capture-area">
+                <form action="https://formspree.io/f/placeholder" method="POST" onclick="event.preventDefault(); /* Remove this for live */ alert('Investor portal connection simulated.');">
+                    <input type="email" placeholder="Get launch notes" required>
+                    <button type="submit">Join</button>
+                </form>
+                <span class="capture-label">No spam. Only signal.</span>
+            </div>
+        </main>
+
+        <footer>
+            <div class="copyright">
+                © <span id="year">2026</span> Alimentarus Systems. <br>
+                San Francisco • Zurich
+            </div>
+            
+            <div class="lang-toggle">
+                <span class="lang-opt active">EN</span>
+                <span class="lang-opt">IT</span>
+            </div>
+        </footer>
+
+    </div>
 
     <script>
-        // --- CUSTOM CURSOR LOGIC ---
-        const cursor = document.getElementById('cursor');
-        
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-        });
+        // Set dynamic copyright year
+        document.getElementById('year').textContent = new Date().getFullYear();
 
-        function hoverCursor() {
-            cursor.classList.add('hovered');
-        }
-
-        function unhoverCursor() {
-            cursor.classList.remove('hovered');
-        }
-
-        // --- 3D TILT EFFECT ON TYPOGRAPHY ---
-        const hero = document.getElementById('hero');
-        const sensitivity = 20; // Lower is more extreme
-
-        document.addEventListener('mousemove', (e) => {
-            const x = (window.innerWidth / 2 - e.clientX) / sensitivity;
-            const y = (window.innerHeight / 2 - e.clientY) / sensitivity;
-            
-            // Apply rotation based on mouse position
-            hero.style.transform = `rotateX(${y}deg) rotateY(${(-x)}deg)`;
-        });
-
-        // --- CANVAS PARTICLE NETWORK ---
-        const canvas = document.getElementById('neuralCanvas');
-        const ctx = canvas.getContext('2d');
-        let width, height;
-        let particles = [];
-
-        function resize() {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-        }
-
-        window.addEventListener('resize', resize);
-        resize();
-
-        class Particle {
-            constructor() {
-                this.x = Math.random() * width;
-                this.y = Math.random() * height;
-                this.vx = (Math.random() - 0.5) * 0.5;
-                this.vy = (Math.random() - 0.5) * 0.5;
-                this.size = Math.random() * 2;
-            }
-
-            update() {
-                this.x += this.vx;
-                this.y += this.vy;
-
-                if (this.x < 0 || this.x > width) this.vx *= -1;
-                if (this.y < 0 || this.y > height) this.vy *= -1;
-            }
-
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
-                ctx.fill();
-            }
-        }
-
-        function initParticles() {
-            particles = [];
-            const particleCount = Math.min(window.innerWidth / 10, 100); 
-            for (let i = 0; i < particleCount; i++) {
-                particles.push(new Particle());
-            }
-        }
-
-        function animate() {
-            ctx.clearRect(0, 0, width, height);
-            
-            for (let i = 0; i < particles.length; i++) {
-                particles[i].update();
-                particles[i].draw();
-
-                // Draw connections
-                for (let j = i; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-
-                    if (distance < 150) {
-                        ctx.beginPath();
-                        ctx.strokeStyle = `rgba(255, 255, 255, ${0.1 - distance/1500})`;
-                        ctx.lineWidth = 1;
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.stroke();
-                    }
-                }
-            }
-            requestAnimationFrame(animate);
-        }
-
-        initParticles();
-        animate();
+        // Simple console signature for curious developers/investors inspecting element
+        console.log(
+            "%c ALIMENTARUS SYSTEMS %c \nWaitlist Active: true \nLatency: 12ms",
+            "background: #1a1a1a; color: #fff; padding: 4px; border-radius: 4px; font-weight: bold;",
+            "color: #585858;"
+        );
     </script>
 </body>
 </html>
