@@ -1,773 +1,805 @@
+```html
 <!doctype html>
-<html lang="en" data-lang="en">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Alimentarus Systems — Institutional Placeholder</title>
-  <meta name="description" content="Alimentarus Systems — Food systems, nutrition governance, and signal-first design." />
-  <meta name="theme-color" content="#0b0f14" />
+  <meta name="color-scheme" content="dark light" />
+  <title>Alimentarus Systems — Control Architecture for Food</title>
+  <meta name="description" content="Alimentarus Systems builds control-grade food intelligence: standards, traceability, and metabolic signaling design. Contemporary placeholder site." />
 
-  <!-- No external dependencies. System fonts only for maximum reliability. -->
+  <!-- Premium typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..900&family=Inter:wght@300..900&display=swap" rel="stylesheet">
+
   <style>
     :root{
-      --bg: #0b0f14;
-      --panel: rgba(255,255,255,.06);
-      --panel2: rgba(255,255,255,.08);
-      --stroke: rgba(255,255,255,.12);
-      --text: rgba(255,255,255,.92);
-      --muted: rgba(255,255,255,.68);
-      --faint: rgba(255,255,255,.48);
-      --accent: #d9c8a9; /* warm institutional */
-      --accent2: #9ec3ff; /* cold research */
-      --ok: rgba(158,255,196,.9);
-      --shadow: 0 16px 50px rgba(0,0,0,.55);
+      --bg: #07080b;
+      --fg: #e9edf5;
+      --muted: rgba(233,237,245,.72);
+      --soft: rgba(233,237,245,.10);
+      --softer: rgba(233,237,245,.06);
+      --line: rgba(233,237,245,.14);
+      --accent: #9ff8ff;   /* cyan ice */
+      --accent2:#c5ffb8;   /* spring */
+      --warn:#ffd18b;
+      --shadow: 0 20px 60px rgba(0,0,0,.45);
       --radius: 18px;
       --radius2: 26px;
-      --max: 1160px;
-      --pad: clamp(18px, 3vw, 28px);
-      --pad2: clamp(26px, 4vw, 44px);
-      --h1: clamp(34px, 4.8vw, 56px);
-      --h2: clamp(18px, 2.2vw, 22px);
-      --p: clamp(15px, 1.35vw, 17px);
+      --max: 1180px;
       --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      --serif: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", Times, serif;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      --serif: Fraunces, ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
     }
 
     *{ box-sizing:border-box; }
     html,body{ height:100%; }
     body{
       margin:0;
+      color:var(--fg);
+      background: radial-gradient(1200px 900px at 72% 10%, rgba(159,248,255,.12), transparent 60%),
+                  radial-gradient(1000px 700px at 10% 50%, rgba(197,255,184,.10), transparent 55%),
+                  radial-gradient(700px 600px at 80% 75%, rgba(255,209,139,.08), transparent 55%),
+                  linear-gradient(180deg, #06070a 0%, #05060a 45%, #04050a 100%);
       font-family: var(--sans);
-      color: var(--text);
-      background:
-        radial-gradient(1200px 700px at 20% -10%, rgba(158,195,255,.18), transparent 55%),
-        radial-gradient(900px 600px at 90% 10%, rgba(217,200,169,.14), transparent 55%),
-        radial-gradient(900px 650px at 70% 110%, rgba(158,255,196,.10), transparent 55%),
-        linear-gradient(180deg, #070a0e 0%, #0b0f14 55%, #070a0e 100%);
+      letter-spacing: -0.01em;
       overflow-x:hidden;
     }
 
-    a{ color: inherit; text-decoration:none; }
-    a:hover{ text-decoration:underline; text-underline-offset: 3px; }
-
-    .wrap{ max-width: var(--max); margin:0 auto; padding: var(--pad2) var(--pad); }
-    .topbar{
-      position: sticky; top:0; z-index: 50;
-      background: linear-gradient(180deg, rgba(11,15,20,.88), rgba(11,15,20,.65));
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(255,255,255,.08);
+    /* Subtle film grain */
+    body::before{
+      content:"";
+      position:fixed; inset:0;
+      pointer-events:none;
+      opacity:.13;
+      mix-blend-mode: overlay;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+      background-size:240px 240px;
     }
 
+    a{ color:inherit; text-decoration:none; }
+    .wrap{ max-width: var(--max); margin:0 auto; padding:0 24px; }
+
+    /* Top bar */
+    header{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(14px);
+      background: linear-gradient(180deg, rgba(7,8,11,.78), rgba(7,8,11,.45));
+      border-bottom: 1px solid rgba(233,237,245,.10);
+    }
     .nav{
       display:flex; align-items:center; justify-content:space-between;
-      gap: 16px;
-      padding: 14px var(--pad);
-      max-width: var(--max);
-      margin: 0 auto;
+      gap:16px;
+      padding:14px 0;
     }
-
     .brand{
-      display:flex; flex-direction:column; line-height:1.05;
-      letter-spacing:.02em;
-      min-width: 260px;
+      display:flex; align-items:center; gap:12px;
+      min-width: 220px;
     }
-    .brand .name{
-      font-weight: 740;
-      font-size: 14px;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-    }
-    .brand .tag{
-      font-family: var(--serif);
-      font-size: 13px;
-      color: var(--muted);
-      margin-top: 6px;
-      letter-spacing: .02em;
-    }
-
-    .navlinks{
-      display:flex; align-items:center; gap: 16px;
-      color: var(--muted);
-      font-weight: 620;
-      font-size: 13px;
-      letter-spacing: .02em;
-      white-space: nowrap;
-    }
-    .navlinks a{ opacity:.95; }
-    .navlinks a:hover{ opacity:1; }
-
-    .lang{
-      display:flex; align-items:center; gap:10px;
-      border: 1px solid rgba(255,255,255,.14);
-      padding: 8px 10px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.04);
-    }
-    .lang button{
-      appearance:none; border:0; background:transparent; color: var(--muted);
-      font-weight: 750; font-size: 12px; letter-spacing:.12em;
-      padding: 6px 10px; border-radius: 999px; cursor:pointer;
-    }
-    .lang button[aria-pressed="true"]{
-      background: rgba(217,200,169,.18);
-      color: var(--text);
-      outline: 1px solid rgba(217,200,169,.35);
-    }
-
-    .hero{
-      padding: clamp(30px, 5vw, 56px) 0 10px;
-    }
-
-    .grid{
-      display:grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap: clamp(18px, 3vw, 26px);
-      align-items: stretch;
-    }
-
-    .card{
-      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: var(--radius2);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-    }
-
-    .card .inner{ padding: clamp(18px, 3vw, 34px); }
-
-    .kicker{
-      display:flex; align-items:center; gap:10px;
-      color: var(--muted);
-      font-weight: 720;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      font-size: 12px;
-    }
-    .dot{
-      width:8px; height:8px; border-radius: 999px;
-      background: var(--accent);
-      box-shadow: 0 0 0 6px rgba(217,200,169,.12);
-    }
-
-    h1{
-      font-family: var(--serif);
-      font-size: var(--h1);
-      line-height: 1.02;
-      margin: 14px 0 14px;
-      letter-spacing: -.01em;
-    }
-
-    .lead{
-      font-size: clamp(16px, 1.55vw, 18px);
-      line-height: 1.65;
-      color: var(--muted);
-      max-width: 58ch;
-      margin: 0 0 22px;
-    }
-
-    .pillrow{
-      display:flex; flex-wrap: wrap; gap: 10px;
-      margin-top: 18px;
-    }
-    .pill{
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.04);
-      border-radius: 999px;
-      padding: 9px 12px;
-      font-weight: 650;
-      font-size: 12px;
-      color: rgba(255,255,255,.80);
-      letter-spacing: .02em;
-    }
-
-    .ctaRow{
-      display:flex; flex-wrap:wrap; gap: 12px;
-      margin-top: 26px;
-      align-items:center;
-    }
-    .btn{
-      display:inline-flex; align-items:center; gap:10px;
-      border-radius: 999px;
-      padding: 11px 14px;
-      border: 1px solid rgba(255,255,255,.16);
-      background: rgba(255,255,255,.05);
-      font-weight: 760;
-      font-size: 13px;
-      letter-spacing: .02em;
-      color: var(--text);
-    }
-    .btn.primary{
-      background: linear-gradient(135deg, rgba(217,200,169,.28), rgba(158,195,255,.16));
-      border-color: rgba(217,200,169,.38);
-    }
-    .btn:hover{ text-decoration:none; filter: brightness(1.05); }
-
-    .rightPanel{
-      display:flex;
-      flex-direction:column;
-      min-height: 100%;
-    }
-    .seal{
-      padding: 18px 18px 0;
-    }
-
-    .sealBox{
-      border-radius: var(--radius);
+    .mark{
+      width:38px; height:38px; border-radius: 12px;
       background:
-        radial-gradient(700px 300px at 10% 0%, rgba(158,195,255,.20), transparent 55%),
-        radial-gradient(700px 300px at 100% 10%, rgba(217,200,169,.18), transparent 55%),
-        rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.12);
-      padding: 18px;
+        radial-gradient(12px 12px at 28% 30%, rgba(159,248,255,.9), transparent 60%),
+        radial-gradient(18px 18px at 70% 68%, rgba(197,255,184,.85), transparent 62%),
+        linear-gradient(135deg, rgba(233,237,245,.14), rgba(233,237,245,.04));
+      border:1px solid rgba(233,237,245,.14);
+      box-shadow: 0 14px 35px rgba(0,0,0,.35);
       position:relative;
       overflow:hidden;
     }
-    .sealTitle{
-      font-family: var(--mono);
-      font-size: 12px;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,.70);
-      margin-bottom: 12px;
+    .mark::after{
+      content:"";
+      position:absolute; inset:-40%;
+      background: conic-gradient(from 210deg, transparent 0 40%, rgba(159,248,255,.16) 55%, transparent 70% 100%);
+      animation: spin 14s linear infinite;
     }
-    .sealValue{
+    @keyframes spin{ to{ transform: rotate(360deg); } }
+
+    .brand b{
       font-family: var(--serif);
-      font-size: 20px;
-      line-height:1.25;
-      letter-spacing: -.01em;
-      margin: 0 0 10px;
+      font-variation-settings: "opsz" 80;
+      font-size: 16px;
+      letter-spacing: .02em;
     }
-    .sealNote{
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.6;
-      margin: 0;
-    }
-
-    .divider{
-      height: 1px;
-      background: rgba(255,255,255,.10);
-      margin: 18px 0;
-    }
-
-    .mini{
-      display:grid;
-      grid-template-columns: 1fr;
-      gap: 12px;
-      padding: 0 18px 18px;
-    }
-    .miniCard{
-      border-radius: var(--radius);
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.03);
-      padding: 14px 14px;
-    }
-    .miniCard h3{
-      margin: 0 0 6px;
-      font-size: 13px;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,.78);
-    }
-    .miniCard p{
-      margin: 0;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.55;
-    }
-
-    section.block{
-      padding: 26px 0 0;
-    }
-
-    .sectionTitle{
-      display:flex; align-items:baseline; justify-content:space-between;
-      gap: 14px;
-      margin: 18px 0 12px;
-    }
-    .sectionTitle h2{
-      font-family: var(--serif);
-      font-size: var(--h2);
-      margin: 0;
-      letter-spacing: -.01em;
-    }
-    .sectionTitle .hint{
-      font-family: var(--mono);
+    .brand span{
+      display:block;
       font-size: 12px;
-      letter-spacing: .10em;
-      color: rgba(255,255,255,.55);
-      text-transform: uppercase;
-    }
-
-    .cols{
-      display:grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 14px;
-    }
-    .tile{
-      border-radius: var(--radius);
-      border: 1px solid rgba(255,255,255,.12);
-      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
-      padding: 16px 16px 14px;
-      min-height: 132px;
-    }
-    .tile .cap{
-      display:flex; align-items:center; gap:10px;
-      font-size: 12px;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,.76);
-      margin-bottom: 10px;
-      font-weight: 770;
-    }
-    .tile .cap i{
-      width: 10px; height: 10px; border-radius: 999px;
-      background: var(--accent2);
-      box-shadow: 0 0 0 6px rgba(158,195,255,.10);
-      display:inline-block;
-    }
-    .tile p{
-      margin: 0;
       color: var(--muted);
-      font-size: var(--p);
-      line-height: 1.6;
+      letter-spacing: .08em;
+      text-transform: uppercase;
     }
 
-    .quote{
-      margin-top: 14px;
-      border-left: 3px solid rgba(217,200,169,.55);
-      padding: 14px 16px;
-      background: rgba(255,255,255,.03);
+    .links{
+      display:flex; align-items:center; gap:16px;
+      color: rgba(233,237,245,.82);
+      font-size: 13px;
+    }
+    .links a{
+      padding:10px 10px;
+      border-radius: 12px;
+      border:1px solid transparent;
+      transition: .18s ease;
+    }
+    .links a:hover{
+      border-color: rgba(233,237,245,.14);
+      background: rgba(233,237,245,.04);
+    }
+    .lang{
+      display:flex; align-items:center; gap:8px;
+      padding:8px 10px;
+      border:1px solid rgba(233,237,245,.14);
       border-radius: 14px;
-      color: rgba(255,255,255,.82);
-    }
-    .quote p{ margin: 0; line-height:1.65; }
-    .quote .by{
-      margin-top: 10px;
-      color: rgba(255,255,255,.58);
-      font-family: var(--mono);
+      background: rgba(233,237,245,.04);
       font-size: 12px;
-      letter-spacing: .10em;
+      color: rgba(233,237,245,.78);
+      user-select:none;
+    }
+    .pill{
+      display:inline-flex; align-items:center; justify-content:center;
+      height:26px; padding:0 10px;
+      border-radius: 999px;
+      border:1px solid rgba(233,237,245,.14);
+      background: rgba(233,237,245,.04);
+      font-size: 12px;
+      color: rgba(233,237,245,.8);
+      white-space:nowrap;
+    }
+    .cta{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      height:40px; padding:0 14px;
+      border-radius: 14px;
+      border:1px solid rgba(233,237,245,.16);
+      background: linear-gradient(135deg, rgba(159,248,255,.16), rgba(197,255,184,.12));
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+      font-weight: 650;
+      font-size: 13px;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
+    }
+    .cta:hover{ transform: translateY(-1px); border-color: rgba(233,237,245,.26); }
+    .cta svg{ opacity:.9; }
+
+    /* Hero */
+    .hero{
+      padding: 72px 0 22px;
+      position:relative;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 26px;
+      align-items: start;
+    }
+    .kicker{
+      display:flex; align-items:center; gap:10px;
+      margin: 0 0 16px;
+      color: rgba(233,237,245,.78);
+      font-size: 13px;
+      letter-spacing: .06em;
       text-transform: uppercase;
+    }
+    .kdot{
+      width:9px; height:9px; border-radius:99px;
+      background: radial-gradient(circle at 30% 30%, var(--accent), rgba(159,248,255,.2));
+      box-shadow: 0 0 0 6px rgba(159,248,255,.08);
+    }
+    h1{
+      margin:0 0 18px;
+      font-family: var(--serif);
+      font-variation-settings: "opsz" 96;
+      font-size: clamp(44px, 5vw, 74px);
+      line-height: .98;
+      letter-spacing: -0.04em;
+    }
+    .lead{
+      margin: 0 0 22px;
+      color: rgba(233,237,245,.78);
+      font-size: clamp(16px, 1.55vw, 18px);
+      line-height: 1.55;
+      max-width: 60ch;
+    }
+    .hero-actions{
+      display:flex; align-items:center; gap:12px; flex-wrap:wrap;
+      margin: 18px 0 26px;
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      height:46px; padding:0 16px;
+      border-radius: 16px;
+      border:1px solid rgba(233,237,245,.14);
+      background: rgba(233,237,245,.04);
+      color: rgba(233,237,245,.9);
+      font-weight: 650;
+      transition: .18s ease;
+    }
+    .btn:hover{ transform: translateY(-1px); border-color: rgba(233,237,245,.24); background: rgba(233,237,245,.06); }
+    .btn.primary{
+      border-color: rgba(233,237,245,.18);
+      background: linear-gradient(135deg, rgba(159,248,255,.18), rgba(197,255,184,.14));
+      box-shadow: 0 18px 45px rgba(0,0,0,.35);
+    }
+    .btn .sub{
+      font-size:12px;
+      color: rgba(233,237,245,.7);
+      font-weight: 520;
     }
 
-    .footer{
-      margin-top: 42px;
-      padding: 24px 0 12px;
-      border-top: 1px solid rgba(255,255,255,.10);
-      color: rgba(255,255,255,.62);
-      display:flex; flex-wrap:wrap; gap: 12px;
-      align-items:center;
-      justify-content:space-between;
-      font-size: 13px;
+    /* Right hero card */
+    .panel{
+      border-radius: var(--radius2);
+      border:1px solid rgba(233,237,245,.14);
+      background: linear-gradient(180deg, rgba(233,237,245,.06), rgba(233,237,245,.03));
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
     }
-    .footer .left{
-      display:flex; flex-wrap:wrap; gap: 10px;
-      align-items:center;
+    .panel::before{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(600px 260px at 70% 0%, rgba(159,248,255,.14), transparent 55%),
+        radial-gradient(520px 260px at 20% 40%, rgba(197,255,184,.10), transparent 55%),
+        radial-gradient(520px 260px at 70% 85%, rgba(255,209,139,.09), transparent 58%);
+      pointer-events:none;
     }
-    .badge{
+    .panel-inner{
+      position:relative;
+      padding: 18px 18px 16px;
+    }
+    .panel-top{
+      display:flex; align-items:flex-start; justify-content:space-between; gap:12px;
+      padding: 8px 6px 14px;
+    }
+    .panel-top h2{
+      margin:0;
+      font-size: 14px;
+      letter-spacing:.08em;
+      text-transform: uppercase;
+      color: rgba(233,237,245,.78);
+      font-weight: 750;
+    }
+    .status{
       font-family: var(--mono);
       font-size: 12px;
-      letter-spacing: .12em;
-      text-transform: uppercase;
       padding: 7px 10px;
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.04);
+      border:1px solid rgba(233,237,245,.14);
+      background: rgba(233,237,245,.04);
+      color: rgba(233,237,245,.78);
+      white-space:nowrap;
     }
-    .tinylinks a{ margin-right: 12px; color: rgba(255,255,255,.72); }
+    .spec{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .tile{
+      padding: 14px 14px 12px;
+      border-radius: 16px;
+      border:1px solid rgba(233,237,245,.12);
+      background: rgba(7,8,11,.22);
+    }
+    .tile b{
+      display:block;
+      font-size: 13px;
+      letter-spacing: -0.01em;
+      margin-bottom: 6px;
+    }
+    .tile p{
+      margin:0;
+      color: rgba(233,237,245,.72);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+    .tile code{
+      display:inline-block;
+      margin-top: 10px;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: rgba(233,237,245,.78);
+      background: rgba(233,237,245,.04);
+      border:1px solid rgba(233,237,245,.12);
+      padding: 6px 8px;
+      border-radius: 12px;
+    }
 
+    /* “Capabilities” row */
+    .caps{
+      margin: 30px 0 0;
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .cap{
+      border-radius: var(--radius);
+      border:1px solid rgba(233,237,245,.12);
+      background: rgba(233,237,245,.03);
+      padding: 16px 16px 14px;
+      position:relative;
+      overflow:hidden;
+    }
+    .cap::before{
+      content:"";
+      position:absolute; inset:-1px;
+      background: radial-gradient(420px 180px at 30% 0%, rgba(159,248,255,.12), transparent 55%);
+      opacity:.7;
+      pointer-events:none;
+    }
+    .cap h3{
+      position:relative;
+      margin:0 0 8px;
+      font-size: 14px;
+      letter-spacing: -0.01em;
+    }
+    .cap p{
+      position:relative;
+      margin:0;
+      color: rgba(233,237,245,.72);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    /* Sections */
+    section{ padding: 44px 0; }
+    .section-head{
+      display:flex; align-items:flex-end; justify-content:space-between; gap:16px;
+      margin-bottom: 16px;
+    }
+    .section-head h4{
+      margin:0;
+      font-size: 12px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: rgba(233,237,245,.72);
+      font-weight: 800;
+    }
+    .section-head p{
+      margin:0;
+      color: rgba(233,237,245,.68);
+      max-width: 60ch;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .cards{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .card{
+      border-radius: var(--radius2);
+      border:1px solid rgba(233,237,245,.12);
+      background: linear-gradient(180deg, rgba(233,237,245,.05), rgba(233,237,245,.02));
+      padding: 18px;
+      box-shadow: 0 12px 40px rgba(0,0,0,.30);
+      position:relative;
+      overflow:hidden;
+      min-height: 168px;
+    }
+    .card::before{
+      content:"";
+      position:absolute; inset:0;
+      background: radial-gradient(480px 220px at 75% 0%, rgba(197,255,184,.10), transparent 55%);
+      pointer-events:none;
+      opacity:.85;
+    }
+    .card b{
+      position:relative;
+      display:block;
+      font-size: 16px;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+    .card ul{
+      position:relative;
+      margin:0;
+      padding-left: 18px;
+      color: rgba(233,237,245,.72);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .card li{ margin: 6px 0; }
+
+    /* Contact / Newsletter */
+    .contact{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      align-items: stretch;
+    }
+    .form{
+      border-radius: var(--radius2);
+      border:1px solid rgba(233,237,245,.12);
+      background: rgba(233,237,245,.03);
+      padding: 18px;
+    }
+    .field{
+      display:flex; flex-direction:column; gap:8px;
+      margin-top: 12px;
+    }
+    label{
+      font-size: 12px;
+      color: rgba(233,237,245,.72);
+      letter-spacing:.08em;
+      text-transform: uppercase;
+      font-weight: 750;
+    }
+    input, textarea{
+      width:100%;
+      background: rgba(7,8,11,.45);
+      border:1px solid rgba(233,237,245,.14);
+      border-radius: 14px;
+      padding: 12px 12px;
+      color: rgba(233,237,245,.92);
+      outline:none;
+      font-family: var(--sans);
+      font-size: 14px;
+    }
+    textarea{ min-height: 110px; resize: vertical; }
+    input:focus, textarea:focus{
+      border-color: rgba(159,248,255,.35);
+      box-shadow: 0 0 0 6px rgba(159,248,255,.08);
+    }
+    .form-actions{
+      display:flex; gap:10px; align-items:center; flex-wrap:wrap;
+      margin-top: 12px;
+    }
+    .note{
+      color: rgba(233,237,245,.60);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    footer{
+      padding: 26px 0 40px;
+      border-top: 1px solid rgba(233,237,245,.10);
+      color: rgba(233,237,245,.70);
+    }
+    .foot{
+      display:flex; align-items:flex-start; justify-content:space-between; gap:18px; flex-wrap:wrap;
+    }
+    .foot small{ display:block; color: rgba(233,237,245,.62); line-height:1.5; }
+    .foot .right{
+      display:flex; gap:10px; flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .tag{
+      font-family: var(--mono);
+      font-size: 12px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border:1px solid rgba(233,237,245,.12);
+      background: rgba(233,237,245,.03);
+      color: rgba(233,237,245,.72);
+    }
+
+    /* Responsive */
     @media (max-width: 980px){
-      .grid{ grid-template-columns: 1fr; }
-      .cols{ grid-template-columns: 1fr; }
-      .brand{ min-width: auto; }
+      .hero-grid{ grid-template-columns: 1fr; }
+      .caps{ grid-template-columns: 1fr; }
+      .cards{ grid-template-columns: 1fr; }
+      .contact{ grid-template-columns: 1fr; }
+      .brand{ min-width: unset; }
+      .links{ display:none; }
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      .mark::after{ animation:none; }
+      .btn:hover, .cta:hover{ transform:none; }
     }
   </style>
 </head>
 
 <body>
-  <header class="topbar">
-    <div class="nav">
-      <div class="brand">
-        <div class="name">ALIMENTARUS SYSTEMS</div>
-        <div class="tag" data-i18n="tagline">Food systems • Nutrition governance • Signal-first design</div>
-      </div>
+  <header>
+    <div class="wrap">
+      <div class="nav">
+        <a class="brand" href="#top" aria-label="Alimentarus Systems">
+          <div class="mark" aria-hidden="true"></div>
+          <div>
+            <b>Alimentarus Systems</b>
+            <span>Food • Standards • Control Architecture</span>
+          </div>
+        </a>
 
-      <nav class="navlinks" aria-label="Primary">
-        <a href="#mission" data-i18n="nav_mission">Mission</a>
-        <a href="#architecture" data-i18n="nav_arch">Architecture</a>
-        <a href="#book" data-i18n="nav_book">Book</a>
-        <a href="#contact" data-i18n="nav_contact">Contact</a>
-      </nav>
+        <nav class="links" aria-label="Primary navigation">
+          <a href="#work">What we build</a>
+          <a href="#principles">Principles</a>
+          <a href="#contact">Contact</a>
+          <span class="lang" title="Language">
+            <span class="pill">EN</span>
+            <span style="opacity:.55">/</span>
+            <a href="#it" style="padding:0; border:0; background:none;">IT</a>
+          </span>
+        </nav>
 
-      <div class="lang" aria-label="Language">
-        <button type="button" id="btnEN" aria-pressed="true">EN</button>
-        <button type="button" id="btnIT" aria-pressed="false">IT</button>
+        <a class="cta" href="#contact">
+          <span>Request an intro</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M7 17L17 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </a>
       </div>
     </div>
   </header>
 
-  <main class="wrap">
-    <section class="hero" id="mission">
-      <div class="grid">
-        <div class="card">
-          <div class="inner">
-            <div class="kicker"><span class="dot"></span><span data-i18n="kicker">Institutional placeholder</span></div>
-            <h1 data-i18n="h1">Food is infrastructure. Nutrition is governance.</h1>
-            <p class="lead" data-i18n="lead">
-              Alimentarus Systems builds an institutional language for food and nutrition: not as lifestyle choices, but as
-              state-shaping systems—where signals, thresholds, timing, and context determine outcomes.
+  <main id="top">
+    <div class="wrap">
+      <div class="hero">
+        <div class="hero-grid">
+          <div>
+            <div class="kicker"><span class="kdot"></span><span>Launching soon • Placeholder</span></div>
+            <h1>Control-grade intelligence for food systems.</h1>
+            <p class="lead">
+              Alimentarus Systems designs the *governance layer* of modern food: specifications, traceability logic, and
+              decision frameworks that can survive regulators, markets, and time.
             </p>
 
-            <div class="pillrow" aria-label="Key themes">
-              <span class="pill" data-i18n="pill1">Signal-first framing</span>
-              <span class="pill" data-i18n="pill2">Threshold logic</span>
-              <span class="pill" data-i18n="pill3">Context arbitration</span>
-              <span class="pill" data-i18n="pill4">Policy-grade clarity</span>
-              <span class="pill" data-i18n="pill5">EU-facing architecture</span>
+            <div class="hero-actions">
+              <a class="btn primary" href="#work">
+                <span>Explore the frame</span>
+                <span class="sub">3 pillars</span>
+              </a>
+              <a class="btn" href="#contact">
+                <span>Partnership inquiry</span>
+                <span class="sub">research • industry</span>
+              </a>
+              <span class="pill" title="Legal form (planned)">SRL in formation</span>
+              <span class="pill" title="Operating geographies">TR • IT • EU</span>
             </div>
 
-            <div class="ctaRow">
-              <a class="btn primary" href="#book" data-i18n="cta_primary">Enter the framework</a>
-              <a class="btn" href="#contact" data-i18n="cta_secondary">Request institutional briefing</a>
-            </div>
-
-            <div class="quote" role="note" aria-label="Position statement">
-              <p data-i18n="quote">
-                Nutrition is not a list of nutrients. It is an admissibility problem: what the system permits, when it permits it,
-                and under which constraints.
-              </p>
-              <div class="by" data-i18n="quote_by">Position note • draft public face</div>
-            </div>
-          </div>
-        </div>
-
-        <aside class="rightPanel card" aria-label="Institutional panel">
-          <div class="seal">
-            <div class="sealBox">
-              <div class="sealTitle" data-i18n="seal_title">Current status</div>
-              <div class="sealValue" data-i18n="seal_value">Foundational build-out in progress</div>
-              <p class="sealNote" data-i18n="seal_note">
-                This site is a placeholder with an institutional tone. The public release will open with research program taxonomy,
-                publications archive, and bilingual navigation.
-              </p>
-              <div class="divider"></div>
-              <p class="sealNote">
-                <span style="color:var(--ok); font-weight:750;" data-i18n="seal_green">Operational intent:</span>
-                <span data-i18n="seal_green_text">Italy-first setup (Napoli) with academic bridge to Bologna.</span>
-              </p>
+            <div class="caps">
+              <div class="cap">
+                <h3>Standards that behave like code</h3>
+                <p>Specifications written to prevent drift—auditable, portable, and hard to misread.</p>
+              </div>
+              <div class="cap">
+                <h3>Traceability that explains itself</h3>
+                <p>Not “data collection,” but decision-grade evidence that survives scrutiny.</p>
+              </div>
+              <div class="cap">
+                <h3>Nutrition as architecture</h3>
+                <p>From “ingredients” to admissible states—signals, thresholds, and safe operating envelopes.</p>
+              </div>
             </div>
           </div>
 
-          <div class="mini">
-            <div class="miniCard">
-              <h3 data-i18n="mini1_title">What we publish</h3>
-              <p data-i18n="mini1_text">Framework papers, institutional briefs, and a control-architecture book on metabolic signaling.</p>
+          <aside class="panel" aria-label="Project status panel">
+            <div class="panel-inner">
+              <div class="panel-top">
+                <h2>Signal Stack</h2>
+                <div class="status">BUILD: public preview</div>
+              </div>
+
+              <div class="spec">
+                <div class="tile">
+                  <b>Scope</b>
+                  <p>Food security, compliance-grade standards, metabolic label logic.</p>
+                  <code>v0.1 / placeholder</code>
+                </div>
+                <div class="tile">
+                  <b>Delivery</b>
+                  <p>Research links, briefs, and institutional pages — minimal now, expandable later.</p>
+                  <code>static / fast</code>
+                </div>
+                <div class="tile">
+                  <b>Design rule</b>
+                  <p>Typography-first. Content must read like a policy artifact, not a brochure.</p>
+                  <code>type → trust</code>
+                </div>
+                <div class="tile">
+                  <b>Next</b>
+                  <p>Domain binding + mail capture + publications page.</p>
+                  <code>deploy → iterate</code>
+                </div>
+              </div>
             </div>
-            <div class="miniCard">
-              <h3 data-i18n="mini2_title">What we build</h3>
-              <p data-i18n="mini2_text">A taxonomy of research programs connecting food systems to physiological state control.</p>
-            </div>
-            <div class="miniCard">
-              <h3 data-i18n="mini3_title">What we protect</h3>
-              <p data-i18n="mini3_text">A roof identity that can hold applied brands such as Nutradina without collapsing into “wellness”.</p>
-            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+
+    <section id="work">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <h4>What we build</h4>
           </div>
-        </aside>
-      </div>
-    </section>
-
-    <section class="block" id="architecture">
-      <div class="sectionTitle">
-        <h2 data-i18n="arch_title">A systems definition of food and nutrition</h2>
-        <div class="hint" data-i18n="arch_hint">public draft</div>
-      </div>
-
-      <div class="cols">
-        <div class="tile">
-          <div class="cap"><i></i><span data-i18n="t1_cap">Food</span></div>
-          <p data-i18n="t1_p">
-            A structured input stream that changes what the body permits. Its value lies in constraints and timing, not in labels.
+          <p>
+            A serious placeholder should already communicate the operating philosophy: constraint-first, audit-ready,
+            publication-grade.
           </p>
         </div>
 
-        <div class="tile">
-          <div class="cap"><i style="background:var(--accent); box-shadow:0 0 0 6px rgba(217,200,169,.10)"></i><span data-i18n="t2_cap">Nutrition</span></div>
-          <p data-i18n="t2_p">
-            A governance layer: thresholds, integration windows, and context that decide whether signals are admitted or blocked.
-          </p>
-        </div>
-
-        <div class="tile">
-          <div class="cap"><i style="background:#b7a7ff; box-shadow:0 0 0 6px rgba(183,167,255,.10)"></i><span data-i18n="t3_cap">Outcome</span></div>
-          <p data-i18n="t3_p">
-            Not guaranteed by presence of substrate. Outcomes are state-contingent—selected by arbitration under competing priorities.
-          </p>
-        </div>
-      </div>
-
-      <div class="quote" style="margin-top:16px;">
-        <p data-i18n="arch_quote">
-          The future of food is not abundance alone. It is admissibility: who gets access to stable metabolic states under scarcity,
-          volatility, and policy constraints.
-        </p>
-        <div class="by" data-i18n="arch_by">Strategic frame • food security to physiology</div>
-      </div>
-    </section>
-
-    <section class="block" id="book">
-      <div class="sectionTitle">
-        <h2 data-i18n="book_title">The book backbone</h2>
-        <div class="hint" data-i18n="book_hint">mOS doctrine</div>
-      </div>
-
-      <div class="card">
-        <div class="inner">
-          <p style="margin:0; color:var(--muted); font-size:var(--p); line-height:1.7;" data-i18n="book_p">
-            Our book treats metabolism as a control architecture—where signals behave as permissions, blocking dominates enabling,
-            and state emerges from constraint. The public site will mirror this doctrine with program taxonomy, publication archive,
-            and policy-grade summaries designed for institutions, not trends.
-          </p>
-
-          <div class="pillrow" style="margin-top:18px;">
-            <span class="pill" data-i18n="book_p1">Constraint-first language</span>
-            <span class="pill" data-i18n="book_p2">Signals as permissions</span>
-            <span class="pill" data-i18n="book_p3">State arbitration</span>
-            <span class="pill" data-i18n="book_p4">Oscillation encodes information</span>
-            <span class="pill" data-i18n="book_p5">Institutional readability</span>
+        <div class="cards">
+          <div class="card">
+            <b>Alimentarus Standards Layer</b>
+            <ul>
+              <li>Specifications, nomenclature, and product logic designed for enforcement.</li>
+              <li>Compliance framing (EU/Türkiye) without marketing drift.</li>
+              <li>Documentation that reads like a control system, not a PDF ornament.</li>
+            </ul>
           </div>
 
-          <div class="ctaRow" style="margin-top:20px;">
-            <a class="btn primary" href="#contact" data-i18n="book_cta">Request a one-page brief</a>
-            <span style="font-family:var(--mono); font-size:12px; color:rgba(255,255,255,.60); letter-spacing:.08em;" data-i18n="book_note">
-              (public release will include TR/EN/IT navigation)
-            </span>
+          <div class="card">
+            <b>Traceability & Evidence Layer</b>
+            <ul>
+              <li>Minimal, high-integrity data schemas.</li>
+              <li>Audit narratives: why a decision is valid, not only what happened.</li>
+              <li>Export readiness: provenance, batch logic, shelf-life claims.</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <b>Nutrition Architecture Layer</b>
+            <ul>
+              <li>Label frameworks that reflect metabolic context, not “one number.”</li>
+              <li>Signals, thresholds, admissibility—designed for real consumers and real risk.</li>
+              <li>Bridge from food chemistry to policy language.</li>
+            </ul>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="block" id="contact">
-      <div class="sectionTitle">
-        <h2 data-i18n="contact_title">Contact</h2>
-        <div class="hint" data-i18n="contact_hint">placeholder</div>
-      </div>
-
-      <div class="card">
-        <div class="inner">
-          <p style="margin:0 0 14px; color:var(--muted); line-height:1.7;" data-i18n="contact_p">
-            For institutional correspondence, partnerships, and early brief requests, use the addresses below. This placeholder page
-            will later route to dedicated program and contact endpoints.
+    <section id="principles">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <h4>Principles</h4>
+          </div>
+          <p>
+            These are not slogans. They are the design constraints that keep a young institution from looking young.
           </p>
+        </div>
 
-          <div class="cols" style="grid-template-columns: 1fr 1fr; margin-top: 10px;">
-            <div class="tile" style="min-height:auto;">
-              <div class="cap"><i></i><span data-i18n="c1_cap">General</span></div>
-              <p style="font-family:var(--mono); color:rgba(255,255,255,.78); margin:0;">contact@alimentarus.it</p>
-            </div>
-            <div class="tile" style="min-height:auto;">
-              <div class="cap"><i style="background:var(--accent); box-shadow:0 0 0 6px rgba(217,200,169,.10)"></i><span data-i18n="c2_cap">Programs</span></div>
-              <p style="font-family:var(--mono); color:rgba(255,255,255,.78); margin:0;">programs@alimentarus.it</p>
-            </div>
+        <div class="cards">
+          <div class="card">
+            <b>Typography as governance</b>
+            <ul>
+              <li>Hierarchy must be obvious, even under stress scanning.</li>
+              <li>Words carry authority when spacing and rhythm are controlled.</li>
+              <li>Every page should look “quotable” in a policy memo.</li>
+            </ul>
           </div>
 
-          <div class="divider"></div>
+          <div class="card">
+            <b>Minimal surface, maximal depth</b>
+            <ul>
+              <li>No decorative clutter; every element earns its footprint.</li>
+              <li>Fast, static delivery; complexity belongs in content.</li>
+              <li>Design supports credibility—never competes with it.</li>
+            </ul>
+          </div>
 
-          <!-- Newsletter placeholder (no backend) -->
-          <form onsubmit="event.preventDefault(); alert(getText('newsletter_alert'));" aria-label="Newsletter">
-            <div style="display:flex; flex-wrap:wrap; gap:10px; align-items:center;">
-              <label for="email" style="font-weight:750; color:rgba(255,255,255,.78);" data-i18n="nl_label">Briefings list (early)</label>
-              <input id="email" name="email" type="email" autocomplete="email" required
-                     placeholder="name@institution.org"
-                     style="flex:1; min-width: 240px; padding: 12px 14px; border-radius: 12px;
-                            border:1px solid rgba(255,255,255,.14); background: rgba(0,0,0,.22);
-                            color: var(--text); outline:none;" />
-              <button class="btn primary" type="submit" data-i18n="nl_btn">Request access</button>
-            </div>
-            <div style="margin-top:10px; color:rgba(255,255,255,.55); font-size:12px; line-height:1.6;" data-i18n="nl_note">
-              No automated mail yet. This is a placeholder interaction; use email for formal requests.
-            </div>
-          </form>
+          <div class="card">
+            <b>International posture</b>
+            <ul>
+              <li>Institutional tone: measured, not loud.</li>
+              <li>Language-ready: EN now, IT next (and TR as needed).</li>
+              <li>Build like it must survive procurement, grants, and scrutiny.</li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
 
-    <footer class="footer" aria-label="Footer">
-      <div class="left">
-        <span class="badge">ALIMENTARUS SYSTEMS</span>
-        <span data-i18n="foot_note">Institutional placeholder • Naples ⇄ Bologna • EU-facing build</span>
+    <section id="contact">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <h4>Contact</h4>
+          </div>
+          <p>
+            This form is a clean placeholder. When you’re ready, wire it to Formspree / Netlify Forms / a backend endpoint.
+          </p>
+        </div>
+
+        <div class="contact">
+          <div class="form">
+            <div style="display:flex; align-items:center; justify-content:space-between; gap:10px;">
+              <b style="font-size:16px; letter-spacing:-.02em;">Partnership inquiry</b>
+              <span class="tag">response SLA: 48h</span>
+            </div>
+
+            <form action="#" method="post" onsubmit="return false;">
+              <div class="field">
+                <label for="name">Name</label>
+                <input id="name" name="name" placeholder="Your name" autocomplete="name" />
+              </div>
+
+              <div class="field">
+                <label for="email">Email</label>
+                <input id="email" name="email" placeholder="name@domain.com" autocomplete="email" />
+              </div>
+
+              <div class="field">
+                <label for="msg">Message</label>
+                <textarea id="msg" name="message" placeholder="What do you want to build with Alimentarus Systems?"></textarea>
+              </div>
+
+              <div class="form-actions">
+                <button class="btn primary" type="submit" aria-disabled="true" title="Placeholder: connect to a form service when ready">
+                  Submit (placeholder)
+                </button>
+                <div class="note">
+                  Tip: fastest production path is Formspree or Netlify Forms—no backend required.
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <div class="panel">
+            <div class="panel-inner">
+              <div class="panel-top">
+                <h2>Operating lines</h2>
+                <div class="status">EN / IT ready</div>
+              </div>
+
+              <div class="tile" style="margin:10px 0 12px;">
+                <b>Primary posture</b>
+                <p>Institution-grade research and standards: food security, compliance logic, and decision frameworks.</p>
+              </div>
+
+              <div class="tile" style="margin:10px 0 12px;">
+                <b>Near-term website plan</b>
+                <p>Publications • Research links • People • Contact • Institutional pages.</p>
+                <code>pages/ → scale</code>
+              </div>
+
+              <div class="tile">
+                <b>Newsletter</b>
+                <p>Short dispatches on food governance, policy-grade labeling, and system design.</p>
+                <div class="field" style="margin-top:10px;">
+                  <label for="nl">Email</label>
+                  <input id="nl" placeholder="your@email.com" />
+                </div>
+                <div class="form-actions">
+                  <button class="btn" type="button" onclick="alert('Placeholder. Wire to Formspree/Netlify later.')">Join (placeholder)</button>
+                  <span class="note">No spam. Pure signal.</span>
+                </div>
+              </div>
+
+              <div id="it" class="tile" style="margin-top:12px;">
+                <b>Italian line (placeholder)</b>
+                <p style="margin:0;">
+                  <span style="color:rgba(233,237,245,.72)">Prossimamente:</span>
+                  standard alimentari, tracciabilità, architettura nutrizionale — con tono istituzionale.
+                </p>
+              </div>
+
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="tinylinks">
-        <a href="#mission" data-i18n="nav_mission">Mission</a>
-        <a href="#architecture" data-i18n="nav_arch">Architecture</a>
-        <a href="#book" data-i18n="nav_book">Book</a>
-        <a href="#contact" data-i18n="nav_contact">Contact</a>
+    </section>
+
+    <footer>
+      <div class="wrap">
+        <div class="foot">
+          <div>
+            <b style="font-family:var(--serif); font-size:14px;">Alimentarus Systems</b>
+            <small>Institutional placeholder • Static build • Typography-first design.</small>
+            <small style="margin-top:8px;">© <span id="y"></span> Alimentarus Systems. All rights reserved.</small>
+          </div>
+          <div class="right">
+            <span class="tag">Fast • Minimal • Auditable</span>
+            <span class="tag">TR • IT • EU</span>
+            <span class="tag">SRL planned</span>
+          </div>
+        </div>
       </div>
     </footer>
   </main>
 
   <script>
-    // Minimal, deterministic i18n (EN / IT). No external assets.
-    const dict = {
-      en: {
-        tagline: "Food systems • Nutrition governance • Signal-first design",
-        nav_mission: "Mission",
-        nav_arch: "Architecture",
-        nav_book: "Book",
-        nav_contact: "Contact",
-        kicker: "Institutional placeholder",
-        h1: "Food is infrastructure. Nutrition is governance.",
-        lead:
-          "Alimentarus Systems builds an institutional language for food and nutrition: not as lifestyle choices, but as state-shaping systems—where signals, thresholds, timing, and context determine outcomes.",
-        pill1: "Signal-first framing",
-        pill2: "Threshold logic",
-        pill3: "Context arbitration",
-        pill4: "Policy-grade clarity",
-        pill5: "EU-facing architecture",
-        cta_primary: "Enter the framework",
-        cta_secondary: "Request institutional briefing",
-        quote:
-          "Nutrition is not a list of nutrients. It is an admissibility problem: what the system permits, when it permits it, and under which constraints.",
-        quote_by: "Position note • draft public face",
-        seal_title: "Current status",
-        seal_value: "Foundational build-out in progress",
-        seal_note:
-          "This site is a placeholder with an institutional tone. The public release will open with research program taxonomy, publications archive, and bilingual navigation.",
-        seal_green: "Operational intent:",
-        seal_green_text: "Italy-first setup (Napoli) with academic bridge to Bologna.",
-        mini1_title: "What we publish",
-        mini1_text: "Framework papers, institutional briefs, and a control-architecture book on metabolic signaling.",
-        mini2_title: "What we build",
-        mini2_text: "A taxonomy of research programs connecting food systems to physiological state control.",
-        mini3_title: "What we protect",
-        mini3_text: "A roof identity that can hold applied brands such as Nutradina without collapsing into “wellness”.",
-        arch_title: "A systems definition of food and nutrition",
-        arch_hint: "public draft",
-        t1_cap: "Food",
-        t1_p: "A structured input stream that changes what the body permits. Its value lies in constraints and timing, not in labels.",
-        t2_cap: "Nutrition",
-        t2_p: "A governance layer: thresholds, integration windows, and context that decide whether signals are admitted or blocked.",
-        t3_cap: "Outcome",
-        t3_p: "Not guaranteed by presence of substrate. Outcomes are state-contingent—selected by arbitration under competing priorities.",
-        arch_quote:
-          "The future of food is not abundance alone. It is admissibility: who gets access to stable metabolic states under scarcity, volatility, and policy constraints.",
-        arch_by: "Strategic frame • food security to physiology",
-        book_title: "The book backbone",
-        book_hint: "mOS doctrine",
-        book_p:
-          "Our book treats metabolism as a control architecture—where signals behave as permissions, blocking dominates enabling, and state emerges from constraint. The public site will mirror this doctrine with program taxonomy, publication archive, and policy-grade summaries designed for institutions, not trends.",
-        book_p1: "Constraint-first language",
-        book_p2: "Signals as permissions",
-        book_p3: "State arbitration",
-        book_p4: "Oscillation encodes information",
-        book_p5: "Institutional readability",
-        book_cta: "Request a one-page brief",
-        book_note: "(public release will include TR/EN/IT navigation)",
-        contact_title: "Contact",
-        contact_hint: "placeholder",
-        contact_p:
-          "For institutional correspondence, partnerships, and early brief requests, use the addresses below. This placeholder page will later route to dedicated program and contact endpoints.",
-        c1_cap: "General",
-        c2_cap: "Programs",
-        nl_label: "Briefings list (early)",
-        nl_btn: "Request access",
-        nl_note: "No automated mail yet. This is a placeholder interaction; use email for formal requests.",
-        newsletter_alert: "Not live yet. Send a formal request to contact@alimentarus.it.",
-        foot_note: "Institutional placeholder • Naples ⇄ Bologna • EU-facing build"
-      },
-      it: {
-        tagline: "Sistemi alimentari • Governance della nutrizione • Design signal-first",
-        nav_mission: "Missione",
-        nav_arch: "Architettura",
-        nav_book: "Libro",
-        nav_contact: "Contatti",
-        kicker: "Segnaposto istituzionale",
-        h1: "Il cibo è infrastruttura. La nutrizione è governance.",
-        lead:
-          "Alimentarus Systems costruisce un linguaggio istituzionale per cibo e nutrizione: non come scelte di stile di vita, ma come sistemi che modellano lo stato—dove segnali, soglie, tempi e contesto determinano gli esiti.",
-        pill1: "Impostazione signal-first",
-        pill2: "Logica di soglia",
-        pill3: "Arbitraggio del contesto",
-        pill4: "Chiarezza da policy",
-        pill5: "Architettura EU-facing",
-        cta_primary: "Entrare nel quadro",
-        cta_secondary: "Richiedi un brief istituzionale",
-        quote:
-          "La nutrizione non è un elenco di nutrienti. È un problema di ammissibilità: cosa il sistema consente, quando lo consente e sotto quali vincoli.",
-        quote_by: "Nota di posizione • bozza pubblica",
-        seal_title: "Stato attuale",
-        seal_value: "Costruzione fondamentale in corso",
-        seal_note:
-          "Questo sito è un segnaposto con tono istituzionale. La release pubblica aprirà con tassonomia dei programmi di ricerca, archivio pubblicazioni e navigazione bilingue.",
-        seal_green: "Intento operativo:",
-        seal_green_text: "Setup Italy-first (Napoli) con ponte accademico verso Bologna.",
-        mini1_title: "Cosa pubblichiamo",
-        mini1_text: "Paper di quadro, brief istituzionali e un libro di architettura di controllo sul signaling metabolico.",
-        mini2_title: "Cosa costruiamo",
-        mini2_text: "Una tassonomia di programmi di ricerca che collega sistemi alimentari e controllo dello stato fisiologico.",
-        mini3_title: "Cosa proteggiamo",
-        mini3_text: "Un’identità “tetto” che può reggere brand applicati come Nutradina senza scivolare nel “wellness”.",
-        arch_title: "Una definizione sistemica di cibo e nutrizione",
-        arch_hint: "bozza pubblica",
-        t1_cap: "Cibo",
-        t1_p: "Un flusso di input strutturato che cambia ciò che il corpo consente. Il valore sta nei vincoli e nei tempi, non nelle etichette.",
-        t2_cap: "Nutrizione",
-        t2_p: "Uno strato di governance: soglie, finestre di integrazione e contesto che decidono se i segnali sono ammessi o bloccati.",
-        t3_cap: "Esito",
-        t3_p: "Non garantito dalla semplice presenza del substrato. Gli esiti dipendono dallo stato—selezionati da un arbitraggio tra priorità concorrenti.",
-        arch_quote:
-          "Il futuro del cibo non è solo abbondanza. È ammissibilità: chi accede a stati metabolici stabili sotto scarsità, volatilità e vincoli di policy.",
-        arch_by: "Cornice strategica • sicurezza alimentare → fisiologia",
-        book_title: "L’ossatura del libro",
-        book_hint: "dottrina mOS",
-        book_p:
-          "Il libro tratta il metabolismo come architettura di controllo—dove i segnali agiscono come permessi, il blocco domina l’abilitazione e lo stato emerge dal vincolo. Il sito pubblico rispecchierà questa dottrina con tassonomia programmi, archivio pubblicazioni e sintesi a misura di istituzioni, non di trend.",
-        book_p1: "Linguaggio constraint-first",
-        book_p2: "Segnali come permessi",
-        book_p3: "Arbitraggio dello stato",
-        book_p4: "Oscillazione = informazione",
-        book_p5: "Leggibilità istituzionale",
-        book_cta: "Richiedi un brief di una pagina",
-        book_note: "(la release pubblica includerà navigazione TR/EN/IT)",
-        contact_title: "Contatti",
-        contact_hint: "segnaposto",
-        contact_p:
-          "Per corrispondenza istituzionale, partnership e richieste preliminari, usa gli indirizzi sotto. Questo segnaposto sarà poi instradato verso endpoint dedicati per programmi e contatti.",
-        c1_cap: "Generale",
-        c2_cap: "Programmi",
-        nl_label: "Lista briefing (early)",
-        nl_btn: "Richiedi accesso",
-        nl_note: "Nessuna automazione email per ora. Interazione segnaposto; usa email per richieste formali.",
-        newsletter_alert: "Non è ancora attivo. Invia una richiesta formale a contact@alimentarus.it.",
-        foot_note: "Segnaposto istituzionale • Napoli ⇄ Bologna • build EU-facing"
-      }
-    };
-
-    function setLang(lang){
-      document.documentElement.setAttribute("data-lang", lang);
-      document.getElementById("btnEN").setAttribute("aria-pressed", String(lang==="en"));
-      document.getElementById("btnIT").setAttribute("aria-pressed", String(lang==="it"));
-
-      document.querySelectorAll("[data-i18n]").forEach(el=>{
-        const key = el.getAttribute("data-i18n");
-        if(dict[lang] && dict[lang][key]) el.textContent = dict[lang][key];
-      });
-      localStorage.setItem("ALIMENTARUS_LANG", lang);
-      document.documentElement.lang = lang;
-    }
-
-    function getText(key){
-      const lang = document.documentElement.getAttribute("data-lang") || "en";
-      return (dict[lang] && dict[lang][key]) ? dict[lang][key] : (dict.en[key] || "");
-    }
-
-    document.getElementById("btnEN").addEventListener("click", ()=>setLang("en"));
-    document.getElementById("btnIT").addEventListener("click", ()=>setLang("it"));
-
-    // Boot: saved preference, else EN.
-    const saved = localStorage.getItem("ALIMENTARUS_LANG");
-    setLang(saved === "it" ? "it" : "en");
+    document.getElementById("y").textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
+```
