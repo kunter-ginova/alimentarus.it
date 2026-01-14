@@ -510,3 +510,16 @@ a:focus-visible{
   margin: 0 auto;
   padding: 0 22px;
 }
+
+/* Spacious editorial rhythm (final authority) */
+.section{
+  padding: 92px 0;
+}
+.section-head,
+.about,
+.footer__inner,
+.transition__inner{
+  padding-left: 22px;
+  padding-right: 22px;
+}
+
