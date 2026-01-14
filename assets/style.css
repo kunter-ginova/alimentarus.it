@@ -576,3 +576,34 @@ a:focus-visible{
   line-height: 1.65;
 }
 
+/* Footer must be full-bleed (no floating card vibe) */
+.footer{
+  width: 100%;
+  border-radius: 0 !important;
+  margin: 0 !important;
+  box-shadow: none !important;
+}
+.footer::before{
+  content:"";
+  position:absolute;
+  left:0; right:0; top:0;
+  height: 3px;
+  background: rgba(224,106,26,1);
+  opacity: .95;
+}
+.footer__inner{
+  max-width: var(--max);
+  margin: 0 auto;
+  padding-left: 22px;
+  padding-right: 22px;
+}
+
+/* Reduce "consumer app" softness inside focusband */
+.focusband .mini{
+  border-radius: 14px;
+  backdrop-filter: blur(6px);
+}
+.focusband .mini__title{
+  letter-spacing: .01em;
+}
+
