@@ -1,40 +1,43 @@
+/* UPDATED assets/site.js (supports EN/IT/ES/DE/RU/TR) */
 (function () {
   const KEY = "alimentarus_lang";
-  const buttons = Array.from(document.querySelectorAll(".lang__btn"));
+  const supported = ["en", "it", "es", "de", "ru", "tr"];
+
   const blocks = Array.from(document.querySelectorAll(".langblock"));
+  const buttons = Array.from(document.querySelectorAll("[data-set-lang]"));
 
   function setLang(lang) {
-    // toggle blocks
-    blocks.forEach(el => {
-      const show = el.getAttribute("data-lang") === lang;
-      el.hidden = !show;
+    if (!supported.includes(lang)) lang = "en";
+
+    blocks.forEach((el) => {
+      el.hidden = el.getAttribute("data-lang") !== lang;
     });
 
-    // toggle button state
-    buttons.forEach(btn => {
-      const active = btn.getAttribute("data-lang") === lang;
-      btn.classList.toggle("is-active", active);
+    buttons.forEach((btn) => {
+      const active = btn.getAttribute("data-set-lang") === lang;
+      btn.classList.toggle("active", active);
       btn.setAttribute("aria-pressed", active ? "true" : "false");
     });
 
-    // set html lang attr for accessibility
-    document.documentElement.setAttribute("lang", lang === "it" ? "it" : "en");
-
-    // persist
-    try { localStorage.setItem(KEY, lang); } catch(e) {}
+    document.documentElement.setAttribute("lang", lang);
+    try { localStorage.setItem(KEY, lang); } catch (e) {}
   }
 
-  // init
+  // init (saved → browser preference → EN)
   let lang = "en";
   try {
     const saved = localStorage.getItem(KEY);
-    if (saved === "it" || saved === "en") lang = saved;
-  } catch(e) {}
+    if (saved && supported.includes(saved)) {
+      lang = saved;
+    } else {
+      const nav = (navigator.language || "en").slice(0, 2).toLowerCase();
+      if (supported.includes(nav)) lang = nav;
+    }
+  } catch (e) {}
 
   setLang(lang);
 
-  // handlers
-  buttons.forEach(btn => {
-    btn.addEventListener("click", () => setLang(btn.getAttribute("data-lang")));
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", () => setLang(btn.getAttribute("data-set-lang")));
   });
 })();
