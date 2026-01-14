@@ -700,7 +700,7 @@ a:focus-visible{
   box-shadow: 0 20px 56px rgba(10,10,10,.11);
 }
 .gatecard__media{
-  position: relative;
+  position: top relative;
   height: 480px;
   background: #0e0e0e;
 }
