@@ -1,1296 +1,199 @@
-<!doctype html>
-<html lang="it">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Home | Alimentarus Systems</title>
-  <meta name="description" content="ALIMENTARUS SYSTEMS — Mensura, Structura, Regimen. Architetture e standard per sistemi alimentari e nutrizionali di livello mondiale." />
-  <link rel="canonical" href="https://my-site-xg0ywz2o-kunter7.wix-vibe.com" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Alimentarus Systems</title>
 
-  <meta property="og:title" content="Home | Alimentarus Systems" />
-  <meta property="og:url" content="https://my-site-xg0ywz2o-kunter7.wix-vibe.com" />
-  <meta property="og:site_name" content="Alimentarus Systems" />
-  <meta property="og:type" content="website" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Home | Alimentarus Systems" />
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
 
-  <!-- Single-file: no external CSS. System fonts only. -->
-  <style>
-    :root{
-      --bg: #ffffff;
-      --paper: #fbfaf7;          /* paper-white */
-      --ink: #111315;            /* primary */
-      --muted: rgba(17,19,21,.70);
-      --hair: rgba(17,19,21,.10);
-      --deep: #0d0f12;           /* deep-charcoal */
-      --gold: #c9a24d;           /* accent-gold */
-      --orange4: #fb923c;        /* orange-400 */
-      --orange5: #f97316;        /* orange-500 */
-      --orange6: #ea580c;        /* orange-600 */
-      --shadow1: 0 10px 30px rgba(0, 0, 0, .08);
-      --shadow2: 0 18px 50px rgba(0, 0, 0, .14);
-      --r1: 14px;
-      --r2: 18px;
-      --max: 120rem;
-      --px: clamp(18px, 3vw, 96px);
-    }
-
-    *{ box-sizing:border-box; }
-    html, body{ height:100%; }
-    body{
-      margin:0;
-      color: var(--ink);
-      background: var(--bg);
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      overflow-x:hidden;
-    }
-    a{ color: inherit; text-decoration:none; }
-    a:hover{ text-decoration: underline; text-underline-offset: 3px; }
-
-    .container{
-      max-width: var(--max);
-      margin: 0 auto;
-      padding-left: var(--px);
-      padding-right: var(--px);
-    }
-
-    /* Header */
-    .header{
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 50;
-      background: rgba(255,255,255,.95);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--hair);
-    }
-    .header-inner{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding: 22px 0;
-    }
-    .brand{
-      font-weight: 750;
-      letter-spacing: -0.02em;
-      font-size: clamp(18px, 1.6vw, 26px);
-    }
-    .lang{
-      display:flex;
-      align-items:center;
-      gap: 10px;
-      font-size: 13px;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      font-weight: 600;
-    }
-    .lang button{
-      border: 0;
-      background: transparent;
-      cursor:pointer;
-      padding: 6px 8px;
-      border-radius: 10px;
-      transition: color .18s ease, background .18s ease;
-    }
-    .lang .active{
-      color: var(--gold);
-      font-weight: 700;
-    }
-    .lang .idle{
-      color: rgba(17,19,21,.60);
-    }
-    .lang .idle:hover{
-      color: rgba(17,19,21,.90);
-      background: rgba(17,19,21,.04);
-    }
-    .sep{ color: rgba(17,19,21,.30); }
-
-    /* Sections */
-    main{ padding-top: 96px; }
-    section{
-      border-bottom: 1px solid var(--hair);
-    }
-
-    /* Hero */
-    .hero{
-      min-height: calc(100vh - 96px);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding: 96px 0;
-    }
-    .hero-inner{
-      max-width: 64rem;
-      width: 100%;
-      text-align:center;
-      display:flex;
-      flex-direction: column;
-      gap: 18px;
-    }
-    .hero-kicker{
-      font-size: 11px;
-      letter-spacing: .30em;
-      text-transform: uppercase;
-      color: rgba(17,19,21,.50);
-    }
-    .hero-title{
-      margin: 0;
-      font-weight: 850;
-      letter-spacing: -0.03em;
-      line-height: .96;
-      font-size: clamp(44px, 6vw, 92px);
-    }
-    .hero-subtitle{
-      margin: 0;
-      font-weight: 900;
-      letter-spacing: -0.02em;
-      font-size: clamp(22px, 2.8vw, 44px);
-    }
-    .hero-italic{
-      margin: 0;
-      font-style: italic;
-      color: rgba(17,19,21,.60);
-      letter-spacing: .02em;
-      font-size: clamp(15px, 1.4vw, 20px);
-    }
-    .hero-lead{
-      margin: 0 auto;
-      max-width: 42rem;
-      color: rgba(17,19,21,.70);
-      font-size: clamp(14px, 1.3vw, 18px);
-      line-height: 1.65;
-    }
-    .hero-private{
-      margin-top: 20px;
-      padding-top: 26px;
-      border-top: 1px solid var(--hair);
-      display:flex;
-      justify-content:center;
-    }
-    .hero-private span{
-      display:inline-block;
-      font-size: 11px;
-      letter-spacing: .20em;
-      text-transform: uppercase;
-      color: rgba(17,19,21,.60);
-    }
-
-    /* Paper section */
-    .paper{
-      background: linear-gradient(180deg, #fff, var(--paper));
-      padding: 96px 0;
-    }
-    .section-head{
-      max-width: 72rem;
-      margin: 0 auto 56px;
-    }
-    .h2{
-      margin:0 0 12px;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      font-size: clamp(22px, 2.1vw, 40px);
-    }
-    .p-muted{
-      margin:0;
-      color: rgba(17,19,21,.60);
-      font-size: 16px;
-      line-height: 1.55;
-      max-width: 42rem;
-    }
-
-    /* Executive arms cards */
-    .grid-2{
-      display:grid;
-      grid-template-columns: 1fr;
-      gap: 18px;
-      max-width: 90rem;
-      margin: 0 auto;
-    }
-    @media (min-width: 1024px){
-      .grid-2{ grid-template-columns: 1fr 1fr; gap: 26px; }
-    }
-
-    .card{
-      position: relative;
-      background: #fff;
-      border-radius: 18px;
-      border: 1px solid rgba(17,19,21,.05);
-      box-shadow: var(--shadow1);
-      overflow:hidden;
-      transition: transform .22s ease, box-shadow .22s ease;
-    }
-    .card:hover{
-      transform: translateY(-2px);
-      box-shadow: var(--shadow2);
-    }
-    .bar{
-      position:absolute;
-      top:0; bottom:0; left:0;
-      width: 10px;
-      background: linear-gradient(180deg, var(--orange4), var(--orange5), var(--orange6));
-      transition: width .22s ease;
-    }
-    .card:hover .bar{ width: 14px; }
-    .card-inner{
-      padding: 42px 42px 30px 42px;
-      display:flex;
-      flex-direction: column;
-      gap: 22px;
-    }
-    .pl{ padding-left: 22px; }
-
-    .tag{
-      display:inline-block;
-      font-size: 11px;
-      letter-spacing: .30em;
-      text-transform: uppercase;
-      color: var(--orange5);
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-    .grad-title{
-      margin:0;
-      font-weight: 900;
-      letter-spacing: -0.02em;
-      font-size: clamp(26px, 2.4vw, 46px);
-      background: linear-gradient(90deg, var(--orange5), var(--orange6));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-    .card-lead{
-      margin:0;
-      color: rgba(17,19,21,.70);
-      font-size: 18px;
-      line-height: 1.5;
-    }
-    .card-body{
-      margin:0;
-      color: rgba(17,19,21,.65);
-      font-size: 15px;
-      line-height: 1.65;
-    }
-    .mini-grid{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      padding-top: 10px;
-    }
-    .pill{
-      border-radius: 14px;
-      padding: 14px;
-      border: 1px solid rgba(251,146,60,.22);
-      background: rgba(251,146,60,.08);
-    }
-    .pill b{
-      display:block;
-      font-size: 13px;
-      color: var(--orange6);
-      margin-bottom: 4px;
-      letter-spacing: -0.01em;
-    }
-    .pill span{
-      display:block;
-      font-size: 12px;
-      color: rgba(17,19,21,.60);
-    }
-    .integrations{
-      padding-top: 16px;
-      border-top: 1px solid var(--hair);
-    }
-    .integrations .label{
-      font-size: 11px;
-      letter-spacing: .20em;
-      text-transform: uppercase;
-      color: rgba(17,19,21,.50);
-      margin-bottom: 8px;
-      font-weight: 650;
-    }
-    .integrations .value{
-      font-size: 13px;
-      color: rgba(17,19,21,.70);
-    }
-    .discover{
-      padding-top: 14px;
-      border-top: 1px solid var(--hair);
-    }
-    .discover button{
-      border:0;
-      background: transparent;
-      cursor:pointer;
-      font-size: 12px;
-      letter-spacing: .20em;
-      text-transform: uppercase;
-      color: var(--orange6);
-      font-weight: 750;
-      padding: 10px 0 0;
-    }
-    .discover button:hover{ color: #c2410c; }
-
-    /* Who we are */
-    .who{
-      background: var(--paper);
-      padding: 96px 0;
-    }
-    .who p{
-      margin:0 0 16px;
-      color: rgba(17,19,21,.70);
-      font-size: clamp(14px, 1.2vw, 18px);
-      line-height: 1.7;
-    }
-    .tri{
-      display:grid;
-      grid-template-columns: 1fr;
-      gap: 24px;
-      padding-top: 26px;
-    }
-    @media (min-width: 768px){
-      .tri{ grid-template-columns: 1fr 1fr 1fr; }
-    }
-    .tri h3{
-      margin:0 0 8px;
-      font-weight: 800;
-      letter-spacing:-0.01em;
-      font-size: 18px;
-    }
-    .tri p{
-      margin:0;
-      color: rgba(17,19,21,.60);
-      font-size: 13px;
-      line-height: 1.6;
-    }
-
-    /* Platforms row */
-    .platforms{
-      background: #fff;
-      padding: 96px 0;
-    }
-    .platform-grid{
-      display:grid;
-      grid-template-columns: 1fr;
-      gap: 16px;
-    }
-    @media (min-width: 768px){
-      .platform-grid{ grid-template-columns: 1fr 1fr; }
-    }
-    @media (min-width: 1200px){
-      .platform-grid{ grid-template-columns: repeat(5, 1fr); }
-    }
-    .tile{
-      cursor:pointer;
-      position: relative;
-      background:#fff;
-      border-radius: 22px;
-      border: 2px solid rgba(17,19,21,.08);
-      box-shadow: 0 12px 30px rgba(0,0,0,.08);
-      padding: 26px;
-      overflow:hidden;
-      transition: transform .22s ease, box-shadow .22s ease;
-      min-height: 170px;
-    }
-    .tile:hover{
-      transform: translateY(-2px);
-      box-shadow: 0 20px 55px rgba(0,0,0,.14);
-    }
-    .tile .bar2{
-      position:absolute;
-      top:0; bottom:0; left:0;
-      width: 14px;
-      transition: width .22s ease;
-    }
-    .tile:hover .bar2{ width: 18px; }
-    .tile h3{
-      margin:0;
-      padding-left: 18px;
-      font-weight: 950;
-      letter-spacing: -0.02em;
-      font-size: 22px;
-      line-height: 1.1;
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-    .tile p{
-      margin: 16px 0 0;
-      padding-left: 18px;
-      color: rgba(17,19,21,.75);
-      font-size: 14px;
-      line-height: 1.55;
-      font-weight: 550;
-    }
-    .tile .more{
-      padding-left: 18px;
-      padding-top: 18px;
-      margin-top: 18px;
-      border-top: 1px solid var(--hair);
-      font-size: 11px;
-      letter-spacing: .15em;
-      text-transform: uppercase;
-      color: rgba(17,19,21,.50);
-      font-weight: 750;
-    }
-
-    /* Footer */
-    footer{
-      position: relative;
-      background: linear-gradient(180deg, #111315, var(--deep));
-      color: #fff;
-      overflow:hidden;
-    }
-    .glow{
-      position:absolute; inset:0;
-      opacity: .08;
-      pointer-events:none;
-    }
-    .glow .g1, .glow .g2{
-      position:absolute;
-      width: 420px; height: 420px;
-      border-radius: 999px;
-      filter: blur(60px);
-    }
-    .glow .g1{ top:-120px; right:-60px; background: var(--orange5); }
-    .glow .g2{ bottom:-120px; left:-60px; background: var(--gold); }
-    .footer-inner{
-      position: relative;
-      z-index: 1;
-      padding: 96px 0 60px;
-    }
-    .footer-top{
-      padding-bottom: 70px;
-      margin-bottom: 56px;
-      border-bottom: 1px solid rgba(255,255,255,.10);
-    }
-    .footer-top h2{
-      margin:0 0 12px;
-      font-weight: 900;
-      letter-spacing: -0.02em;
-      font-size: clamp(30px, 3vw, 54px);
-    }
-    .footer-top p{
-      margin:0;
-      color: rgba(255,255,255,.70);
-      line-height:1.6;
-    }
-    .footer-top .italic{
-      font-style: italic;
-      margin-bottom: 10px;
-    }
-
-    .footer-grid{
-      display:grid;
-      grid-template-columns: 1fr;
-      gap: 26px;
-      margin-bottom: 56px;
-    }
-    @media (min-width: 768px){
-      .footer-grid{ grid-template-columns: 1fr 1fr; }
-    }
-    @media (min-width: 1200px){
-      .footer-grid{ grid-template-columns: repeat(5, 1fr); gap: 22px; }
-    }
-    .f-title{
-      font-size: 11px;
-      letter-spacing: .30em;
-      text-transform: uppercase;
-      color: rgba(251,146,60,.90);
-      font-weight: 800;
-      margin: 0 0 16px;
-    }
-    .f-list{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap: 10px; }
-    .f-list a{
-      color: rgba(255,255,255,.70);
-      font-size: 13px;
-      transition: color .18s ease;
-    }
-    .f-list a:hover{ color: rgba(251,146,60,.95); text-decoration:none; }
-    .f-sub{
-      color: rgba(255,255,255,.50);
-      font-size: 12px;
-      margin-top: 4px;
-    }
-
-    .footer-bottom{
-      border-top: 1px solid rgba(255,255,255,.10);
-      padding-top: 26px;
-      display:grid;
-      grid-template-columns: 1fr;
-      gap: 14px;
-      align-items:center;
-    }
-    @media (min-width: 768px){
-      .footer-bottom{ grid-template-columns: 1fr 1fr 1fr; }
-      .footer-bottom .center{ text-align:center; }
-      .footer-bottom .right{ justify-content:flex-end; }
-    }
-    .footer-bottom p{
-      margin:0;
-      color: rgba(255,255,255,.50);
-      font-size: 11px;
-    }
-    .footer-bottom .stamp{
-      color: rgba(251,146,60,.70);
-      font-weight: 800;
-      letter-spacing: .20em;
-      text-transform: uppercase;
-      font-size: 11px;
-    }
-    .social{
-      display:flex;
-      gap: 18px;
-    }
-    .social a{
-      color: rgba(255,255,255,.50);
-      font-size: 11px;
-      letter-spacing: .10em;
-      text-transform: uppercase;
-      transition: color .18s ease;
-    }
-    .social a:hover{ color: rgba(251,146,60,.95); text-decoration:none; }
-
-    .footer-bar{
-      height: 4px;
-      background: linear-gradient(90deg, var(--orange4), var(--orange5), var(--orange6));
-    }
-
-    /* Simple modal */
-    .modal{
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,.55);
-      display:none;
-      align-items:center;
-      justify-content:center;
-      z-index: 100;
-      padding: 20px;
-    }
-    .modal[aria-hidden="false"]{ display:flex; }
-    .modal-card{
-      width: min(860px, 96vw);
-      background: #fff;
-      color: var(--ink);
-      border-radius: 18px;
-      border: 1px solid rgba(17,19,21,.10);
-      box-shadow: 0 30px 80px rgba(0,0,0,.25);
-      overflow:hidden;
-    }
-    .modal-head{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding: 16px 18px;
-      border-bottom: 1px solid rgba(17,19,21,.08);
-      background: linear-gradient(180deg, #fff, rgba(17,19,21,.02));
-    }
-    .modal-head b{
-      letter-spacing: -0.01em;
-    }
-    .modal-close{
-      border: 0;
-      background: transparent;
-      cursor:pointer;
-      padding: 8px 10px;
-      border-radius: 10px;
-    }
-    .modal-close:hover{ background: rgba(17,19,21,.05); }
-    .modal-body{
-      padding: 18px;
-      color: rgba(17,19,21,.76);
-      line-height: 1.7;
-      font-size: 14px;
-    }
-
-    /* Wix Vibe banner (optional; kept, but you can delete this entire block safely) */
-    #wixvibe-banner-container{
-      position: fixed;
-      direction: ltr;
-      height: 36px;
-      right: 20px;
-      bottom: 20px;
-      z-index: 9999;
-      box-shadow: 0 0 18px rgba(0, 6, 36, 0.10), 0 6px 6px rgba(0, 6, 36, 0.00);
-      border: 0;
-      box-sizing: border-box;
-    }
-    #wixvibe-banner{
-      display:flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-      gap: 4px;
-      width: 100%;
-      height: 100%;
-      background: #fff;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      font-size: 14px;
-      color: #000000;
-      font-weight: 500;
-      line-height: 20px;
-      border-radius: 4px;
-      border: 1px solid #E0E0E0;
-      padding-left: 8px;
-      cursor: pointer;
-      text-decoration: none;
-    }
-    #wixvibe-banner-close{
-      background:transparent;
-      border:none;
-      padding: 4px;
-      margin: 0;
-      cursor:pointer;
-      margin-top: -14px;
-      margin-right: 2px;
-      padding-left: 2px;
-    }
-  </style>
+  <!-- Styles -->
+  <link rel="stylesheet" href="assets/style.css">
 </head>
 
 <body>
-  <header class="header">
-    <div class="container">
-      <div class="header-inner">
-        <div class="brand">ALIMENTARUS</div>
-        <div class="lang" aria-label="Language selector">
-          <button id="btnIT" class="active" type="button">IT</button>
-          <span class="sep">|</span>
-          <button id="btnEN" class="idle" type="button">EN</button>
-        </div>
-      </div>
-    </div>
-  </header>
 
-  <main>
-    <!-- HERO -->
-    <section class="hero" id="top">
-      <div class="container">
-        <div class="hero-inner">
-          <p class="hero-kicker" data-i18n="hero.kicker">S.r.l. costituenda</p>
-          <h1 class="hero-title" data-i18n="hero.title">ALIMENTARUS SYSTEMS</h1>
-          <p class="hero-subtitle" data-i18n="hero.subtitle">Mensura, Structura, Regimen</p>
-          <p class="hero-italic" data-i18n="hero.italic">Ordinem Cibi</p>
-          <p class="hero-lead" data-i18n="hero.lead">Gruppo di architetture e standard per sistemi alimentari e nutrizionali.</p>
-          <div class="hero-private">
-            <span data-i18n="hero.private">Anteprima privata</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- BRACCI ESECUTIVI (cards) -->
-    <section class="paper" id="bracci">
-      <div class="container">
-        <div class="section-head">
-          <h2 class="h2" data-i18n="arms.h2">Bracci esecutivi</h2>
-          <p class="p-muted" data-i18n="arms.p">Due interfacce specializzate per massimizzare l'impatto del sistema ALIMENTARUS</p>
-        </div>
-
-        <div class="grid-2">
-          <!-- Nutradina -->
-          <article class="card" role="button" tabindex="0" data-open="nutradina">
-            <div class="bar"></div>
-            <div class="card-inner">
-              <div class="pl">
-                <span class="tag" data-i18n="nutradina.tag">Interfaccia Umana</span>
-                <h3 class="grad-title" data-i18n="nutradina.title">Nutradina®</h3>
-                <p class="card-lead" data-i18n="nutradina.lead">Piattaforma consumer e clinica per la nutrizione personalizzata.</p>
-              </div>
-
-              <div class="pl">
-                <p class="card-body" data-i18n="nutradina.body">
-                  Nutradina® rappresenta l'interfaccia umana del sistema ALIMENTARUS. Fornisce strumenti intuitivi per consumer e professionisti clinici, integrando le piattaforme REGIMEN, SIGNUM e BiOMIKS in un'esperienza coerente e user-centric. Consente la personalizzazione nutrizionale basata su dati, preferenze e obiettivi di salute.
-                </p>
-
-                <div class="mini-grid">
-                  <div class="pill">
-                    <b data-i18n="nutradina.p1t">Personalizzazione</b>
-                    <span data-i18n="nutradina.p1s">Basata su dati</span>
-                  </div>
-                  <div class="pill">
-                    <b data-i18n="nutradina.p2t">Integrazione</b>
-                    <span data-i18n="nutradina.p2s">Multi-piattaforma</span>
-                  </div>
-                </div>
-
-                <div class="integrations">
-                  <div class="label" data-i18n="nutradina.intLabel">Integrazioni</div>
-                  <div class="value" data-i18n="nutradina.intValue">Nutradina · REGIMEN, Nutradina · SIGNUM, Nutradina · BiOMIKS</div>
-                </div>
-
-                <div class="discover">
-                  <button type="button" data-open="nutradina" data-i18n="nutradina.discover">Scopri Nutradina →</button>
-                </div>
-              </div>
-            </div>
-          </article>
-
-          <!-- AUCTORIS -->
-          <article class="card" role="button" tabindex="0" data-open="auctoris">
-            <div class="bar"></div>
-            <div class="card-inner">
-              <div class="pl">
-                <span class="tag" data-i18n="auctoris.tag">Interfaccia Istituzionale</span>
-                <h3 class="grad-title" data-i18n="auctoris.title">AUCTORIS®</h3>
-                <p class="card-lead" data-i18n="auctoris.lead">Piattaforma sovrana e regolata per governance alimentare.</p>
-              </div>
-
-              <div class="pl">
-                <p class="card-body" data-i18n="auctoris.body">
-                  AUCTORIS® è l'interfaccia istituzionale per autorità sovrane e organismi regolati. Fornisce strumenti di governance, conformità e controllo integrati con CIVITAS, LEXALIS e AEVUM. Consente la gestione della sicurezza alimentare a livello nazionale e internazionale.
-                </p>
-
-                <div class="mini-grid">
-                  <div class="pill">
-                    <b data-i18n="auctoris.p1t">Governance</b>
-                    <span data-i18n="auctoris.p1s">Integrata</span>
-                  </div>
-                  <div class="pill">
-                    <b data-i18n="auctoris.p2t">Conformità</b>
-                    <span data-i18n="auctoris.p2s">Garantita</span>
-                  </div>
-                </div>
-
-                <div class="integrations">
-                  <div class="label" data-i18n="auctoris.intLabel">Integrazioni</div>
-                  <div class="value" data-i18n="auctoris.intValue">AUCTORIS · CIVITAS, AUCTORIS · LEXALIS, AUCTORIS · AEVUM</div>
-                </div>
-
-                <div class="discover">
-                  <button type="button" data-open="auctoris" data-i18n="auctoris.discover">Scopri AUCTORIS →</button>
-                </div>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- CHI SIAMO -->
-    <section class="who" id="chi-siamo">
-      <div class="container" style="max-width: 64rem;">
-        <h2 class="h2" data-i18n="who.h2">Chi siamo</h2>
-
-        <p data-i18n="who.p1">
-          ALIMENTARUS SYSTEMS ridefinisce il problema per trovare la soluzione. In un mondo dove i sistemi alimentari affrontano sfide senza precedenti—dalla sicurezza alla sostenibilità, dalla nutrizione personalizzata alla conformità normativa—crediamo che il cambiamento richieda architetture fondamentali, non patch superficiali.
-        </p>
-        <p data-i18n="who.p2">
-          La nostra metodologia integra misura (dati precisi), struttura (architetture solide) e regime (governance intelligente) per trasformare come il mondo produce, distribuisce e consuma cibo. Non costruiamo software. Costruiamo sistemi che ridefiniscono gli standard.
-        </p>
-
-        <div class="tri">
-          <div>
-            <h3 data-i18n="who.misuraT">Misura</h3>
-            <p data-i18n="who.misuraP">Dati precisi e verificabili come fondamento di ogni decisione.</p>
-          </div>
-          <div>
-            <h3 data-i18n="who.strutturaT">Struttura</h3>
-            <p data-i18n="who.strutturaP">Architetture solide che scalano con il cambiamento.</p>
-          </div>
-          <div>
-            <h3 data-i18n="who.regimeT">Regime</h3>
-            <p data-i18n="who.regimeP">Governance intelligente per risultati sostenibili.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- PLATFORMS TILES -->
-    <section class="platforms" id="piattaforme">
-      <div class="container">
-        <div class="platform-grid">
-          <article class="tile" role="button" tabindex="0" data-open="REGIMEN">
-            <div class="bar2" style="background: linear-gradient(180deg, #fb7185, #f43f5e);"></div>
-            <h3 style="background-image: linear-gradient(90deg, #fb7185, #f43f5e);" data-i18n="plat.regimenT">REGIMEN</h3>
-            <p data-i18n="plat.regimenP">Governance della nutrizione.</p>
-            <div class="more" data-i18n="plat.more">Scopri di più</div>
-          </article>
-
-          <article class="tile" role="button" tabindex="0" data-open="CIVITAS">
-            <div class="bar2" style="background: linear-gradient(180deg, #fbbf24, #f59e0b);"></div>
-            <h3 style="background-image: linear-gradient(90deg, #fbbf24, #f59e0b);" data-i18n="plat.civitasT">CIVITAS</h3>
-            <p data-i18n="plat.civitasP">Sicurezza e resilienza.</p>
-            <div class="more" data-i18n="plat.more">Scopri di più</div>
-          </article>
-
-          <article class="tile" role="button" tabindex="0" data-open="LEXALIS">
-            <div class="bar2" style="background: linear-gradient(180deg, #22d3ee, #06b6d4);"></div>
-            <h3 style="background-image: linear-gradient(90deg, #22d3ee, #06b6d4);" data-i18n="plat.lexalisT">LEXALIS</h3>
-            <p data-i18n="plat.lexalisP">Conformità e claims.</p>
-            <div class="more" data-i18n="plat.more">Scopri di più</div>
-          </article>
-
-          <article class="tile" role="button" tabindex="0" data-open="AEVUM">
-            <div class="bar2" style="background: linear-gradient(180deg, #34d399, #10b981);"></div>
-            <h3 style="background-image: linear-gradient(90deg, #34d399, #10b981);" data-i18n="plat.aevumT">AEVUM</h3>
-            <p data-i18n="plat.aevumP">Conservazione e tempo.</p>
-            <div class="more" data-i18n="plat.more">Scopri di più</div>
-          </article>
-
-          <article class="tile" role="button" tabindex="0" data-open="SIGNUM">
-            <div class="bar2" style="background: linear-gradient(180deg, #c084fc, #a855f7);"></div>
-            <h3 style="background-image: linear-gradient(90deg, #c084fc, #a855f7);" data-i18n="plat.signumT">SIGNUM</h3>
-            <p data-i18n="plat.signumP">Dati, metriche, segnali.</p>
-            <div class="more" data-i18n="plat.more">Scopri di più</div>
-          </article>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- FOOTER -->
-  <footer id="contatti">
-    <div class="glow" aria-hidden="true">
-      <div class="g1"></div>
-      <div class="g2"></div>
-    </div>
-
-    <div class="footer-inner">
-      <div class="container">
-        <div class="footer-top">
-          <h2>ALIMENTARUS SYSTEMS</h2>
-          <p class="italic" data-i18n="foot.tagline">Ordinem Cibi: Mensura, Structura, Regimen</p>
-          <p data-i18n="foot.desc">Architetture e standard per sistemi alimentari e nutrizionali di livello mondiale.</p>
-        </div>
-
-        <div class="footer-grid">
-          <div>
-            <p class="f-title" data-i18n="foot.platforms">Piattaforme</p>
-            <ul class="f-list">
-              <li><a href="#piattaforme" data-open="REGIMEN" data-i18n="foot.regimen">REGIMEN</a></li>
-              <li><a href="#piattaforme" data-open="CIVITAS" data-i18n="foot.civitas">CIVITAS</a></li>
-              <li><a href="#piattaforme" data-open="LEXALIS" data-i18n="foot.lexalis">LEXALIS</a></li>
-              <li><a href="#piattaforme" data-open="AEVUM" data-i18n="foot.aevum">AEVUM</a></li>
-              <li><a href="#piattaforme" data-open="SIGNUM" data-i18n="foot.signum">SIGNUM</a></li>
-            </ul>
-          </div>
-
-          <div>
-            <p class="f-title" data-i18n="foot.solutions">Soluzioni</p>
-            <ul class="f-list">
-              <li>
-                <a href="#bracci" data-open="nutradina">
-                  <span data-i18n="foot.nutradina">Nutradina®</span>
-                  <div class="f-sub" data-i18n="foot.nutradinaSub">Interfaccia umana</div>
-                </a>
-              </li>
-              <li>
-                <a href="#bracci" data-open="auctoris">
-                  <span data-i18n="foot.auctoris">AUCTORIS®</span>
-                  <div class="f-sub" data-i18n="foot.auctorisSub">Interfaccia istituzionale</div>
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <p class="f-title" data-i18n="foot.company">Azienda</p>
-            <ul class="f-list">
-              <li><a href="#chi-siamo" data-i18n="foot.about">Chi siamo</a></li>
-              <li><a href="#top" data-i18n="foot.vision">Visione</a></li>
-              <li><a href="#contatti" data-i18n="foot.contacts">Contatti</a></li>
-              <li><a href="#top" data-i18n="foot.careers">Carriere</a></li>
-            </ul>
-          </div>
-
-          <div>
-            <p class="f-title" data-i18n="foot.legal">Legale</p>
-            <ul class="f-list">
-              <li><a href="#top" data-i18n="foot.privacy">Privacy</a></li>
-              <li><a href="#top" data-i18n="foot.terms">Termini di servizio</a></li>
-              <li><a href="#top" data-i18n="foot.cookies">Cookie</a></li>
-              <li><a href="#top" data-i18n="foot.compliance">Conformità</a></li>
-            </ul>
-          </div>
-
-          <div>
-            <p class="f-title" data-i18n="foot.contactsTitle">Contatti</p>
-            <div style="display:flex; flex-direction:column; gap: 16px;">
-              <div>
-                <div class="f-sub" data-i18n="foot.emailLabel" style="letter-spacing:.10em; text-transform:uppercase;">Email</div>
-                <a href="mailto:info@alimentarus.systems" data-i18n="foot.emailValue">info@alimentarus.systems</a>
-              </div>
-              <div>
-                <div class="f-sub" data-i18n="foot.phoneLabel" style="letter-spacing:.10em; text-transform:uppercase;">Telefono</div>
-                <a href="tel:+39(0)2XXXXXXXX" data-i18n="foot.phoneValue">+39 (0) 2 XXXX XXXX</a>
-              </div>
-              <div>
-                <div class="f-sub" data-i18n="foot.addrLabel" style="letter-spacing:.10em; text-transform:uppercase;">Indirizzo</div>
-                <div style="color: rgba(255,255,255,.70);" data-i18n="foot.addrValue">Milano, Italia</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="footer-bottom">
-          <div><p data-i18n="foot.copyright">© 2026 ALIMENTARUS SYSTEMS S.r.l. Tutti i diritti riservati.</p></div>
-          <div class="center"><p class="stamp" data-i18n="foot.stamp">Realizzato con precisione e dedizione</p></div>
-          <div class="right" style="display:flex;">
-            <div class="social">
-              <a href="#" data-i18n="foot.linkedin">LinkedIn</a>
-              <a href="#" data-i18n="foot.twitter">Twitter</a>
-              <a href="#" data-i18n="foot.instagram">Instagram</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="footer-bar"></div>
-  </footer>
-
-  <!-- Optional "Built on Wix" banner (delete if you want) -->
-  <div id="wixvibe-banner-container">
-    <a id="wixvibe-banner" href="https://vibe.wix.com/?origin=site_banner" target="_blank" rel="noopener">
-      <span>Built on</span>
-      <span style="font-weight:700; margin-left:4px;">Wix</span>
-      <button id="wixvibe-banner-close" aria-label="Close banner" title="Close" type="button">
-        <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8" fill="none" aria-hidden="true">
-          <path fill-rule="evenodd" clip-rule="evenodd" d="M2.65901 3.71967L0.21967 1.28033C-0.0732233 0.987437 -0.0732233 0.512563 0.21967 0.21967C0.512563 -0.0732233 0.987437 -0.0732233 1.28033 0.21967L3.71967 2.65901L6.15901 0.21967C6.4519 -0.0732233 6.92678 -0.0732233 7.21967 0.21967C7.51256 0.512563 7.51256 0.987437 7.21967 1.28033L4.78033 3.71967L7.21967 6.15901C7.51256 6.4519 7.51256 6.92678 7.21967 7.21967C6.92678 7.51256 6.4519 7.51256 6.15901 7.21967L3.71967 4.78033L1.28033 7.21967C0.987437 7.51256 0.512563 7.51256 0.21967 7.21967C-0.0732233 6.92678 -0.0732233 6.4519 0.21967 6.15901L2.65901 3.71967Z" fill="#000624"></path>
-        </svg>
-      </button>
-    </a>
+<!-- TOP BAR -->
+<header class="topbar">
+  <div class="topbar__inner">
+    <div class="brand">ALIMENTARUS SYSTEMS</div>
+    <nav class="lang-switch">
+      <button data-set-lang="en" class="active">EN</button>
+      <button data-set-lang="it">IT</button>
+      <button data-set-lang="es">ES</button>
+      <button data-set-lang="de">DE</button>
+      <button data-set-lang="ru">RU</button>
+      <button data-set-lang="tr">TR</button>
+    </nav>
   </div>
+</header>
 
-  <!-- Modal -->
-  <div class="modal" id="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Details">
-    <div class="modal-card">
-      <div class="modal-head">
-        <b id="modalTitle">Dettagli</b>
-        <button class="modal-close" id="modalClose" type="button" aria-label="Close">
-          ✕
-        </button>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero__inner">
+    <div class="hero__preline">HOLDING COMPANY</div>
+    <h1 class="hero__title">ALIMENTARUS</h1>
+    <p class="hero__motto">Architecting metabolic coherence</p>
+    <p class="hero__submotto">From signaling science to deployable systems</p>
+    <div class="hero__rule"></div>
+    <p class="hero__desc">
+      Alimentarus Systems is the roof architecture unifying scientific signaling research,
+      metabolic state engineering, and commercially deployable nutrition platforms.
+    </p>
+    <div class="hero__meta">SYSTEMS · SIGNALS · STATES</div>
+  </div>
+</section>
+
+<!-- ATTENTION GATE -->
+<section class="section attentiongate">
+  <div class="wrap">
+    <div class="attentiongate__head">
+      <div class="kicker">ATTENTION GATE</div>
+      <h2 class="h2">Ordinary people. Extraordinary clarity.</h2>
+      <p class="lead">
+        These are not influencers or extremes.  
+        They are ordinary individuals after metabolic restoration — when noise drops and coherence returns.
+      </p>
+    </div>
+
+    <div class="attentiongate__grid">
+      <div class="gatecard">
+        <div class="gatecard__media">
+          <img src="assets/metahuman-man-Bioshield.jpg" alt="BioShield state">
+        </div>
+        <div class="gatecard__text">
+          <h3 class="gatecard__title">BioShield™</h3>
+          <p>Resilience layer for systemic stability under real-world constraints.</p>
+        </div>
       </div>
-      <div class="modal-body" id="modalBody"></div>
+
+      <div class="gatecard">
+        <div class="gatecard__media">
+          <img src="assets/metahuman-woman-Dermashield.jpg" alt="DermaShield state">
+        </div>
+        <div class="gatecard__text">
+          <h3 class="gatecard__title">DermaShield™</h3>
+          <p>Barrier and recovery interface engineered through signaling discipline.</p>
+        </div>
+      </div>
     </div>
   </div>
+</section>
 
-  <script>
-    // --------- Wix banner close ----------
-    (function(){
-      const closeBtn = document.getElementById('wixvibe-banner-close');
-      if (!closeBtn) return;
-      closeBtn.addEventListener('click', function(ev){
-        ev.stopPropagation();
-        ev.preventDefault();
-        const c = document.getElementById('wixvibe-banner-container');
-        if (c) c.style.display = 'none';
-      });
-    })();
+<!-- PLATFORMS -->
+<section class="section platforms">
+  <div class="section-head">
+    <div class="section-kicker">CURRENT PLATFORMS</div>
+    <p class="section-lead">
+      Platforms already structured, scientifically grounded, and commercially realizable.
+    </p>
+  </div>
 
-    // --------- IT / EN toggle (static i18n map) ----------
-    const DICT = {
-      it: {
-        "hero.kicker": "S.r.l. costituenda",
-        "hero.title": "ALIMENTARUS SYSTEMS",
-        "hero.subtitle": "Mensura, Structura, Regimen",
-        "hero.italic": "Ordinem Cibi",
-        "hero.lead": "Gruppo di architetture e standard per sistemi alimentari e nutrizionali.",
-        "hero.private": "Anteprima privata",
+  <div class="grid-3">
+    <div class="card card--accent">
+      <div class="card__inner">
+        <div class="card__kicker">CORE</div>
+        <h3 class="platform-name">Nutradina™</h3>
+        <p>Precision metabolic nutrition products engineered as state-modulating systems.</p>
+      </div>
+    </div>
 
-        "arms.h2": "Bracci esecutivi",
-        "arms.p": "Due interfacce specializzate per massimizzare l'impatto del sistema ALIMENTARUS",
+    <div class="card">
+      <div class="card__inner">
+        <div class="card__kicker">ANIMAL INTERFACE</div>
+        <h3 class="platform-name">Zooform™</h3>
+        <p>Metabolic coherence and restoration systems for animals and companion species.</p>
+      </div>
+    </div>
 
-        "nutradina.tag": "Interfaccia Umana",
-        "nutradina.title": "Nutradina®",
-        "nutradina.lead": "Piattaforma consumer e clinica per la nutrizione personalizzata.",
-        "nutradina.body": "Nutradina® rappresenta l'interfaccia umana del sistema ALIMENTARUS. Fornisce strumenti intuitivi per consumer e professionisti clinici, integrando le piattaforme REGIMEN, SIGNUM e BiOMIKS in un'esperienza coerente e user-centric. Consente la personalizzazione nutrizionale basata su dati, preferenze e obiettivi di salute.",
-        "nutradina.p1t": "Personalizzazione",
-        "nutradina.p1s": "Basata su dati",
-        "nutradina.p2t": "Integrazione",
-        "nutradina.p2s": "Multi-piattaforma",
-        "nutradina.intLabel": "Integrazioni",
-        "nutradina.intValue": "Nutradina · REGIMEN, Nutradina · SIGNUM, Nutradina · BiOMIKS",
-        "nutradina.discover": "Scopri Nutradina →",
+    <div class="card">
+      <div class="card__inner">
+        <div class="card__kicker">REGULATORY</div>
+        <h3 class="platform-name">Praxis™</h3>
+        <p>Translation of metabolic science into compliant, legible regulatory frameworks.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-        "auctoris.tag": "Interfaccia Istituzionale",
-        "auctoris.title": "AUCTORIS®",
-        "auctoris.lead": "Piattaforma sovrana e regolata per governance alimentare.",
-        "auctoris.body": "AUCTORIS® è l'interfaccia istituzionale per autorità sovrane e organismi regolati. Fornisce strumenti di governance, conformità e controllo integrati con CIVITAS, LEXALIS e AEVUM. Consente la gestione della sicurezza alimentare a livello nazionale e internazionale.",
-        "auctoris.p1t": "Governance",
-        "auctoris.p1s": "Integrata",
-        "auctoris.p2t": "Conformità",
-        "auctoris.p2s": "Garantita",
-        "auctoris.intLabel": "Integrazioni",
-        "auctoris.intValue": "AUCTORIS · CIVITAS, AUCTORIS · LEXALIS, AUCTORIS · AEVUM",
-        "auctoris.discover": "Scopri AUCTORIS →",
+<!-- TRANSITION FIELD -->
+<section class="transition">
+  <div class="transition__inner">
+    <div class="transition__kicker">ARCHITECTURAL ROOF</div>
+    <h2 class="transition__title">Metabolic State Engineering</h2>
+    <p class="transition__lead">
+      We treat nutrition as a control architecture — signals, constraints, admissibility —
+      and translate this logic into repeatable, measurable platforms without narrative drift.
+    </p>
 
-        "who.h2": "Chi siamo",
-        "who.p1": "ALIMENTARUS SYSTEMS ridefinisce il problema per trovare la soluzione. In un mondo dove i sistemi alimentari affrontano sfide senza precedenti—dalla sicurezza alla sostenibilità, dalla nutrizione personalizzata alla conformità normativa—crediamo che il cambiamento richieda architetture fondamentali, non patch superficiali.",
-        "who.p2": "La nostra metodologia integra misura (dati precisi), struttura (architetture solide) e regime (governance intelligente) per trasformare come il mondo produce, distribuisce e consuma cibo. Non costruiamo software. Costruiamo sistemi che ridefiniscono gli standard.",
-        "who.misuraT": "Misura",
-        "who.misuraP": "Dati precisi e verificabili come fondamento di ogni decisione.",
-        "who.strutturaT": "Struttura",
-        "who.strutturaP": "Architetture solide che scalano con il cambiamento.",
-        "who.regimeT": "Regime",
-        "who.regimeP": "Governance intelligente per risultati sostenibili.",
+    <div class="transition__grid">
+      <div class="tcard">
+        <div class="tcard__title">SCIENCE</div>
+        <p class="tcard__text">Signal theory, metabolic admissibility, systems biology.</p>
+      </div>
+      <div class="tcard">
+        <div class="tcard__title">EXECUTION</div>
+        <p class="tcard__text">Productization, protocols, manufacturing logic.</p>
+      </div>
+      <div class="tcard">
+        <div class="tcard__title">SCALE</div>
+        <p class="tcard__text">Platforms built for repetition, governance, and growth.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-        "plat.regimenT": "REGIMEN",
-        "plat.regimenP": "Governance della nutrizione.",
-        "plat.civitasT": "CIVITAS",
-        "plat.civitasP": "Sicurezza e resilienza.",
-        "plat.lexalisT": "LEXALIS",
-        "plat.lexalisP": "Conformità e claims.",
-        "plat.aevumT": "AEVUM",
-        "plat.aevumP": "Conservazione e tempo.",
-        "plat.signumT": "SIGNUM",
-        "plat.signumP": "Dati, metriche, segnali.",
-        "plat.more": "Scopri di più",
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer__inner">
+    <h3 class="footer__title">Alimentarus Systems</h3>
+    <p class="footer__subtitle">Architectures for metabolic coherence</p>
+    <p class="footer__lead">
+      World-class food, nutrition, and metabolic systems engineered at the architectural level.
+    </p>
 
-        "foot.tagline": "Ordinem Cibi: Mensura, Structura, Regimen",
-        "foot.desc": "Architetture e standard per sistemi alimentari e nutrizionali di livello mondiale.",
-        "foot.platforms": "Piattaforme",
-        "foot.regimen": "REGIMEN",
-        "foot.civitas": "CIVITAS",
-        "foot.lexalis": "LEXALIS",
-        "foot.aevum": "AEVUM",
-        "foot.signum": "SIGNUM",
-        "foot.solutions": "Soluzioni",
-        "foot.nutradina": "Nutradina®",
-        "foot.nutradinaSub": "Interfaccia umana",
-        "foot.auctoris": "AUCTORIS®",
-        "foot.auctorisSub": "Interfaccia istituzionale",
-        "foot.company": "Azienda",
-        "foot.about": "Chi siamo",
-        "foot.vision": "Visione",
-        "foot.contacts": "Contatti",
-        "foot.careers": "Carriere",
-        "foot.legal": "Legale",
-        "foot.privacy": "Privacy",
-        "foot.terms": "Termini di servizio",
-        "foot.cookies": "Cookie",
-        "foot.compliance": "Conformità",
-        "foot.contactsTitle": "Contatti",
-        "foot.emailLabel": "Email",
-        "foot.emailValue": "info@alimentarus.systems",
-        "foot.phoneLabel": "Telefono",
-        "foot.phoneValue": "+39 (0) 2 XXXX XXXX",
-        "foot.addrLabel": "Indirizzo",
-        "foot.addrValue": "Milano, Italia",
-        "foot.copyright": "© 2026 ALIMENTARUS SYSTEMS S.r.l. Tutti i diritti riservati.",
-        "foot.stamp": "Realizzato con precisione e dedizione",
-        "foot.linkedin": "LinkedIn",
-        "foot.twitter": "Twitter",
-        "foot.instagram": "Instagram"
-      },
-      en: {
-        "hero.kicker": "S.r.l. (to be incorporated)",
-        "hero.title": "ALIMENTARUS SYSTEMS",
-        "hero.subtitle": "Mensura, Structura, Regimen",
-        "hero.italic": "Ordinem Cibi",
-        "hero.lead": "A group of architectures and standards for food and nutrition systems.",
-        "hero.private": "Private preview",
+    <div class="footer__rule"></div>
 
-        "arms.h2": "Executive arms",
-        "arms.p": "Two specialized interfaces designed to maximize the impact of the ALIMENTARUS system",
+    <div class="footer__bottom">
+      <div>© Alimentarus Systems</div>
+      <div class="social">
+        <span>Research</span>
+        <span>Platforms</span>
+        <span>Contact</span>
+      </div>
+    </div>
+  </div>
+</footer>
 
-        "nutradina.tag": "Human Interface",
-        "nutradina.title": "Nutradina®",
-        "nutradina.lead": "Consumer & clinical platform for personalized nutrition.",
-        "nutradina.body": "Nutradina® is the human interface of the ALIMENTARUS system. It provides intuitive tools for consumers and clinical professionals, integrating REGIMEN, SIGNUM, and BiOMIKS into a coherent, user-centric experience. It enables data-driven nutritional personalization based on preferences and health goals.",
-        "nutradina.p1t": "Personalization",
-        "nutradina.p1s": "Data-driven",
-        "nutradina.p2t": "Integration",
-        "nutradina.p2s": "Multi-platform",
-        "nutradina.intLabel": "Integrations",
-        "nutradina.intValue": "Nutradina · REGIMEN, Nutradina · SIGNUM, Nutradina · BiOMIKS",
-        "nutradina.discover": "Explore Nutradina →",
+<!-- Language Script -->
+<script>
+(() => {
+  const supported = ["en","it","es","de","ru","tr"];
+  const key = "as_lang";
 
-        "auctoris.tag": "Institutional Interface",
-        "auctoris.title": "AUCTORIS®",
-        "auctoris.lead": "Sovereign, regulated platform for food governance.",
-        "auctoris.body": "AUCTORIS® is the institutional interface for sovereign authorities and regulated bodies. It provides governance, compliance, and control tools integrated with CIVITAS, LEXALIS, and AEVUM—enabling food security management at national and international level.",
-        "auctoris.p1t": "Governance",
-        "auctoris.p1s": "Integrated",
-        "auctoris.p2t": "Compliance",
-        "auctoris.p2s": "Assured",
-        "auctoris.intLabel": "Integrations",
-        "auctoris.intValue": "AUCTORIS · CIVITAS, AUCTORIS · LEXALIS, AUCTORIS · AEVUM",
-        "auctoris.discover": "Explore AUCTORIS →",
-
-        "who.h2": "Who we are",
-        "who.p1": "ALIMENTARUS SYSTEMS reframes the problem to reach the solution. In a world where food systems face unprecedented pressures—from security to sustainability, from personalized nutrition to regulatory compliance—we believe change requires foundational architectures, not superficial patches.",
-        "who.p2": "Our methodology integrates measurement (precise data), structure (robust architectures), and regimen (intelligent governance) to transform how the world produces, distributes, and consumes food. We do not build software. We build systems that redefine standards.",
-        "who.misuraT": "Measurement",
-        "who.misuraP": "Precise, verifiable data as the basis of every decision.",
-        "who.strutturaT": "Structure",
-        "who.strutturaP": "Robust architectures that scale with change.",
-        "who.regimeT": "Regimen",
-        "who.regimeP": "Intelligent governance for sustainable outcomes.",
-
-        "plat.regimenT": "REGIMEN",
-        "plat.regimenP": "Governance of nutrition.",
-        "plat.civitasT": "CIVITAS",
-        "plat.civitasP": "Security & resilience.",
-        "plat.lexalisT": "LEXALIS",
-        "plat.lexalisP": "Compliance & claims.",
-        "plat.aevumT": "AEVUM",
-        "plat.aevumP": "Preservation & time.",
-        "plat.signumT": "SIGNUM",
-        "plat.signumP": "Data, metrics, signals.",
-        "plat.more": "Learn more",
-
-        "foot.tagline": "Ordinem Cibi: Mensura, Structura, Regimen",
-        "foot.desc": "World-class architectures and standards for food and nutrition systems.",
-        "foot.platforms": "Platforms",
-        "foot.regimen": "REGIMEN",
-        "foot.civitas": "CIVITAS",
-        "foot.lexalis": "LEXALIS",
-        "foot.aevum": "AEVUM",
-        "foot.signum": "SIGNUM",
-        "foot.solutions": "Solutions",
-        "foot.nutradina": "Nutradina®",
-        "foot.nutradinaSub": "Human interface",
-        "foot.auctoris": "AUCTORIS®",
-        "foot.auctorisSub": "Institutional interface",
-        "foot.company": "Company",
-        "foot.about": "About",
-        "foot.vision": "Vision",
-        "foot.contacts": "Contact",
-        "foot.careers": "Careers",
-        "foot.legal": "Legal",
-        "foot.privacy": "Privacy",
-        "foot.terms": "Terms of service",
-        "foot.cookies": "Cookies",
-        "foot.compliance": "Compliance",
-        "foot.contactsTitle": "Contact",
-        "foot.emailLabel": "Email",
-        "foot.emailValue": "info@alimentarus.systems",
-        "foot.phoneLabel": "Phone",
-        "foot.phoneValue": "+39 (0) 2 XXXX XXXX",
-        "foot.addrLabel": "Address",
-        "foot.addrValue": "Milan, Italy",
-        "foot.copyright": "© 2026 ALIMENTARUS SYSTEMS S.r.l. All rights reserved.",
-        "foot.stamp": "Built with precision and dedication",
-        "foot.linkedin": "LinkedIn",
-        "foot.twitter": "Twitter",
-        "foot.instagram": "Instagram"
-      }
-    };
-
-    function setLang(lang){
-      document.documentElement.lang = (lang === "en") ? "en" : "it";
-      document.querySelectorAll("[data-i18n]").forEach(el => {
-        const k = el.getAttribute("data-i18n");
-        const v = DICT[lang] && DICT[lang][k];
-        if (typeof v === "string") el.textContent = v;
-      });
-
-      const it = document.getElementById("btnIT");
-      const en = document.getElementById("btnEN");
-      if (lang === "it"){
-        it.className = "active"; en.className = "idle";
-      } else {
-        it.className = "idle"; en.className = "active";
-      }
-    }
-
-    document.getElementById("btnIT").addEventListener("click", () => setLang("it"));
-    document.getElementById("btnEN").addEventListener("click", () => setLang("en"));
-
-    // --------- Modal details (functional placeholders) ----------
-    const MODAL_CONTENT = {
-      nutradina: {
-        title: "Nutradina®",
-        body: "Pagina in preparazione. Qui puoi inserire una descrizione estesa, link a documenti, o una pagina dedicata. Se vuoi, posso trasformare questo in una vera multi-pagina (nutradina.html / auctorix.html / regimen.html) mantenendo lo stesso stile."
-      },
-      auctorIS: null,
-      auctorIs: null,
-      auctorIsFix: null,
-      auctorIs2: null,
-      auctorIs3: null,
-      auctorIs4: null,
-      auctorIs5: null,
-      auctorIs6: null,
-      auctorIs7: null,
-      auctorIs8: null,
-      auctorIs9: null,
-      auctorIs10: null,
-      auctorIs11: null,
-      auctorIs12: null,
-      auctorIs13: null,
-      auctorIs14: null,
-      auctorIs15: null,
-      auctorIs16: null,
-      auctorIs17: null,
-      auctorIs18: null,
-      auctorIs19: null,
-      auctorIs20: null,
-      auctoris: {
-        title: "AUCTORIS®",
-        body: "Pagina in preparazione. Qui puoi inserire policy optics, governance scope, e moduli di compliance. Posso anche aggiungere un form contatti (senza backend: mailto, oppure con endpoint Formspree/Netlify)."
-      },
-      REGIMEN: {
-        title: "REGIMEN",
-        body: "Governance della nutrizione — contenuto esteso da inserire. (Placeholder funzionale.)"
-      },
-      CIVITAS: {
-        title: "CIVITAS",
-        body: "Sicurezza e resilienza — contenuto esteso da inserire. (Placeholder funzionale.)"
-      },
-      LEXALIS: {
-        title: "LEXALIS",
-        body: "Conformità e claims — contenuto esteso da inserire. (Placeholder funzionale.)"
-      },
-      AEVUM: {
-        title: "AEVUM",
-        body: "Conservazione e tempo — contenuto esteso da inserire. (Placeholder funzionale.)"
-      },
-      SIGNUM: {
-        title: "SIGNUM",
-        body: "Dati, metriche, segnali — contenuto esteso da inserire. (Placeholder funzionale.)"
-      }
-    };
-
-    const modal = document.getElementById("modal");
-    const modalTitle = document.getElementById("modalTitle");
-    const modalBody = document.getElementById("modalBody");
-    const modalClose = document.getElementById("modalClose");
-
-    function openModal(key){
-      const item = MODAL_CONTENT[key];
-      if (!item) return;
-      modalTitle.textContent = item.title;
-      modalBody.textContent = item.body;
-      modal.setAttribute("aria-hidden", "false");
-      document.body.style.overflow = "hidden";
-    }
-    function closeModal(){
-      modal.setAttribute("aria-hidden", "true");
-      document.body.style.overflow = "";
-    }
-
-    modalClose.addEventListener("click", closeModal);
-    modal.addEventListener("click", (e) => {
-      if (e.target === modal) closeModal();
+  function setLang(lang){
+    if(!supported.includes(lang)) lang="en";
+    document.documentElement.lang = lang;
+    document.querySelectorAll("[data-lang]").forEach(el=>{
+      el.hidden = el.dataset.lang !== lang;
     });
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") closeModal();
+    document.querySelectorAll("[data-set-lang]").forEach(b=>{
+      b.classList.toggle("active", b.dataset.setLang===lang);
     });
+    localStorage.setItem(key,lang);
+  }
 
-    // click handlers on cards/tiles and footer links with data-open
-    function wireOpeners(){
-      document.querySelectorAll("[data-open]").forEach(el => {
-        el.addEventListener("click", (e) => {
-          const key = el.getAttribute("data-open");
-          if (!key) return;
-          // let normal anchor jump happen, but also open modal if content exists
-          // prevent only when it's a button-like element
-          if (el.tagName === "BUTTON" || el.getAttribute("role") === "button") e.preventDefault();
-          openModal(key);
-        });
-        el.addEventListener("keydown", (e) => {
-          if (e.key === "Enter" || e.key === " ") {
-            const key = el.getAttribute("data-open");
-            if (!key) return;
-            e.preventDefault();
-            openModal(key);
-          }
-        });
-      });
-    }
-    wireOpeners();
+  setLang(localStorage.getItem(key) || "en");
 
-    // default language = IT (matches your source)
-    setLang("it");
-  </script>
+  document.addEventListener("click",e=>{
+    const b=e.target.closest("[data-set-lang]");
+    if(b) setLang(b.dataset.setLang);
+  });
+})();
+</script>
+
 </body>
 </html>
