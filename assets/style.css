@@ -305,3 +305,18 @@ body{
 
 /* small utilities */
 .spacer-1{height:10px}
+
+/* kunter */
+
+/* HERO: lock to true vertical center */
+.hero{
+  max-width:var(--max);
+  margin:0 auto;
+  padding:0 22px;
+  min-height:calc(100vh - 74px); /* 74px ≈ topbar height */
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+
