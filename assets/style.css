@@ -607,3 +607,46 @@ a:focus-visible{
   letter-spacing: .01em;
 }
 
+/* PLATFORM NAMES — holding-level authority */
+.platform__title,
+.card__title,
+.mini__title,
+.platform-name{
+  font-family: "Playfair Display", serif;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  font-size: clamp(26px, 2.2vw, 34px);
+  line-height: 1.15;
+  color: rgba(20,20,20,.92);
+}
+
+/* Dark focusband variant */
+.focusband .mini__title{
+  color: rgba(255,255,255,.94);
+}
+
+/* PLATFORM DESCRIPTIONS — clarity, no competition */
+.platform__desc,
+.card__desc,
+.mini__text{
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 400;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: rgba(27,27,27,.62);
+}
+
+.focusband .mini__text{
+  color: rgba(255,255,255,.72);
+}
+
+/* Trademark symbol refinement */
+.platform-name sup,
+.platform__title sup,
+.mini__title sup{
+  font-size: .55em;
+  vertical-align: super;
+  margin-left: 1px;
+  opacity: .65;
+  letter-spacing: 0;
+}
