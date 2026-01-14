@@ -701,7 +701,7 @@ a:focus-visible{
 }
 .gatecard__media{
   position: relative;
-  height: 360px;
+  height: 480px;
   background: #0e0e0e;
 }
 @media (max-width: 700px){
