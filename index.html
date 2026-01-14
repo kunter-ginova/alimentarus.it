@@ -3,607 +3,331 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Alimentarus Systems — nutrition-grade systems, governance, and signal-based food engineering." />
   <title>Alimentarus Systems</title>
+  <meta name="description" content="Architectures and standards for world-class food and nutrition systems." />
 
-  <!-- Single-file styling (no external dependencies) -->
-  <style>
-    :root{
-      --bg: #fbfbfb;
-      --panel: #ffffff;
-      --ink: #101114;
-      --muted: #5a606b;
-      --line: rgba(16,17,20,.10);
-      --shadow: 0 10px 30px rgba(16,17,20,.08);
-      --radius: 18px;
-      --max: 1120px;
-      --pad: clamp(16px, 2vw, 22px);
-    }
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
 
-    *{ box-sizing: border-box; }
-    html{ scroll-behavior: smooth; }
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      color: var(--ink);
-      background: radial-gradient(1200px 600px at 10% 10%, rgba(16,17,20,.05), transparent 60%),
-                  radial-gradient(900px 500px at 90% 20%, rgba(16,17,20,.04), transparent 55%),
-                  linear-gradient(180deg, #ffffff, var(--bg));
-    }
-
-    a{ color: inherit; text-decoration: none; }
-    a:hover{ text-decoration: underline; text-underline-offset: 3px; }
-
-    .wrap{ max-width: var(--max); margin: 0 auto; padding: 0 var(--pad); }
-
-    /* Top bar */
-    header{
-      position: sticky; top: 0; z-index: 50;
-      backdrop-filter: blur(10px);
-      background: rgba(251,251,251,.75);
-      border-bottom: 1px solid var(--line);
-    }
-    .nav{
-      display:flex; align-items:center; justify-content:space-between;
-      padding: 14px 0;
-      gap: 14px;
-    }
-    .brand{
-      display:flex; align-items:center; gap: 10px;
-      letter-spacing: .2px;
-      font-weight: 650;
-    }
-    .mark{
-      width: 34px; height: 34px; border-radius: 12px;
-      border: 1px solid var(--line);
-      background: linear-gradient(135deg, rgba(16,17,20,.10), rgba(16,17,20,.03));
-      display:grid; place-items:center;
-      box-shadow: 0 6px 16px rgba(16,17,20,.08);
-      font-size: 14px;
-    }
-    .brand small{ display:block; font-weight: 550; color: var(--muted); letter-spacing:.3px; }
-
-    .links{ display:flex; align-items:center; gap: 18px; }
-    .links a{ font-size: 14px; color: rgba(16,17,20,.85); }
-    .cta{
-      display:inline-flex; align-items:center; justify-content:center;
-      height: 40px; padding: 0 14px; border-radius: 999px;
-      border: 1px solid var(--line);
-      background: #fff;
-      box-shadow: 0 6px 18px rgba(16,17,20,.06);
-      font-size: 14px;
-      white-space: nowrap;
-    }
-    .cta:hover{ text-decoration:none; transform: translateY(-1px); }
-
-    .burger{
-      display:none;
-      height: 40px; width: 40px; border-radius: 12px;
-      border: 1px solid var(--line); background: #fff;
-      box-shadow: 0 6px 18px rgba(16,17,20,.06);
-      cursor:pointer;
-    }
-    .burger span{ display:block; height:2px; width:18px; background: rgba(16,17,20,.80); margin: 0 auto; }
-    .burger span + span{ margin-top: 5px; }
-
-    .mobile{
-      display:none;
-      padding-bottom: 14px;
-    }
-    .mobile a{
-      display:block;
-      padding: 10px 0;
-      border-top: 1px solid var(--line);
-      color: rgba(16,17,20,.86);
-    }
-
-    /* Hero */
-    .hero{ padding: 52px 0 22px; }
-    .heroGrid{
-      display:grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap: 18px;
-      align-items: stretch;
-    }
-    .card{
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-    }
-    .heroMain{
-      padding: clamp(22px, 3vw, 34px);
-      position: relative;
-      overflow: hidden;
-    }
-    .kicker{
-      display:inline-flex; align-items:center; gap: 10px;
-      font-size: 13px; color: rgba(16,17,20,.72);
-      border: 1px solid var(--line);
-      padding: 8px 12px; border-radius: 999px;
-      background: rgba(255,255,255,.75);
-    }
-    .dot{
-      width: 8px; height: 8px; border-radius: 999px;
-      background: rgba(16,17,20,.50);
-    }
-    h1{
-      margin: 16px 0 10px;
-      font-size: clamp(32px, 4vw, 48px);
-      line-height: 1.04;
-      letter-spacing: -0.8px;
-    }
-    .lead{
-      margin: 0;
-      color: rgba(16,17,20,.75);
-      font-size: 16px;
-      line-height: 1.55;
-      max-width: 62ch;
-    }
-    .heroActions{
-      margin-top: 18px;
-      display:flex; gap: 10px; flex-wrap: wrap;
-      align-items:center;
-    }
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      height: 44px; padding: 0 16px;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      background: #fff;
-      box-shadow: 0 10px 22px rgba(16,17,20,.08);
-      font-size: 14px;
-      cursor:pointer;
-      transition: transform .12s ease, box-shadow .12s ease;
-    }
-    .btn:hover{ text-decoration:none; transform: translateY(-1px); }
-    .btn.primary{
-      background: rgba(16,17,20,.93);
-      color: #fff;
-      border-color: rgba(16,17,20,.25);
-    }
-    .btn.primary:hover{ box-shadow: 0 14px 30px rgba(16,17,20,.18); }
-
-    .heroSide{
-      padding: 18px;
-      display:flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    .mini{
-      padding: 16px;
-      border-radius: 16px;
-      border: 1px solid var(--line);
-      background: linear-gradient(180deg, rgba(16,17,20,.04), transparent);
-    }
-    .mini h3{
-      margin:0 0 6px; font-size: 14px; letter-spacing:.2px;
-    }
-    .mini p{
-      margin:0; color: rgba(16,17,20,.72);
-      font-size: 13px; line-height: 1.5;
-    }
-
-    /* Sections */
-    section{ padding: 26px 0; }
-    .sectionHead{
-      display:flex; align-items:flex-end; justify-content:space-between;
-      gap: 16px;
-      margin-bottom: 12px;
-    }
-    h2{
-      margin:0;
-      font-size: 18px;
-      letter-spacing: .2px;
-    }
-    .sub{
-      margin:0;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.5;
-      max-width: 70ch;
-    }
-
-    .grid3{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-    }
-    .tile{
-      padding: 18px;
-      border-radius: 18px;
-      border: 1px solid var(--line);
-      background: #fff;
-      box-shadow: 0 10px 26px rgba(16,17,20,.06);
-      transition: transform .12s ease, box-shadow .12s ease;
-    }
-    .tile:hover{ transform: translateY(-2px); box-shadow: 0 16px 36px rgba(16,17,20,.10); text-decoration:none; }
-    .tile b{ display:block; font-size: 14px; margin-bottom: 8px; }
-    .tile span{ display:block; color: rgba(16,17,20,.72); font-size: 13px; line-height: 1.55; }
-
-    /* Quote */
-    blockquote{
-      margin: 0;
-      padding: 18px 18px;
-      border-radius: 18px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.7);
-      box-shadow: 0 10px 26px rgba(16,17,20,.06);
-      color: rgba(16,17,20,.86);
-      font-size: 14px;
-      line-height: 1.6;
-    }
-    blockquote footer{
-      margin-top: 10px;
-      color: rgba(16,17,20,.58);
-      font-size: 12px;
-    }
-
-    /* Contact */
-    .contact{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      align-items: stretch;
-    }
-    form{
-      padding: 18px;
-    }
-    label{
-      display:block;
-      font-size: 12px;
-      color: rgba(16,17,20,.72);
-      margin: 10px 0 6px;
-    }
-    input, textarea{
-      width: 100%;
-      border-radius: 14px;
-      border: 1px solid var(--line);
-      padding: 12px 12px;
-      font: inherit;
-      background: #fff;
-      outline: none;
-    }
-    textarea{ min-height: 120px; resize: vertical; }
-    .hint{
-      font-size: 12px;
-      color: rgba(16,17,20,.58);
-      margin-top: 10px;
-      line-height: 1.5;
-    }
-    .ok, .err{
-      display:none;
-      margin-top: 12px;
-      padding: 12px 12px;
-      border-radius: 14px;
-      border: 1px solid var(--line);
-      background: #fff;
-      font-size: 13px;
-      line-height: 1.4;
-    }
-    .ok{ border-color: rgba(46, 160, 67, .25); }
-    .err{ border-color: rgba(220, 38, 38, .25); }
-
-    /* Footer */
-    footer{
-      padding: 30px 0 46px;
-      border-top: 1px solid var(--line);
-      margin-top: 18px;
-      color: rgba(16,17,20,.62);
-      font-size: 13px;
-    }
-    .foot{
-      display:flex; justify-content:space-between; gap: 16px; flex-wrap:wrap;
-      align-items:center;
-    }
-    .foot a{ color: rgba(16,17,20,.68); margin-right: 12px; }
-    .mono{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
-
-    /* Responsive */
-    @media (max-width: 920px){
-      .heroGrid{ grid-template-columns: 1fr; }
-      .grid3{ grid-template-columns: 1fr; }
-      .contact{ grid-template-columns: 1fr; }
-      .links{ display:none; }
-      .burger{ display:inline-grid; place-items:center; }
-      .mobile{ display:block; }
-      .mobile[hidden]{ display:none; }
-    }
-  </style>
+  <link rel="stylesheet" href="assets/style.css">
 </head>
 
 <body>
-  <header>
-    <div class="wrap">
-      <nav class="nav" aria-label="Primary">
-        <a class="brand" href="#top" aria-label="Alimentarus Systems Home">
-          <span class="mark">AS</span>
-          <span>
-            Alimentarus Systems
-            <small>Nutrition-grade systems & governance</small>
-          </span>
-        </a>
+  <div class="topbar">
+    <div class="topbar__inner">
+      <div class="brand">ALIMENTARUS</div>
 
-        <div class="links" role="navigation" aria-label="Site">
-          <a href="#platforms">Platforms</a>
-          <a href="#scope">Scope</a>
-          <a href="#principle">Principle</a>
-          <a href="#contact">Contact</a>
-        </div>
-
-        <div style="display:flex; gap:10px; align-items:center;">
-          <a class="cta" href="#contact">Request a conversation</a>
-          <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false">
-            <span></span><span></span><span></span>
-          </button>
-        </div>
+      <nav class="lang" aria-label="Language">
+        <button class="lang__btn" data-lang="it" type="button">IT</button>
+        <span class="lang__sep" aria-hidden="true"></span>
+        <button class="lang__btn" data-lang="en" type="button">EN</button>
       </nav>
-
-      <div class="mobile" id="mobileMenu" hidden>
-        <a href="#platforms">Platforms</a>
-        <a href="#scope">Scope</a>
-        <a href="#principle">Principle</a>
-        <a href="#contact">Contact</a>
-      </div>
     </div>
+  </div>
+
+  <!-- HERO -->
+  <header class="hero" id="top">
+    <div class="hero__preline">S.R.L. (IN FORMATION)</div>
+
+    <h1 class="hero__title">
+      ALIMENTARUS<br/>SYSTEMS
+    </h1>
+
+    <div class="hero__motto">Mensura, Structura, Regimen</div>
+    <div class="hero__submotto">Ordinem Cibi</div>
+
+    <!-- EN -->
+    <p class="hero__desc langblock" data-lang="en">
+      A group building architectures and standards for food and nutrition systems.
+    </p>
+
+    <!-- IT -->
+    <p class="hero__desc langblock" data-lang="it" hidden>
+      Un gruppo che costruisce architetture e standard per sistemi alimentari e nutrizionali.
+    </p>
+
+    <div class="hero__rule"></div>
+    <div class="hero__meta">PRIVATE PREVIEW</div>
   </header>
 
-  <main id="top">
-    <div class="wrap">
-      <section class="hero">
-        <div class="heroGrid">
-          <div class="card heroMain">
-            <div class="kicker"><span class="dot"></span><span>Signal-based food engineering • policy-grade clarity • execution discipline</span></div>
-            <h1>Alimentarus Systems builds the operating logic of nutrition, from label to state.</h1>
-            <p class="lead">
-              This is a plain-HTML counterpart to your Wix page: fast, portable, and deployable anywhere (GitHub Pages, Netlify, S3).
-              Replace the copy blocks below with your exact Wix text and you’ll have a clean, institutional presence without platform lock-in.
-            </p>
+  <!-- SPLIT CARDS -->
+  <section class="section" id="platforms">
+    <div class="grid-2">
 
-            <div class="heroActions">
-              <a class="btn primary" href="#platforms">Explore the platforms</a>
-              <a class="btn" href="#contact">Contact</a>
-              <a class="btn" href="#" id="downloadBtn">Download this page (HTML)</a>
+      <article class="card">
+        <div class="card__inner">
+          <div class="card__kicker langblock" data-lang="en">Human Interface</div>
+          <div class="card__kicker langblock" data-lang="it" hidden>Interfaccia umana</div>
+
+          <h2 class="card__title">Nutradina®</h2>
+
+          <p class="card__lead langblock" data-lang="en">
+            Consumer and clinical platform for personalized nutrition.
+          </p>
+          <p class="card__lead langblock" data-lang="it" hidden>
+            Piattaforma consumer e clinica per la nutrizione personalizzata.
+          </p>
+
+          <p class="card__body langblock" data-lang="en">
+            Nutradina® is the human interface of the ALIMENTARUS system. It unifies REGIMEN, SIGNUM, and BiOMIKS
+            into a coherent experience for consumers and clinical professionals, enabling personalization by data,
+            preferences, and health goals.
+          </p>
+          <p class="card__body langblock" data-lang="it" hidden>
+            Nutradina® è l’interfaccia umana del sistema ALIMENTARUS. Unifica REGIMEN, SIGNUM e BiOMIKS
+            in un’esperienza coerente per consumatori e professionisti clinici, abilitando personalizzazione basata su dati,
+            preferenze e obiettivi di salute.
+          </p>
+
+          <div class="pills">
+            <div class="pill">
+              <strong class="langblock" data-lang="en">Personalization</strong>
+              <strong class="langblock" data-lang="it" hidden>Personalizzazione</strong>
+
+              <span class="langblock" data-lang="en">Data-driven</span>
+              <span class="langblock" data-lang="it" hidden>Guidata dai dati</span>
+            </div>
+
+            <div class="pill">
+              <strong class="langblock" data-lang="en">Integration</strong>
+              <strong class="langblock" data-lang="it" hidden>Integrazione</strong>
+
+              <span class="langblock" data-lang="en">Multi-platform</span>
+              <span class="langblock" data-lang="it" hidden>Multi-piattaforma</span>
             </div>
           </div>
 
-          <aside class="card heroSide" aria-label="Highlights">
-            <div class="mini">
-              <h3>What we ship</h3>
-              <p>Platforms, product grammars, label logic, and institutional narratives that survive scrutiny.</p>
-            </div>
-            <div class="mini">
-              <h3>What we avoid</h3>
-              <p>Well-designed fluff that collapses under policy optics, audit pressure, or scientific review.</p>
-            </div>
-            <div class="mini">
-              <h3>Deployment</h3>
-              <p>Single-file HTML • no build step • easily extended into multi-page structure.</p>
-            </div>
-          </aside>
-        </div>
-      </section>
+          <div class="divider"></div>
 
-      <section id="platforms">
-        <div class="sectionHead">
-          <div>
-            <h2>Platforms</h2>
-            <p class="sub">Replace these tiles with the exact platform set you already defined (CIVITAS, LEXALIS, AEVUM, SIGNUM, etc.).</p>
-          </div>
-        </div>
+          <div class="meta-label langblock" data-lang="en">Integrations</div>
+          <div class="meta-label langblock" data-lang="it" hidden>Integrazioni</div>
 
-        <div class="grid3">
-          <a class="tile" href="#contact">
-            <b>CIVITAS</b>
-            <span>Public-facing legitimacy layer: trust, institutional optics, and the policy-admissible narrative.</span>
-          </a>
-          <a class="tile" href="#contact">
-            <b>LEXALIS</b>
-            <span>Grammar and constraints: how claims, labels, and product language remain audit-safe.</span>
-          </a>
-          <a class="tile" href="#contact">
-            <b>AEVUM</b>
-            <span>Long-horizon continuity: portfolio coherence across years, regulation, and consumer drift.</span>
-          </a>
-          <a class="tile" href="#contact">
-            <b>SIGNUM</b>
-            <span>Signal architecture: what the product “permits” physiologically, and what it must never imply.</span>
-          </a>
-          <a class="tile" href="#contact">
-            <b>REGIMEN</b>
-            <span>Regimen logic: sequencing, timing, and user-state fit—without collapsing into wellness clichés.</span>
-          </a>
-          <a class="tile" href="#contact">
-            <b>BiOMIKS</b>
-            <span>Product execution: formulation families engineered to express the architecture in real goods.</span>
+          <div class="meta-line">Nutradina · REGIMEN, Nutradina · SIGNUM, Nutradina · BiOMIKS</div>
+
+          <a class="cta" href="#nutradina">
+            <span class="langblock" data-lang="en">Discover Nutradina</span>
+            <span class="langblock" data-lang="it" hidden">Scopri Nutradina</span>
+            <span class="arrow">→</span>
           </a>
         </div>
-      </section>
+      </article>
 
-      <section id="scope">
-        <div class="sectionHead">
-          <div>
-            <h2>Scope</h2>
-            <p class="sub">These bullets are placeholders—swap with your actual activity map from the Wix page.</p>
-          </div>
-        </div>
+      <article class="card">
+        <div class="card__inner">
+          <div class="card__kicker langblock" data-lang="en">Institutional Interface</div>
+          <div class="card__kicker langblock" data-lang="it" hidden>Interfaccia istituzionale</div>
 
-        <div class="card" style="padding:18px;">
-          <ul style="margin:0; padding-left: 18px; color: rgba(16,17,20,.78); line-height:1.7; font-size:14px;">
-            <li>Institutional web presence, research portal structure, and compliance-first copy.</li>
-            <li>Product family naming system (identity grammar) and portfolio-wide semantic constraints.</li>
-            <li>Label architecture: claims discipline, timing logic, and risk-aware consumer interpretation.</li>
-            <li>Evidence packs: citations, rationale, and boundary statements engineered for audit survivability.</li>
-          </ul>
-        </div>
-      </section>
+          <h2 class="card__title">AUCTORIS®</h2>
 
-      <section id="principle">
-        <div class="sectionHead">
-          <div>
-            <h2>Principle</h2>
-            <p class="sub">A single “north star” statement that can sit on your homepage without embarrassing you in five years.</p>
-          </div>
-        </div>
+          <p class="card__lead langblock" data-lang="en">
+            Sovereign and regulated platform for food governance.
+          </p>
+          <p class="card__lead langblock" data-lang="it" hidden>
+            Piattaforma sovrana e regolata per la governance alimentare.
+          </p>
 
-        <blockquote>
-          We treat nutrition as a governance problem: signals constrain states, language constrains interpretation, and products must remain valid under scrutiny.
-          <footer>— Alimentarus Systems</footer>
-        </blockquote>
-      </section>
+          <p class="card__body langblock" data-lang="en">
+            AUCTORIS® is the institutional interface for authorities and regulated bodies. It integrates CIVITAS,
+            LEXALIS, and AEVUM into governance, compliance, and control—supporting food safety management at national
+            and international levels.
+          </p>
+          <p class="card__body langblock" data-lang="it" hidden>
+            AUCTORIS® è l’interfaccia istituzionale per autorità e organismi regolati. Integra CIVITAS,
+            LEXALIS e AEVUM in governance, conformità e controllo—supportando la gestione della sicurezza alimentare
+            a livello nazionale e internazionale.
+          </p>
 
-      <section id="contact">
-        <div class="sectionHead">
-          <div>
-            <h2>Contact</h2>
-            <p class="sub">This form is functional without a backend: it opens an email draft via <span class="mono">mailto:</span>. If you want serverless submission, plug in a Formspree/Netlify endpoint later.</p>
-          </div>
-        </div>
+          <div class="pills">
+            <div class="pill">
+              <strong class="langblock" data-lang="en">Governance</strong>
+              <strong class="langblock" data-lang="it" hidden>Governance</strong>
 
-        <div class="contact">
-          <div class="card">
-            <form id="contactForm" autocomplete="on">
-              <label for="name">Name</label>
-              <input id="name" name="name" type="text" placeholder="Your name" required />
+              <span class="langblock" data-lang="en">Integrated</span>
+              <span class="langblock" data-lang="it" hidden>Integrata</span>
+            </div>
 
-              <label for="email">Email</label>
-              <input id="email" name="email" type="email" placeholder="name@domain.com" required />
+            <div class="pill">
+              <strong class="langblock" data-lang="en">Compliance</strong>
+              <strong class="langblock" data-lang="it" hidden>Conformità</strong>
 
-              <label for="topic">Topic</label>
-              <input id="topic" name="topic" type="text" placeholder="What do you want to build?" required />
-
-              <label for="message">Message</label>
-              <textarea id="message" name="message" placeholder="Give me the context in 5–10 lines." required></textarea>
-
-              <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
-                <button class="btn primary" type="submit">Send</button>
-                <button class="btn" type="button" id="clearBtn">Clear</button>
-              </div>
-
-              <p class="hint" id="hint">
-                Default recipient is a placeholder. Change <span class="mono">CONTACT_EMAIL</span> in the script below.
-              </p>
-
-              <div class="ok" id="okBox">Your email client should open now. If it doesn’t, copy the message and send it manually.</div>
-              <div class="err" id="errBox">Something is missing or invalid. Check the fields and try again.</div>
-            </form>
-          </div>
-
-          <div class="card" style="padding:18px;">
-            <div class="mini" style="height:100%;">
-              <h3>Operational note</h3>
-              <p>
-                If your goal is a faithful clone of the Wix Vibe page, you must provide the content (copy + images).
-                Once you paste the Wix text here (or upload screenshots), I’ll reconstruct the exact sections and typography in this same single-file format.
-              </p>
-              <div style="height:12px;"></div>
-              <h3>Deployment</h3>
-              <p>
-                Save this file as <span class="mono">index.html</span> and push to your GitHub Pages repository root.
-              </p>
+              <span class="langblock" data-lang="en">Assured</span>
+              <span class="langblock" data-lang="it" hidden>Garantita</span>
             </div>
           </div>
-        </div>
-      </section>
 
-      <footer>
-        <div class="wrap">
-          <div class="foot">
-            <div>
-              <div style="font-weight:650; color: rgba(16,17,20,.78);">Alimentarus Systems</div>
-              <div style="margin-top:4px;">© <span id="year"></span> • Plain HTML5 build</div>
-            </div>
-            <div>
-              <a href="#platforms">Platforms</a>
-              <a href="#scope">Scope</a>
-              <a href="#contact">Contact</a>
-              <a href="#top">Top</a>
-            </div>
-          </div>
+          <div class="divider"></div>
+
+          <div class="meta-label langblock" data-lang="en">Integrations</div>
+          <div class="meta-label langblock" data-lang="it" hidden>Integrazioni</div>
+
+          <div class="meta-line">AUCTORIS · CIVITAS, AUCTORIS · LEXALIS, AUCTORIS · AEVUM</div>
+
+          <a class="cta" href="#auctoris">
+            <span class="langblock" data-lang="en">Discover Auctoris</span>
+            <span class="langblock" data-lang="it" hidden>Scopri Auctoris</span>
+            <span class="arrow">→</span>
+          </a>
         </div>
-      </footer>
+      </article>
+
     </div>
-  </main>
+  </section>
 
-  <script>
-    // === CONFIG ===
-    const CONTACT_EMAIL = "kunter@ginova.org"; // <-- change if needed
+  <!-- ABOUT -->
+  <section class="section about" id="about">
+    <h2 class="about__title">About Us</h2>
 
-    // Mobile menu
-    const burger = document.getElementById("burger");
-    const mobileMenu = document.getElementById("mobileMenu");
-    function setMenu(open){
-      burger.setAttribute("aria-expanded", String(open));
-      mobileMenu.hidden = !open;
-    }
-    burger.addEventListener("click", () => {
-      const open = burger.getAttribute("aria-expanded") !== "true";
-      setMenu(open);
-    });
-    mobileMenu.addEventListener("click", (e) => {
-      if (e.target.tagName === "A") setMenu(false);
-    });
+    <div class="about__copy langblock" data-lang="en">
+      <p>
+        ALIMENTARUS SYSTEMS redefines the problem to come up with the solution. In a world where food systems face
+        unprecedented challenges—from safety to sustainability, from personalized nutrition to regulatory compliance—
+        change requires fundamental architectures, not surface patches.
+      </p>
+      <p>
+        Our methodology integrates measure (precise data), structure (solid architectures), and regime (intelligent
+        governance) to transform how the world produces, distributes, and consumes food. We build systems that redefine
+        standards.
+      </p>
+    </div>
 
-    // Footer year
-    document.getElementById("year").textContent = new Date().getFullYear();
+    <div class="about__copy langblock" data-lang="it" hidden>
+      <p>
+        ALIMENTARUS SYSTEMS ridefinisce il problema per arrivare alla soluzione. In un mondo in cui i sistemi alimentari
+        affrontano sfide senza precedenti—dalla sicurezza alla sostenibilità, dalla nutrizione personalizzata alla conformità
+        regolatoria—il cambiamento richiede architetture fondamentali, non correzioni superficiali.
+      </p>
+      <p>
+        La nostra metodologia integra misura (dati precisi), struttura (architetture solide) e regime (governance intelligente)
+        per trasformare come il mondo produce, distribuisce e consuma cibo. Costruiamo sistemi che ridefiniscono gli standard.
+      </p>
+    </div>
 
-    // Contact form -> mailto (functional without backend)
-    const form = document.getElementById("contactForm");
-    const okBox = document.getElementById("okBox");
-    const errBox = document.getElementById("errBox");
-    const clearBtn = document.getElementById("clearBtn");
+    <div class="tri" aria-label="Three pillars">
+      <div class="tri__item">
+        <h4>Measure</h4>
+        <p class="langblock" data-lang="en">Precise and verifiable data as the foundation of every decision.</p>
+        <p class="langblock" data-lang="it" hidden>Dati precisi e verificabili come fondamento di ogni decisione.</p>
+      </div>
+      <div class="tri__item">
+        <h4>Structure</h4>
+        <p class="langblock" data-lang="en">Solid architectures that scale with change.</p>
+        <p class="langblock" data-lang="it" hidden>Architetture solide che scalano con il cambiamento.</p>
+      </div>
+      <div class="tri__item">
+        <h4>Regime</h4>
+        <p class="langblock" data-lang="en">Intelligent governance for sustainable results.</p>
+        <p class="langblock" data-lang="it" hidden>Governance intelligente per risultati sostenibili.</p>
+      </div>
+    </div>
 
-    function show(el){ el.style.display = "block"; }
-    function hide(el){ el.style.display = "none"; }
+    <div class="tiles" id="platform-tiles">
+      <div class="tiles__row">
+        <div class="tile tile--regimen">
+          <h5>REGIMEN</h5>
+          <p class="langblock" data-lang="en">Nutrition governance.</p>
+          <p class="langblock" data-lang="it" hidden>Governance nutrizionale.</p>
+          <a href="#regimen"><span class="langblock" data-lang="en">Learn more</span><span class="langblock" data-lang="it" hidden>Scopri</span></a>
+        </div>
 
-    clearBtn.addEventListener("click", () => {
-      form.reset();
-      hide(okBox); hide(errBox);
-    });
+        <div class="tile tile--civitas">
+          <h5>CIVITAS</h5>
+          <p class="langblock" data-lang="en">Security and resilience.</p>
+          <p class="langblock" data-lang="it" hidden>Sicurezza e resilienza.</p>
+          <a href="#civitas"><span class="langblock" data-lang="en">Learn more</span><span class="langblock" data-lang="it" hidden>Scopri</span></a>
+        </div>
 
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      hide(okBox); hide(errBox);
+        <div class="tile tile--lexalis">
+          <h5>LEXALIS</h5>
+          <p class="langblock" data-lang="en">Compliance and claims.</p>
+          <p class="langblock" data-lang="it" hidden>Conformità e claim.</p>
+          <a href="#lexalis"><span class="langblock" data-lang="en">Learn more</span><span class="langblock" data-lang="it" hidden>Scopri</span></a>
+        </div>
 
-      const name = document.getElementById("name").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const topic = document.getElementById("topic").value.trim();
-      const message = document.getElementById("message").value.trim();
+        <div class="tile tile--aevum">
+          <h5>AEVUM</h5>
+          <p class="langblock" data-lang="en">Preservation and time.</p>
+          <p class="langblock" data-lang="it" hidden>Conservazione e tempo.</p>
+          <a href="#aevum"><span class="langblock" data-lang="en">Learn more</span><span class="langblock" data-lang="it" hidden>Scopri</span></a>
+        </div>
 
-      if (!name || !email || !topic || !message || !email.includes("@")) {
-        show(errBox);
-        return;
-      }
+        <div class="tile tile--signum">
+          <h5>SIGNUM</h5>
+          <p class="langblock" data-lang="en">Data, metrics, signals.</p>
+          <p class="langblock" data-lang="it" hidden>Dati, metriche, segnali.</p>
+          <a href="#signum"><span class="langblock" data-lang="en">Learn more</span><span class="langblock" data-lang="it" hidden>Scopri</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-      const subject = encodeURIComponent(`[Alimentarus Systems] ${topic}`);
-      const body = encodeURIComponent(
-`Name: ${name}
-Email: ${email}
+  <!-- FOOTER -->
+  <footer class="footer" id="footer">
+    <div class="footer__inner">
+      <h3 class="footer__title">ALIMENTARUS SYSTEMS</h3>
+      <p class="footer__subtitle">Ordinem Cibi: Mensura, Structura, Regimen</p>
+      <p class="footer__lead langblock" data-lang="en">Architectures and standards for world-class food and nutrition systems.</p>
+      <p class="footer__lead langblock" data-lang="it" hidden>Architetture e standard per sistemi alimentari e nutrizionali di livello mondiale.</p>
 
-Message:
-${message}
+      <div class="footer__rule"></div>
 
----`
-      );
+      <div class="footer__cols">
+        <div class="fcol">
+          <h6>Platforms</h6>
+          <a href="#regimen">REGIMEN</a>
+          <a href="#civitas">CIVITAS</a>
+          <a href="#lexalis">LEXALIS</a>
+          <a href="#aevum">AEVUM</a>
+          <a href="#signum">SIGNUM</a>
+        </div>
 
-      const mailto = `mailto:${encodeURIComponent(CONTACT_EMAIL)}?subject=${subject}&body=${body}`;
-      window.location.href = mailto;
-      show(okBox);
-    });
+        <div class="fcol">
+          <h6>Solutions</h6>
+          <a href="#nutradina">Nutradina®</a><small>Human interface</small>
+          <div class="spacer-1"></div>
+          <a href="#auctoris">AUCTORIS®</a><small>Institutional interface</small>
+        </div>
 
-    // Download button: saves this HTML as a file from the browser
-    document.getElementById("downloadBtn").addEventListener("click", (e) => {
-      e.preventDefault();
-      const blob = new Blob([document.documentElement.outerHTML], { type: "text/html;charset=utf-8" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "alimentarus-systems.html";
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      URL.revokeObjectURL(url);
-    });
-  </script>
+        <div class="fcol">
+          <h6>Company</h6>
+          <a href="#about">About Us</a>
+          <a href="#vision">Vision</a>
+          <a href="#contact">Contact</a>
+          <a href="#careers">Careers</a>
+        </div>
+
+        <div class="fcol">
+          <h6>Legal</h6>
+          <a href="#privacy">Privacy</a>
+          <a href="#tos">Terms of Service</a>
+          <a href="#cookies">Cookies</a>
+          <a href="#compliance">Compliance</a>
+        </div>
+
+        <div class="fcol" id="contact">
+          <h6>Contact</h6>
+          <a href="mailto:info@alimentarus.systems">info@alimentarus.systems</a>
+          <small>
+            Phone<br/>
+            +39 (0)2 XXXX XXXX<br/><br/>
+            Address<br/>
+            Milan, Italy
+          </small>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <div class="copyright">© 2026 ALIMENTARUS SYSTEMS S.r.l. All rights reserved.</div>
+        <div class="crafted">Created with precision and dedication</div>
+        <div class="social">
+          <a href="#linkedin">LinkedIn</a>
+          <a href="#twitter">Twitter</a>
+          <a href="#instagram">Instagram</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/site.js"></script>
 </body>
 </html>
