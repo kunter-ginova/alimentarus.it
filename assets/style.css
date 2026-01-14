@@ -371,3 +371,28 @@ body{
   line-height:1.55;
 }
 
+
+/* */
+
+/* ADD/REPLACE in assets/style.css: multilingual switch (6 buttons) */
+.lang-switch{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+.lang-switch button{
+  border:0;
+  background:transparent;
+  cursor:pointer;
+  padding:6px 6px;
+  border-radius:10px;
+  font-size:12px;
+  letter-spacing:.18em;
+  font-weight:700;
+  color:rgba(27,27,27,.55);
+  text-transform:uppercase;
+}
+.lang-switch button.active{
+  color:rgba(224,106,26,1);
+}
+
