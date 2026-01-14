@@ -632,3 +632,146 @@ a:focus-visible{
   margin-top: 24px;
 }
 
+
+/* MASTER CORRECTION */
+
+/* =========================
+   FINAL AUTHORITY OVERRIDES
+   Paste at END of style.css
+   ========================= */
+
+/* A) Background: elegant paper + controlled depth */
+body{
+  background:
+    radial-gradient(1200px 800px at 15% 10%, rgba(224,106,26,.08), transparent 60%),
+    radial-gradient(900px 650px at 85% 20%, rgba(0,0,0,.06), transparent 55%),
+    radial-gradient(900px 650px at 60% 95%, rgba(224,106,26,.06), transparent 55%),
+    linear-gradient(180deg, #fbf7f1 0%, #faf5ef 35%, #f7f0e8 100%);
+  color: rgba(20,20,20,.92);
+}
+
+body::before{
+  content:"";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: .055;
+  mix-blend-mode: multiply;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+  background-size: 220px 220px;
+}
+
+/* B) Links: authoritative underline behavior */
+a{
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color .15s ease, opacity .15s ease;
+}
+a:hover{ border-bottom-color: rgba(10,10,10,.92); }
+a:focus-visible{
+  outline: 2px solid rgba(10,10,10,.75);
+  outline-offset: 3px;
+  border-bottom-color: transparent;
+}
+
+/* C) Language switch (EN IT ES DE RU TR): underline on hover + active marker */
+.lang-switch{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+.lang-switch button{
+  position: relative;
+  border:0;
+  background:transparent;
+  cursor:pointer;
+  padding:8px 6px;
+  border-radius:10px;
+  font-size:12px;
+  letter-spacing:.18em;
+  font-weight:700;
+  color:rgba(27,27,27,.55);
+  text-transform:uppercase;
+}
+.lang-switch button::after{
+  content:"";
+  position:absolute;
+  left:6px; right:6px; bottom:2px;
+  height:2px;
+  background:rgba(10,10,10,.92);
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform .16s ease;
+  opacity:.90;
+}
+.lang-switch button:hover::after{ transform:scaleX(1); }
+.lang-switch button.active{
+  color: rgba(224,106,26,1);
+}
+.lang-switch button.active::after{ transform:scaleX(1); }
+
+/* D) Hero: exact vertical middle (accounts for sticky topbar height) */
+.hero{
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 22px;
+  min-height: calc(100vh - 74px);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+
+/* E) Emerging Platforms: second-hero focus band */
+.focusband{
+  max-width: var(--max);
+  margin: 42px auto 0;
+  padding: 44px 22px;
+  border-radius: 22px;
+  background:
+    radial-gradient(900px 420px at 20% 10%, rgba(224,106,26,.22), transparent 60%),
+    radial-gradient(760px 360px at 85% 25%, rgba(255,255,255,.10), transparent 55%),
+    linear-gradient(180deg, #121212 0%, #0b0b0b 100%);
+  color: rgba(255,255,255,.90);
+  box-shadow: 0 28px 70px rgba(0,0,0,.22);
+  border: 1px solid rgba(255,255,255,.08);
+}
+.focusband__inner{
+  min-height: 62vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:18px;
+}
+.focusband .vision__kicker{ color: rgba(255,255,255,.55); }
+.focusband .vision__lead{
+  color: rgba(255,255,255,.78);
+  max-width: 880px;
+  font-size: 16px;
+  line-height: 1.75;
+}
+.focusband .mini{
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.10);
+  box-shadow: none;
+}
+.focusband .mini__title{ color: rgba(255,255,255,.92); }
+.focusband .mini__sub{ color: rgba(224,106,26,.95); }
+.focusband .mini__bullets{ color: rgba(255,255,255,.72); }
+
+/* F) Transition Field (pre-footer hero) */
+.transition{
+  padding: 96px 0 88px;
+  background:
+    radial-gradient(900px 520px at 20% 12%, rgba(224,106,26,.10), transparent 55%),
+    radial-gradient(820px 520px at 85% 30%, rgba(0,0,0,.10), transparent 55%),
+    linear-gradient(180deg, #f7f0e8 0%, #f3ece4 100%);
+  border-top: 1px solid rgba(27,27,27,.10);
+}
+.transition__inner{
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 22px;
+}
