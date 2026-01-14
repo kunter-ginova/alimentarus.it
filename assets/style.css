@@ -541,3 +541,38 @@ a:focus-visible{
   opacity: .90;
 }
 
+/* Transition Field: stop looking like a brochure block */
+.transition{
+  border-radius: 24px;
+  overflow: hidden;
+}
+.transition__inner{
+  padding-top: 64px;
+  padding-bottom: 64px;
+}
+.transition-cards{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 18px;
+}
+@media (max-width: 980px){
+  .transition-cards{ grid-template-columns: 1fr; }
+}
+.transition .tcard{
+  background: rgba(255,255,255,.78);
+  border: 1px solid rgba(27,27,27,.10);
+  box-shadow: 0 14px 34px rgba(15,15,15,.08);
+}
+.transition .tcard__title{
+  color: rgba(224,106,26,1);
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  font-weight: 900;
+  font-size: 12px;
+}
+.transition .tcard__text{
+  color: rgba(27,27,27,.68);
+  line-height: 1.65;
+}
+
