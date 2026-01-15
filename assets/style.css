@@ -4,6 +4,9 @@
   --ink:#1b1b1b;
   --accent:#e06a1a;
   --accent-2:#c85d14;
+  --shadow-soft:0 10px 30px rgba(15,15,15,.10);
+  --radius:18px;
+  --max:1120px;
 }
 
 *{box-sizing:border-box}
